@@ -1,6 +1,9 @@
 /node_modules
+/public/css
 /public/hot
+/public/js
 /public/storage
+/resources/js/ziggy.js
 /storage/*.key
 /vendor
 .env

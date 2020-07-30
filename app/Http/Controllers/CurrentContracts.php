@@ -61,7 +61,7 @@ class CurrentContracts extends Controller
         }
 
         return Inertia::render('ContractStatus', [
-            'contractId' => '$contractId',
+            'contractId' => $contractId,
             'coopsInfo'  => $coopsInfo,
         ]);
     }
