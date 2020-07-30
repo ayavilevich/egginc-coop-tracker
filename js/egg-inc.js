@@ -8,5 +8,14 @@ require('yargs')
             console.log(JSON.stringify(contracts))
         })
     })
+    .command('getCoopStatus', 'Get Coop Status', (yargs) => {
+        yargs
+            .positional('contract', {type: 'string'})
+            .positional('coop', {type: 'string'})
+    }, (argv) => {
+        eggIncApi.getContract(argv.contract, argv.coop).then((coopInfo) => {
+            console.log(JSON.stringify(coopInfo))
+        })
+    })
     .help()
     .argv

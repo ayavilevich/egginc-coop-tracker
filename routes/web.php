@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Home@index')->name('home');
 
 Route::get('current-contracts', 'CurrentContracts@index')->name('current-contracts');
+
+Route::get('current-contract-status/{contractId}', 'CurrentContracts@status')
+    ->name('contract-status')
+;

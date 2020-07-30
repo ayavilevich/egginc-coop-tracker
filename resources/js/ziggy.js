@@ -1,5 +1,5 @@
     var Ziggy = {
-        namedRoutes: {"home":{"uri":"\/","methods":["GET","HEAD"],"domain":null},"current-contracts":{"uri":"current-contracts","methods":["GET","HEAD"],"domain":null}},
+        namedRoutes: {"home":{"uri":"\/","methods":["GET","HEAD"],"domain":null},"current-contracts":{"uri":"current-contracts","methods":["GET","HEAD"],"domain":null},"contract-status":{"uri":"current-contract-status\/{contractId}","methods":["GET","HEAD"],"domain":null}},
         baseUrl: 'http://localhost:8000/',
         baseProtocol: 'http',
         baseDomain: 'localhost',
