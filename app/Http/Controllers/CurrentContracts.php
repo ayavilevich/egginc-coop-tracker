@@ -11,7 +11,7 @@ class CurrentContracts extends Controller
     public function index()
     {
         $contractCommand = new Command([
-            'command' => 'node .\js\egg-inc.js getAllActiveContracts',
+            'command' => 'node ./js/egg-inc.js getAllActiveContracts',
             'procCwd' => base_path(),
         ]
         );
@@ -47,7 +47,7 @@ class CurrentContracts extends Controller
 
             $coopInfo = Cache::remember($cacheKey, 60 * 5, function () use ($contractId, $coop) {
                 $appInfoCommand = new Command([
-                    'command' => 'node .\js\egg-inc.js getCoopStatus --contract ' . $contractId . ' --coop ' . $coop,
+                    'command' => 'node ./js/egg-inc.js getCoopStatus --contract ' . $contractId . ' --coop ' . $coop,
                     'procCwd' => base_path(),
                 ]);
 

@@ -8,6 +8,28 @@
             <p>Time Left: {{ coop.timeLeft }}</p>
 
             <h4>Members</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Egg Laid</th>
+                        <th>Laying Rate</th>
+                        <th>Contribution</th>
+                        <th>Earning Bonus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="member in coop.members">
+                        <td>
+                            {{ member.name }} - {{ member.boostTokens }}
+                        </td>
+                        <td>{{ member.eggs }}</td>
+                        <td>{{ member.rate }}</td>
+                        <td>some math needs done</td>
+                        <td>need to dig for this number</td>
+                    </tr>
+                </tbody>
+            </table>
             <hr />
         </div>
     </layout>
