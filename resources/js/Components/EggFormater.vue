@@ -24,6 +24,9 @@
         computed: {
             humanReadable() {
                 let magnitude = magnitudeGet(this.eggs)
+                if (!magnitude) {
+                    return 0
+                }
 
                 return Math.round(this.eggs / Math.pow(10, magnitude.magnitude) * 10) / 10 + magnitude.symbol
             }

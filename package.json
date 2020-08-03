@@ -28,6 +28,7 @@
         "@inertiajs/inertia-vue": "^0.1.4",
         "base64-arraybuffer": "^0.2.0",
         "google-protobuf": "^3.12.4",
+        "vue-simple-progress": "^1.1.1",
         "yargs": "^15.4.1"
     }
 }

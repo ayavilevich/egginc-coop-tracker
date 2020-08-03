@@ -10,20 +10,7 @@ class CurrentContracts extends Controller
 {
     public function index()
     {
-        $contractCommand = new Command([
-            'command' => 'node ./js/egg-inc.js getAllActiveContracts',
-            'procCwd' => base_path(),
-        ]
-        );
-
-        $contracts = [];
-        if ($contractCommand->execute()) {
-            $contracts = json_decode($contractCommand->getOutput());
-        }
-
-        if (!$contracts) {
-            throw new \Exception('Could not load contracts');
-        }
+        $contracts = $this->getContractsInfo();
 
         return Inertia::render('CurrentContracts', ['contracts' => $contracts]);
     }
@@ -34,7 +21,11 @@ class CurrentContracts extends Controller
             'secret-projects' => [
                 'secretadv1', 'secretadv8', 'secretadv3', 'secretadv4', 'secretadv5',
                 'secretadv6', 'secretadv7',
-            ]
+            ],
+            'video-games' => [
+                'vgamesadv1', 'vgamesadv2', 'vgamesadv3', 'vgamesadv4', 'vgamesadv5',
+                'vgamesadv6',
+            ],
         ];
         if (!isset($currentCoopIds[$contractId])) {
             abort(404);
@@ -61,8 +52,36 @@ class CurrentContracts extends Controller
         }
 
         return Inertia::render('ContractStatus', [
-            'contractId' => $contractId,
-            'coopsInfo'  => $coopsInfo,
+            'coopsInfo'    => $coopsInfo,
+            'contractInfo' => $this->getContractInfo($contractId),
         ]);
+    }
+
+    private function getContractsInfo()
+    {
+        return Cache::remember('coops', 60 * 60, function () {
+            $contractCommand = new Command([
+                'command' => 'node ./js/egg-inc.js getAllActiveContracts',
+                'procCwd' => base_path(),
+            ]);
+
+            $contracts = [];
+            if ($contractCommand->execute()) {
+                $contracts = json_decode($contractCommand->getOutput());
+            }
+
+            if (!$contracts) {
+                throw new \Exception('Could not load contracts');
+            }
+            return $contracts;
+        });
+    }
+
+    private function getContractInfo($identifier)
+    {
+        return collect($this->getContractsInfo())
+            ->where('identifier', $identifier)
+            ->first()
+        ;
     }
 }
