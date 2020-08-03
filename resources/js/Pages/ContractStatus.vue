@@ -3,9 +3,18 @@
         <div v-for="coop in coopsInfo">
             <h3>{{ coop.coop }}</h3>
 
-            <p>Total Eggs: {{ coop.eggs }}</p>
-            <p>Total Rate: {{ coop.totalRate }}</p>
-            <p>Time Left: {{ coop.timeLeft }}</p>
+            <p>
+                Total Eggs:
+                <EggFormater :eggs="coop.eggs" />
+            </p>
+            <p>
+                Total Rate:
+                <EggFormater :eggs="coop.totalRate" />
+            </p>
+            <p>
+                Time Left:
+                <TimeLeft :seconds-left="coop.timeLeft"></TimeLeft>
+            </p>
 
             <h4>Members</h4>
             <table class="table">
@@ -23,12 +32,31 @@
                         <td>
                             {{ member.name }} - {{ member.boostTokens }}
                         </td>
-                        <td>{{ member.eggs }}</td>
-                        <td>{{ member.rate }}</td>
-                        <td>some math needs done</td>
-                        <td>need to dig for this number</td>
+                        <td>
+                            <EggFormater :eggs="member.eggs" />
+                        </td>
+                        <td>
+                            <EggFormater :eggs="member.rate" />
+                            / hr
+                        </td>
+                        <td>coming soon</td>
+                        <td>coming soon</td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total</td>
+                        <td>
+                            <EggFormater :eggs="totalSum(coop)" />
+                        </td>
+                        <td>
+                            <EggFormater :eggs="totalRate(coop)" />
+                            / hr
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
             </table>
             <hr />
         </div>
@@ -37,14 +65,32 @@
 
 <script>
     import Layout from './Layout'
+    import TimeLeft from '../Components/TimeLeft'
+    import EggFormater from '../Components/EggFormater'
 
     export default {
         components: {
-            Layout,
+            Layout, TimeLeft, EggFormater
         },
         props: {
             contractId: String,
-            coopsInfo: Object,
-        }
+            coopsInfo: Array,
+        },
+        methods: {
+            totalSum(coop) {
+                let total = 0
+                coop.members.forEach((member) => {
+                    total += member.eggs
+                })
+                return total
+            },
+            totalRate(coop) {
+                let total = 0
+                coop.members.forEach((member) => {
+                    total += member.rate
+                })
+                return total
+            }
+        },
     }
 </script>
