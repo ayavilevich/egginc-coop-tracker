@@ -18,7 +18,7 @@
             'text-center': true,
         }">
             <EggFormater :eggs="rateNeededToComplete" />
-            / hr required complete
+            / second required complete
         </div>
 
         <p class="text-center">
@@ -57,7 +57,7 @@
                     </td>
                     <td>
                         <EggFormater :eggs="member.rate" />
-                        / hr
+                        / second
                     </td>
                     <td>
                         {{ Math.round(member.eggs / totalSum * 10000) / 100 }}%
@@ -73,7 +73,7 @@
                     </td>
                     <td>
                         <EggFormater :eggs="totalRate" />
-                        / hr
+                        / second
                     </td>
                     <td></td>
                     <td></td>
@@ -138,10 +138,10 @@
                 return total
             },
             rateNeededToComplete() {
-                return this.eggsLeftToGet / Math.abs(Math.floor(this.coop.timeLeft / (60 * 60)))
+                return this.eggsLeftToGet / Math.abs(Math.floor(this.coop.timeLeft))
             },
             estimateCompletion() {
-                let currentRateInSeconds = this.totalRate / 60 / 60
+                let currentRateInSeconds = this.totalRate
                 return Math.ceil(this.eggsLeftToGet / currentRateInSeconds)
             },
             isCoopGoodToComplete() {
