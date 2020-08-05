@@ -24,7 +24,7 @@ class CurrentContracts extends Controller
             ],
             'video-games' => [
                 'vgamesadv1', 'vgamesadv2', 'vgamesadv3', 'vgamesadv4', 'vgamesadv5',
-                'vgamesadv6',
+                'vgamesadv6', 'gameadvx',
             ],
         ];
         if (!isset($currentCoopIds[$contractId])) {

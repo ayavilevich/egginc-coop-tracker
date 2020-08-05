@@ -17,8 +17,8 @@
             'green-background': isCoopGoodToComplete,
             'text-center': true,
         }">
-            <EggFormater :eggs="rateNeededToComplete" />
-            / second required complete
+            <EggFormater :eggs="rateNeededToComplete * 60 * 60" />
+            / hr required to complete
         </div>
 
         <p class="text-center">
@@ -56,8 +56,8 @@
                         <EggFormater :eggs="member.eggs" />
                     </td>
                     <td>
-                        <EggFormater :eggs="member.rate" />
-                        / second
+                        <EggFormater :eggs="member.rate * 60 * 60" />
+                        / hr
                     </td>
                     <td>
                         {{ Math.round(member.eggs / totalSum * 10000) / 100 }}%
@@ -72,8 +72,8 @@
                         <EggFormater :eggs="totalSum" />
                     </td>
                     <td>
-                        <EggFormater :eggs="totalRate" />
-                        / second
+                        <EggFormater :eggs="totalRate * 60 * 60" />
+                        / hr
                     </td>
                     <td></td>
                     <td></td>
