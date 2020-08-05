@@ -12,6 +12,13 @@
             <TimeLeft :seconds-left="estimateCompletion" />
         </div>
 
+        <div class="text-center">
+            Projected Eggs:
+            <EggFormater :eggs="projectedEggs" />
+            /
+            <EggFormater :eggs="eggsTotalNeeded" />
+        </div>
+
         <div :class="{
             'red-background': !isCoopGoodToComplete,
             'green-background': isCoopGoodToComplete,
@@ -149,6 +156,9 @@
             isCoopGoodToComplete() {
                 return this.rateNeededToComplete < this.totalRate
             },
+            projectedEggs() {
+                return this.coop.eggs + (this.totalRate * this.coop.timeLeft)
+            }
         },
     }
 </script>
