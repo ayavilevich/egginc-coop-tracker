@@ -1,0 +1,126 @@
+[
+    {
+        "name": "Farmer",
+        "magnitude": 2
+    },
+    {
+        "name": "Farmer 2",
+        "magnitude": 3
+    },
+    {
+        "name": "Farmer 3",
+        "magnitude": 4
+    },
+    {
+        "name": "Kilofarmer",
+        "magnitude": 5
+    },
+    {
+        "name": "Kilofarmer 2",
+        "magnitude": 6
+    },
+    {
+        "name": "Kilofarmer 3",
+        "magnitude": 7
+    },
+    {
+        "name": "Megafarmer",
+        "magnitude": 8
+    },
+    {
+        "name": "Megafarmer 2",
+        "magnitude": 9
+    },
+    {
+        "name": "Megafarmer 3",
+        "magnitude": 10
+    },
+    {
+        "name": "Gigafarmer",
+        "magnitude": 11
+    },
+    {
+        "name": "Gigafarmer 2",
+        "magnitude": 12
+    },
+    {
+        "name": "Gigafarmer 3",
+        "magnitude": 13
+    },
+    {
+        "name": "Terafarmer",
+        "magnitude": 14
+    },
+    {
+        "name": "Terafarmer 2",
+        "magnitude": 15
+    },
+    {
+        "name": "Terafarmer 3",
+        "magnitude": 16
+    },
+    {
+        "name": "Petafarmer",
+        "magnitude": 17
+    },
+    {
+        "name": "Petafarmer 2",
+        "magnitude": 18
+    },
+    {
+        "name": "Petafarmer 3",
+        "magnitude": 19
+    },
+    {
+        "name": "Exafarmer",
+        "magnitude": 20
+    },
+    {
+        "name": "Exafarmer 2",
+        "magnitude": 21
+    },
+    {
+        "name": "Exafarmer 3",
+        "magnitude": 22
+    },
+    {
+        "name": "Zettafarmer",
+        "magnitude": 23
+    },
+    {
+        "name": "Zettafarmer 2",
+        "magnitude": 24
+    },
+    {
+        "name": "Zettafarmer 3",
+        "magnitude": 25
+    },
+    {
+        "name": "Yottafarmer",
+        "magnitude": 26
+    },
+    {
+        "name": "Yottafarmer 2",
+        "magnitude": 27
+    },
+    {
+        "name": "Yottafarmer 3",
+        "magnitude": 28
+    },
+    {
+        "name": "Xennafarmer",
+        "magnitude": 29
+    },
+    {
+        "name": "Xennafarmer 2",
+        "magnitude": 30
+    },
+    {
+        "name": "Xennafarmer 3",
+        "magnitude": 31
+    },
+    {
+        "name": "Weccafarmer",
+        "magnitude": 32
+    }
+]

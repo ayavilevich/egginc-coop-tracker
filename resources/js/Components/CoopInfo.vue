@@ -71,6 +71,8 @@
                     </td>
                     <td>
                         <EggFormater :eggs="Math.pow(10, member.soulPower) * 100" />
+                        -
+                        <PlayerRole :soul-power="member.soulPower" />
                     </td>
                 </tr>
             </tbody>
@@ -106,10 +108,11 @@
     import TimeLeft from '../Components/TimeLeft'
     import EggFormater from '../Components/EggFormater'
     import ProgressBar from 'vue-simple-progress'
+    import PlayerRole from '../Components/PlayerRole'
 
     export default {
         components: {
-            TimeLeft, EggFormater, ProgressBar
+            TimeLeft, EggFormater, ProgressBar, PlayerRole
         },
         props: {
             coop: Object,
