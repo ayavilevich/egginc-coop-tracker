@@ -1,6 +1,7 @@
 /node_modules
 /public/css
 /public/hot
+/public/mix-manifest.json
 /public/js
 /public/storage
 /resources/js/ziggy.js
