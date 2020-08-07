@@ -9,7 +9,8 @@
 
         <div class="text-center">
             Estimate Completion:
-            <TimeLeft :seconds-left="estimateCompletion" />
+            <TimeLeft :seconds-left="estimateCompletion" v-if="estimateCompletion" />
+            <template v-if="estimateCompletion === 0">Complete</template>
         </div>
 
         <div class="text-center">
@@ -153,6 +154,10 @@
                 return this.eggsLeftToGet / Math.abs(Math.floor(this.coop.timeLeft))
             },
             estimateCompletion() {
+                if (this.eggsLeftToGet < 0) {
+                    return 0
+                }
+
                 let currentRateInSeconds = this.totalRate
                 return Math.ceil(this.eggsLeftToGet / currentRateInSeconds)
             },
