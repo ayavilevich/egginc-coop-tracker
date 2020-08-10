@@ -26,6 +26,9 @@ class CurrentContracts extends Controller
                 'vgamesadv1', 'vgamesadv2', 'vgamesadv3', 'vgamesadv4', 'vgamesadv5',
                 'vgamesadv6', 'gameadvx',
             ],
+            'ion-drive' => [
+                'ionadv1', 'ionadv2', 'ionadv3', 'ionadv4', 'ionadv5', 'ionadv6',
+            ],
         ];
         if (!isset($currentCoopIds[$contractId])) {
             abort(404);
