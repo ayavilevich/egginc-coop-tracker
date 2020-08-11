@@ -28,6 +28,7 @@ class CurrentContracts extends Controller
             ],
             'ion-drive' => [
                 'ionadv1', 'ionadv2', 'ionadv3', 'ionadv4', 'ionadv5', 'ionadv6',
+                'ionadvx1', 'ionadvx2'
             ],
         ];
         if (!isset($currentCoopIds[$contractId])) {
