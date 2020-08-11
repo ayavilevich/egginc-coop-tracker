@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Coop;
+use Cache;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use mikehaertl\shellcommand\Command;
-use Cache;
 
 class CurrentContracts extends Controller
 {
@@ -17,7 +18,13 @@ class CurrentContracts extends Controller
 
     public function status($contractId)
     {
-        $currentCoopIds = [
+        $coops = Coop::contract($contractId)->get();
+
+        if ($coops->count() == 0) {
+            abort(404);
+        }
+
+        /*$currentCoopIds = [
             'secret-projects' => [
                 'secretadv1', 'secretadv8', 'secretadv3', 'secretadv4', 'secretadv5',
                 'secretadv6', 'secretadv7',
@@ -33,23 +40,23 @@ class CurrentContracts extends Controller
         ];
         if (!isset($currentCoopIds[$contractId])) {
             abort(404);
-        }
+        }*/
 
         $coopsInfo = [];
-        foreach ($currentCoopIds[$contractId] as $coop) {
+        foreach ($coops as $coop) {
             $coopInfo = null;
-            $cacheKey = $contractId . '-' . $coop;
+            $cacheKey = $contractId . '-' . $coop->coop;
 
             $coopInfo = Cache::remember($cacheKey, 60 * 5, function () use ($contractId, $coop) {
                 $appInfoCommand = new Command([
-                    'command' => 'node ./js/egg-inc.js getCoopStatus --contract ' . $contractId . ' --coop ' . $coop,
+                    'command' => 'node ./js/egg-inc.js getCoopStatus --contract ' . $contractId . ' --coop ' . $coop->coop,
                     'procCwd' => base_path(),
                 ]);
 
                 if (!$appInfoCommand->execute()) {
                     throw new Exception('Unable to get coop data');
                 }
-                    return json_decode($appInfoCommand->getOutput());
+                return json_decode($appInfoCommand->getOutput());
             });
 
             $coopsInfo[] = $coopInfo;
