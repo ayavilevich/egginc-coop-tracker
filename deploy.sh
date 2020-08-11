@@ -1,6 +1,6 @@
 php artisan down
 composer install
-php artisan migrate
+php artisan migrate --force
 npm install
 
 php artisan ziggy:generate resources/js/ziggy.js

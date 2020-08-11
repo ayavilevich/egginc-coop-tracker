@@ -24,24 +24,6 @@ class CurrentContracts extends Controller
             abort(404);
         }
 
-        /*$currentCoopIds = [
-            'secret-projects' => [
-                'secretadv1', 'secretadv8', 'secretadv3', 'secretadv4', 'secretadv5',
-                'secretadv6', 'secretadv7',
-            ],
-            'video-games' => [
-                'vgamesadv1', 'vgamesadv2', 'vgamesadv3', 'vgamesadv4', 'vgamesadv5',
-                'vgamesadv6', 'gameadvx',
-            ],
-            'ion-drive' => [
-                'ionadv1', 'ionadv2', 'ionadv3', 'ionadv4', 'ionadv5', 'ionadv6',
-                'ionadvx1', 'ionadvx2'
-            ],
-        ];
-        if (!isset($currentCoopIds[$contractId])) {
-            abort(404);
-        }*/
-
         $coopsInfo = [];
         foreach ($coops as $coop) {
             $coopInfo = null;
