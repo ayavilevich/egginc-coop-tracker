@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Api\EggInc;
 use App\Models\Coop;
-use Cache;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use mikehaertl\shellcommand\Command;
 
 class CurrentContracts extends Controller
 {
@@ -26,22 +25,7 @@ class CurrentContracts extends Controller
 
         $coopsInfo = [];
         foreach ($coops as $coop) {
-            $coopInfo = null;
-            $cacheKey = $contractId . '-' . $coop->coop;
-
-            $coopInfo = Cache::remember($cacheKey, 60 * 5, function () use ($contractId, $coop) {
-                $appInfoCommand = new Command([
-                    'command' => 'node ./js/egg-inc.js getCoopStatus --contract ' . $contractId . ' --coop ' . $coop->coop,
-                    'procCwd' => base_path(),
-                ]);
-
-                if (!$appInfoCommand->execute()) {
-                    throw new Exception('Unable to get coop data');
-                }
-                return json_decode($appInfoCommand->getOutput());
-            });
-
-            $coopsInfo[] = $coopInfo;
+            $coopsInfo[] = $coop->getCoopInfo();
         }
 
         return Inertia::render('ContractStatus', [
@@ -52,22 +36,7 @@ class CurrentContracts extends Controller
 
     private function getContractsInfo()
     {
-        return Cache::remember('coops', 60 * 60, function () {
-            $contractCommand = new Command([
-                'command' => 'node ./js/egg-inc.js getAllActiveContracts',
-                'procCwd' => base_path(),
-            ]);
-
-            $contracts = [];
-            if ($contractCommand->execute()) {
-                $contracts = json_decode($contractCommand->getOutput());
-            }
-
-            if (!$contracts) {
-                throw new \Exception('Could not load contracts');
-            }
-            return $contracts;
-        });
+        return resolve(EggInc::class)->getCurrentContracts();
     }
 
     private function getContractInfo($identifier)
