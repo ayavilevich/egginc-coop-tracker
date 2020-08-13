@@ -1,12 +1,12 @@
 <template>
     <span>
         <template v-if="daysLeft">
-            {{ daysLeft }} days
+            {{ daysLeft }} {{ daysLeft > 1 ? 'days' : 'day' }}
         </template>
         <template v-if="hoursLeft">
-            {{ hoursLeft }} hours
+            {{ hoursLeft }} {{ hoursLeft > 1 ? 'hours' : 'hour' }}
         </template>
-        {{ minutesLeft}} minutes
+        {{ minutesLeft}} {{ minutesLeft > 1 ? 'minutes' : 'minute' }}
     </span>
 </template>
 
