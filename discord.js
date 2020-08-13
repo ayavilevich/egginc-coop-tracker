@@ -26,7 +26,7 @@ client.on('message', message => {
     messageDetails.channel.guild = message.channel.guild ? message.channel.guild.toJSON() : {};
     messageDetails.author = message.author.toJSON();
 
-    axios.post('http://localhost:8000/api/discord-message', messageDetails)
+    axios.post(process.env.DISCORD_API_URL + '/api/discord-message', messageDetails)
         .then(function (response) {
             if (response.data.message) {
                 message.channel.send(response.data.message);
