@@ -151,6 +151,10 @@
                 return total
             },
             rateNeededToComplete() {
+                if (this.eggsLeftToGet <= 0) {
+                    return 0;
+                }
+
                 return this.eggsLeftToGet / Math.abs(Math.floor(this.coop.timeLeft))
             },
             estimateCompletion() {
