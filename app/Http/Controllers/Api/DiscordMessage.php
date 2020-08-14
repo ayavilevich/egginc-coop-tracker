@@ -62,7 +62,7 @@ HELP;
 
         $message = [config('app.url') . route('contract-status', ['contractId' => $parts[1]], false)];
         foreach ($coops as $coop) {
-            $message[] = $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' Projected: ' . $coop->getProjectedEggsFormatted();
+            $message[] = $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' - Projected: ' . $coop->getProjectedEggsFormatted();
         }
 
         return implode("\n", $message);
