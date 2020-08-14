@@ -36,6 +36,16 @@ class Coop extends Model
         return end($this->getContractInfo()->goalsList)->targetAmount;
     }
 
+    public function getProjectedEggs(): int
+    {
+        return $this->getCurrentEggs() + ($this->getTotalRate() * $this->getTimeLeft());
+    }
+
+    public function getProjectedEggsFormatted(): string
+    {
+        return resolve(Egg::class)->format($this->getProjectedEggs());
+    }
+
     public function getCurrentEggsFormatted(): string
     {
         return resolve(Egg::class)->format($this->getCurrentEggs());
@@ -72,5 +82,20 @@ class Coop extends Model
     public function getTotalRate(): int
     {
         return $this->getCoopInfo()->totalRate;
+    }
+
+    public function getTimeLeft(): int
+    {
+        return $this->getCoopInfo()->timeLeft;
+    }
+
+    public function getMembers(): int
+    {
+        return count($this->getCoopInfo()->members);
+    }
+
+    public function getContractSize(): int
+    {
+        return $this->getContractInfo()->maxCoopSize;
     }
 }
