@@ -11,6 +11,7 @@ client.on('ready', () => {
 
 client.on('message', message => {
     let atBotUser = '<@!' + client.user.id + '>';
+    message.content = message.content.replace('<@' + client.user.id + '>', atBotUser);
 
     if (message.author.bot || !message.content.startsWith(atBotUser)) {
         return;
