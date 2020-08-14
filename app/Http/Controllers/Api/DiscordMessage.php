@@ -42,9 +42,10 @@ class DiscordMessage extends Controller
     {
         return <<<HELP
 ```
-@EggInc-GroupStatus help - Displays list of commands
-@EggInc-GroupStatus contracts - Display current contracts with IDs
-@EggInc-GroupStatus status contractId - Display coop info for contract
+@EggBert help - Displays list of commands
+@EggBert contracts - Display current contracts with IDs
+@EggBert status contractId - Display coop info for contract
+
 ```
 HELP;
     }
