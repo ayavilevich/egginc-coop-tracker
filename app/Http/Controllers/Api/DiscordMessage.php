@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 
 class DiscordMessage extends Controller
 {
-    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi'];
+    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'remove'];
 
     public function receive(Request $request): array
     {
-        $message = str_replace($request->input('atBotUser') . ' ', '', $request->input('content'));
+        $message = trim(str_replace($request->input('atBotUser') . ' ', '', $request->input('content')));
         $parts = explode(' ', $message);
         $command = $parts['0'];
 
@@ -45,6 +45,8 @@ class DiscordMessage extends Controller
 @EggBert help - Displays list of commands
 @EggBert contracts - Display current contracts with IDs
 @EggBert status contractId - Display coop info for contract
+@EggBert add {contractID} {Coop} - Add coop to tracking
+@EggBert remove {contractID} {Coop} - Remove coop from tracking
 
 ```
 HELP;
@@ -58,7 +60,7 @@ HELP;
             return 'Invalid contract ID or no coops setup.';
         }
 
-        $message = [];
+        $message = [config('app.url') . route('contract-status', ['contractId' => $parts[1]], false)];
         foreach ($coops as $coop) {
             $message[] = $coop->coop . ' - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion();
         }
@@ -78,5 +80,81 @@ HELP;
         $message[] = '```';
 
         return implode("\n", $message);
+    }
+
+    private function isAdmin($userId)
+    {
+        return in_array($userId, explode(',', env('DISCORD_ADMIN_USERS')));
+    }
+
+    private function add(array $parts, Request $request): string
+    {
+        if (!$this->isAdmin($request->input('author.id'))) {
+            return 'You are not allowed to do that.' . $request->input('author.id');
+        }
+
+        if (!$parts[1]) {
+            return 'Contract ID required';
+        }
+
+        if (!$parts[2]) {
+            return 'Coop name is required';
+        }
+
+        $coopCheck = Coop::contract($parts[1])
+            ->coop($parts[2])
+            ->first()
+        ;
+
+        if ($coopCheck) {
+            return 'Coop is already being tracked.';
+        }
+
+        $contractIsValid = collect(resolve(EggInc::class)->getCurrentContracts())->where('identifier', $parts[1])->first();
+
+        if (!$contractIsValid) {
+            return 'Contract is invalid.';
+        }
+
+        $coop = Coop::create([
+            'contract' => $parts[1],
+            'coop' => $parts[2],
+        ]);
+
+        if ($coop->id) {
+            return 'Coop added successfully.';
+        } else {
+            return 'Was not able to add coop.';
+        }
+    }
+
+    private function remove(array $parts, Request $request): string
+    {
+        if (!$this->isAdmin($request->input('author.id'))) {
+            return 'You are not allowed to do that.' . $request->input('author.id');
+        }
+
+        if (!$parts[1]) {
+            return 'Contract ID required';
+        }
+
+        if (!$parts[2]) {
+            return 'Coop name is required';
+        }
+
+        $coop = Coop::contract($parts[1])
+            ->coop($parts[2])
+            ->first()
+        ;
+
+        if (!$coop) {
+            return 'Coop does not exist yet.';
+        }
+
+        if ($coop->delete()) {
+            return 'Coop has been deleted';
+        } else {
+            return 'Was not able to delete the coop.';
+        }
     }
 }

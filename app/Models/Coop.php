@@ -9,9 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coop extends Model
 {
+    protected $fillable = ['contract', 'coop'];
+
     public function scopeContract($query, $contract)
     {
         return $query->where('contract', $contract);
+    }
+
+    public function scopeCoop($query, $coop)
+    {
+        return $query->where('coop', $coop);
     }
 
     public function getCoopInfo(): \StdClass
