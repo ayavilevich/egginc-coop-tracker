@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 
 class DiscordMessage extends Controller
 {
-    private $validCommands = ['help', 'status', 'contracts'];
-
+    private $validCommands = ['help', 'status', 'contracts', 'love']
     public function receive(Request $request): array
     {
         $message = str_replace($request->input('atBotUser') . ' ', '', $request->input('content'));
@@ -26,6 +25,11 @@ class DiscordMessage extends Controller
         return [
             'message' => $message,
         ];
+    }
+
+    private function love(): string
+    {
+        return 'What is this thing called love?';
     }
 
     private function help(): string
