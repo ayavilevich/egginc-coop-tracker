@@ -90,7 +90,7 @@ HELP;
     private function add(array $parts, Request $request): string
     {
         if (!$this->isAdmin($request->input('author.id'))) {
-            return 'You are not allowed to do that.' . $request->input('author.id');
+            return 'You are not allowed to do that.';
         }
 
         if (!$parts[1]) {
