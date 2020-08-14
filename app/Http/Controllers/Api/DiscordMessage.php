@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class DiscordMessage extends Controller
 {
-    private $validCommands = ['help', 'status', 'contracts', 'love'];
+    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi'];
 
     public function receive(Request $request): array
     {
@@ -20,12 +20,17 @@ class DiscordMessage extends Controller
         if (!in_array($command, $this->validCommands)) {
             $message = 'Invalid command: ' . $command;
         } else {
-            $message = $this->$command($parts);
+            $message = $this->$command($parts, $request);
         }
 
         return [
             'message' => $message,
         ];
+    }
+
+    private function hi(array $parts, Request $request): string
+    {
+        return 'Hello <@' . $request->input('author.id') . '>';
     }
 
     private function love(): string
