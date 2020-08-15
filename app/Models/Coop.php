@@ -43,7 +43,7 @@ class Coop extends Model
 
     public function getProjectedEggsFormatted(): string
     {
-        return resolve(Egg::class)->format($this->getProjectedEggs());
+        return resolve(Egg::class)->format($this->getProjectedEggs(), 1);
     }
 
     public function getCurrentEggsFormatted(): string
