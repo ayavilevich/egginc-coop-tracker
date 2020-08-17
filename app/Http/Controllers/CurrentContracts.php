@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Api\EggInc;
+use App\Exceptions\CoopNotFoundException;
 use App\Models\Coop;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,7 +26,11 @@ class CurrentContracts extends Controller
 
         $coopsInfo = [];
         foreach ($coops as $coop) {
-            $coopsInfo[] = $coop->getCoopInfo();
+            try {
+                $coopsInfo[] = $coop->getCoopInfo();
+            } catch (CoopNotFoundException $e) {
+                $coopsInfo[] = [];
+            }
         }
 
         return Inertia::render('ContractStatus', [

@@ -1,6 +1,7 @@
 <?php
 namespace App\Api;
 
+use App\Exceptions\CoopNotFoundException;
 use Cache;
 use mikehaertl\shellcommand\Command;
 
@@ -19,7 +20,12 @@ class EggInc
             if (!$appInfoCommand->execute()) {
                 throw new Exception('Unable to get coop data');
             }
-            return json_decode($appInfoCommand->getOutput());
+            $output = json_decode($appInfoCommand->getOutput());
+
+            if (!$output) {
+                throw new CoopNotFoundException;
+            }
+            return $output;
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Api\EggInc;
+use App\Exceptions\CoopNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Models\Coop;
 use Illuminate\Http\Request;
@@ -62,7 +63,11 @@ HELP;
 
         $message = [config('app.url') . route('contract-status', ['contractId' => $parts[1]], false)];
         foreach ($coops as $coop) {
-            $message[] = $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' - Projected: ' . $coop->getProjectedEggsFormatted();
+            try {
+                $message[] = $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' - Projected: ' . $coop->getProjectedEggsFormatted();
+            } catch (CoopNotFoundException $e) {
+                $message[] = $coop->coop . ' Not created yet.';
+            }
         }
 
         return implode("\n", $message);
