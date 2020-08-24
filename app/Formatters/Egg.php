@@ -10,7 +10,7 @@ class Egg
 
     public function format(int $eggs, int $decimals = 0): string
     {
-        $last;
+        $last = null;
         foreach ($this->magnitudes as $magnitude) {
             if ($eggs / pow(10, $magnitude->magnitude) < 1) {
                 break;
