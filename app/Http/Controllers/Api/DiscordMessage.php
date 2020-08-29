@@ -63,11 +63,20 @@ HELP;
 
         $message = [config('app.url') . route('contract-status', ['contractId' => $parts[1]], false)];
         foreach ($coops as $coop) {
+            $coopLine = '';
             try {
-                $message[] = $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' - Projected: ' . $coop->getProjectedEggsFormatted();
+                if ($coop->getEggsLeftNeeded() < 0) {
+                    $coopLine .= '~~';
+                }
+                $coopLine .= $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' - Projected: ' . $coop->getProjectedEggsFormatted();
+
+                if ($coop->getEggsLeftNeeded() < 0) {
+                    $coopLine .= '~~';
+                }
             } catch (CoopNotFoundException $e) {
-                $message[] = $coop->coop . ' Not created yet.';
+                $coopLine = $coop->coop . ' Not created yet.';
             }
+            $message[] = $coopLine;
         }
 
         return implode("\n", $message);
