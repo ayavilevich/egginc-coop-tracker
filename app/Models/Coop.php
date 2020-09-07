@@ -81,7 +81,7 @@ class Coop extends Model
 
     public function getTotalRate(): int
     {
-        return $this->getCoopInfo()->totalRate;
+        return $this->getCoopInfo()->totalRate ?: 1;
     }
 
     public function getTimeLeft(): int
