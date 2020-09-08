@@ -68,7 +68,7 @@ HELP;
                 if ($coop->getEggsLeftNeeded() < 0) {
                     $coopLine .= '~~';
                 }
-                $coopLine .= $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' - Projected: ' . $coop->getProjectedEggsFormatted();
+                $coopLine .= $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' - Proj: ' . $coop->getProjectedEggsFormatted();
 
                 if ($coop->getEggsLeftNeeded() < 0) {
                     $coopLine .= '~~';

@@ -76,7 +76,9 @@ class Coop extends Model
         }
         $seconds = ceil($this->getEggsLeftNeeded() / $this->getTotalRate());
 
-        return resolve(TimeLeft::class)->format($seconds);
+        return resolve(TimeLeft::class)
+            ->format($seconds)
+        ;
     }
 
     public function getTotalRate(): int

@@ -21,19 +21,19 @@ class TimeLeft
 
         $timeLeft = [];
         if ($days) {
-            $timeLeft[] = $days . ' day' . ($days > 1 ? 's' : '');
+            $timeLeft[] = $days . 'd';
         }
 
         if ($hours) {
-            $timeLeft[] = $hours . ' hour' . ($hours > 1 ? 's' : '');
+            $timeLeft[] = $hours . 'h';
         }
 
         if ($minutes && $showMinute) {
-            $timeLeft[] = $minutes . ' minute' . ($minutes > 1 ? 's' : '');
+            $timeLeft[] = $minutes . 'm';
         }
 
         if ($seconds && $showSeconds) {
-            $timeLeft[] = $seconds . ' second' . ($seconds > 1 ? 's' : '');
+            $timeLeft[] = $seconds . 's';
         }
 
         return implode(' ', $timeLeft);
