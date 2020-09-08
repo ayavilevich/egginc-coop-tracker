@@ -21,8 +21,9 @@
         </div>
 
         <div :class="{
-            'red-background': !isCoopGoodToComplete,
-            'green-background': isCoopGoodToComplete,
+            'red-background': completeStatus === 'not-close',
+            'green-background': completeStatus === 'completing',
+            'orange-background': completeStatus === 'close-to-complete',
             'text-center': true,
         }">
             <EggFormater :eggs="rateNeededToComplete * 60 * 60" />
@@ -103,6 +104,9 @@
     .green-background {
         background-color: #00800085;
     }
+    .orange-background {
+        background-color: orange;
+    }
 </style>
 
 <script>
@@ -165,8 +169,16 @@
                 let currentRateInSeconds = this.totalRate
                 return Math.ceil(this.eggsLeftToGet / currentRateInSeconds)
             },
-            isCoopGoodToComplete() {
-                return this.rateNeededToComplete < this.totalRate
+            completeStatus() {
+                if (this.rateNeededToComplete < this.totalRate) {
+                    return 'completing'
+                }
+
+                if ((this.rateNeededToComplete * .6) < this.totalRate) {
+                    return 'close-to-complete'
+                }
+
+                return 'not-close'
             },
             projectedEggs() {
                 return this.coop.eggs + (this.totalRate * this.coop.timeLeft)
