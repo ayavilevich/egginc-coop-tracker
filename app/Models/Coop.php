@@ -72,7 +72,7 @@ class Coop extends Model
     public function getEstimateCompletion(): string
     {
         if ($this->getEggsLeftNeeded() < 0) {
-            return 'Complete';
+            return 'CPLT';
         }
         $seconds = ceil($this->getEggsLeftNeeded() / $this->getTotalRate());
 

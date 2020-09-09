@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21689eddd070ca73089563e32fd79612",
+    "content-hash": "915f2bd772d14478a45404fea68286ff",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -798,6 +798,53 @@
                 }
             ],
             "time": "2020-09-05T11:42:23+00:00"
+        },
+        {
+            "name": "kba-team/markdown-table",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/the-kbA-team/markdown-table.git",
+                "reference": "69b0d16fba2ce9d50ec2f0ddf0889837557913b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/the-kbA-team/markdown-table/zipball/69b0d16fba2ce9d50ec2f0ddf0889837557913b2",
+                "reference": "69b0d16fba2ce9d50ec2f0ddf0889837557913b2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "kbATeam\\MarkdownTable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gregor J.",
+                    "email": "gregor-j@users.noreply.github.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "Create a markdown table string from an associative array.",
+            "keywords": [
+                "array",
+                "markdown",
+                "markdown-table",
+                "table"
+            ],
+            "time": "2020-01-27T11:38:40+00:00"
         },
         {
             "name": "laravel/framework",

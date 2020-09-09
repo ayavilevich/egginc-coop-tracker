@@ -7,10 +7,12 @@ use App\Exceptions\CoopNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Models\Coop;
 use Illuminate\Http\Request;
+use kbATeam\MarkdownTable\Table;
+use kbATeam\MarkdownTable\Column;
 
 class DiscordMessage extends Controller
 {
-    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'remove'];
+    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'remove', 'status2'];
 
     public function receive(Request $request): array
     {
@@ -80,6 +82,50 @@ HELP;
         }
 
         return implode("\n", $message);
+    }
+
+    private function status2(array $parts): string
+    {
+        $coops = Coop::contract($parts[1])->get();
+
+        if ($coops->count() == 0) {
+            return 'Invalid contract ID or no coops setup.';
+        }
+
+        $messages = [config('app.url') . route('contract-status', ['contractId' => $parts[1]], false)];
+
+        $firstCoop = $coops->first();
+
+        $table = new Table();
+        $table->addColumn('name', new Column($parts[1] . ' ' . $firstCoop->getContractSize() . '', Column::ALIGN_LEFT));
+        $table->addColumn('progress', new Column($firstCoop->getEggsNeededFormatted(), Column::ALIGN_LEFT));
+        $table->addColumn('time-left', new Column('E Time', Column::ALIGN_LEFT));
+        $table->addColumn('projected', new Column('Proj', Column::ALIGN_LEFT));
+
+        $data = [];
+        foreach ($coops as $coop) {
+            try {
+                $data[] = [
+                    'name'      => $coop->coop . ' ' . $coop->getMembers() . '',
+                    'progress'  => $coop->getCurrentEggsFormatted(),
+                    'time-left' => $coop->getEstimateCompletion(),
+                    'projected' => $coop->getProjectedEggsFormatted(),
+                ];
+            } catch (CoopNotFoundException $e) {
+                $data[] = [
+                    'name'     => $coop->coop,
+                    'progress' => 'NA',
+                ];
+            }
+        }
+
+        $messages[] = '```';
+        foreach ($table->generate($data) as $row) {
+            $messages[] = $row;
+        }
+        $messages[] = '```';
+
+        return implode("\n", $messages);
     }
 
     private function contracts(): string
