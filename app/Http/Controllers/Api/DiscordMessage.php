@@ -16,7 +16,7 @@ class DiscordMessage extends Controller
 
     public function receive(Request $request): array
     {
-        $message = trim(str_replace($request->input('atBotUser') . ' ', '', $request->input('content')));
+        $message = trim(str_replace($request->input('atBotUser'), '', $request->input('content')));
         $parts = explode(' ', $message);
         $command = $parts['0'];
 
