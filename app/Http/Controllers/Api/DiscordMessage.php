@@ -12,7 +12,7 @@ use kbATeam\MarkdownTable\Column;
 
 class DiscordMessage extends Controller
 {
-    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'remove', 'status2'];
+    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'remove',];
 
     public function receive(Request $request): array
     {
@@ -56,35 +56,6 @@ HELP;
     }
 
     private function status(array $parts): string
-    {
-        $coops = Coop::contract($parts[1])->get();
-
-        if ($coops->count() == 0) {
-            return 'Invalid contract ID or no coops setup.';
-        }
-
-        $message = [config('app.url') . route('contract-status', ['contractId' => $parts[1]], false)];
-        foreach ($coops as $coop) {
-            $coopLine = '';
-            try {
-                if ($coop->getEggsLeftNeeded() < 0) {
-                    $coopLine .= '~~';
-                }
-                $coopLine .= $coop->coop . ' (' . $coop->getMembers() . '/' . $coop->getContractSize() . ') - ' . $coop->getCurrentEggsFormatted() . '/' . $coop->getEggsNeededFormatted() . ' - ' . $coop->getEstimateCompletion() . ' - Proj: ' . $coop->getProjectedEggsFormatted();
-
-                if ($coop->getEggsLeftNeeded() < 0) {
-                    $coopLine .= '~~';
-                }
-            } catch (CoopNotFoundException $e) {
-                $coopLine = $coop->coop . ' Not created yet.';
-            }
-            $message[] = $coopLine;
-        }
-
-        return implode("\n", $message);
-    }
-
-    private function status2(array $parts): string
     {
         $coops = Coop::contract($parts[1])->get();
 
