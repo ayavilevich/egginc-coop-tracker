@@ -12,7 +12,7 @@ use kbATeam\MarkdownTable\Column;
 
 class DiscordMessage extends Controller
 {
-    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'remove',];
+    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'delete',];
 
     public function receive(Request $request): array
     {
@@ -49,7 +49,7 @@ class DiscordMessage extends Controller
 @EggBert contracts - Display current contracts with IDs
 @EggBert status contractId - Display coop info for contract
 @EggBert add {contractID} {Coop} - Add coop to tracking
-@EggBert remove {contractID} {Coop} - Remove coop from tracking
+@EggBert delete {contractID} {Coop} - Remove coop from tracking
 
 ```
 HELP;
@@ -165,7 +165,7 @@ HELP;
         }
     }
 
-    private function remove(array $parts, Request $request): string
+    private function delete(array $parts, Request $request): string
     {
         if (!$this->isAdmin($request->input('author.id'))) {
             return 'You are not allowed to do that.' . $request->input('author.id');
