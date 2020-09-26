@@ -57,7 +57,10 @@ HELP;
 
     private function status(array $parts): string
     {
-        $coops = Coop::contract($parts[1])->get();
+        $coops = Coop::contract($parts[1])
+            ->orderBy('coop')
+            ->get()
+        ;
 
         if ($coops->count() == 0) {
             return 'Invalid contract ID or no coops setup.';

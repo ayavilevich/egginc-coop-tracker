@@ -18,7 +18,10 @@ class CurrentContracts extends Controller
 
     public function status($contractId)
     {
-        $coops = Coop::contract($contractId)->get();
+        $coops = Coop::contract($contractId)
+            ->orderBy('coop')
+            ->get()
+        ;
 
         if ($coops->count() == 0) {
             abort(404);
