@@ -11,6 +11,7 @@ client.on('ready', () => {
 
 client.on('message', message => {
     let atBotUser = 'eb!';
+    message.content = message.content.toLowerCase();
 
     if (message.author.bot || !message.content.startsWith(atBotUser)) {
         return;
