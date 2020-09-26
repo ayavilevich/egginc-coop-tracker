@@ -28,7 +28,7 @@
                     return this.eggs
                 }
 
-                return Math.round(this.eggs / Math.pow(10, magnitude.magnitude) * 10) / 10 + magnitude.symbol
+                return Math.round(this.eggs / Math.pow(10, magnitude.magnitude) * 1000) / 1000 + magnitude.symbol
             }
         }
     }
