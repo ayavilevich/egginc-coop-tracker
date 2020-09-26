@@ -63,12 +63,15 @@ HELP;
             return 'Invalid contract ID or no coops setup.';
         }
 
-        $messages = [config('app.url') . route('contract-status', ['contractId' => $parts[1]], false)];
-
+        $contractInfo = $this->getContractInfo($parts[1]);
         $firstCoop = $coops->first();
+        $messages = [
+            $contractInfo->name,
+            config('app.url') . route('contract-status', ['contractId' => $parts[1]], false),
+        ];
 
         $table = new Table();
-        $table->addColumn('name', new Column($parts[1] . ' ' . $firstCoop->getContractSize() . '', Column::ALIGN_LEFT));
+        $table->addColumn('name', new Column('Coop ' . $firstCoop->getContractSize() . '', Column::ALIGN_LEFT));
         $table->addColumn('progress', new Column($firstCoop->getEggsNeededFormatted(), Column::ALIGN_LEFT));
         $table->addColumn('time-left', new Column('E Time', Column::ALIGN_LEFT));
         $table->addColumn('projected', new Column('Proj', Column::ALIGN_LEFT));
@@ -141,7 +144,7 @@ HELP;
             return 'Coop is already being tracked.';
         }
 
-        $contractIsValid = collect(resolve(EggInc::class)->getCurrentContracts())->where('identifier', $parts[1])->first();
+        $contractIsValid = $this->getContractInfo($parts[1]);
 
         if (!$contractIsValid) {
             return 'Contract is invalid.';
@@ -187,5 +190,13 @@ HELP;
         } else {
             return 'Was not able to delete the coop.';
         }
+    }
+
+    private function getContractInfo(string $identifier): ?\StdClass
+    {
+        return collect(resolve(EggInc::class)->getCurrentContracts())
+            ->where('identifier', $identifier)
+            ->first()
+        ;
     }
 }
