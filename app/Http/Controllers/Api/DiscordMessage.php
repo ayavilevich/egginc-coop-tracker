@@ -9,6 +9,7 @@ use App\Models\Coop;
 use Illuminate\Http\Request;
 use kbATeam\MarkdownTable\Table;
 use kbATeam\MarkdownTable\Column;
+use Illuminate\Support\Facades\URL;
 
 class DiscordMessage extends Controller
 {
@@ -16,6 +17,10 @@ class DiscordMessage extends Controller
 
     public function receive(Request $request): array
     {
+        if (!in_array($request->input('channel.guild.id'), ['722987744774848556'])) {
+            return ['message' => 'Invalid Server'];
+        }
+
         $message = trim(str_replace($request->input('atBotUser'), '', $request->input('content')));
         $parts = explode(' ', $message);
         $command = $parts['0'];
@@ -26,13 +31,12 @@ class DiscordMessage extends Controller
             $message = $this->$command($parts, $request);
         }
 
-        return [
-            'message' => $message,
-        ];
+        return ['message' => $message];
     }
 
     private function hi(array $parts, Request $request): string
     {
+        \Log::info('hello', ['data' => $request->all()]);
         return 'Hello <@' . $request->input('author.id') . '>';
     }
 
@@ -70,7 +74,7 @@ HELP;
         $firstCoop = $coops->first();
         $messages = [
             $contractInfo->name,
-            config('app.url') . route('contract-status', ['contractId' => $parts[1]], false),
+            URL::signedRoute('contract-status', ['contractId' => $parts[1]], 60 * 60),
         ];
 
         $table = new Table();

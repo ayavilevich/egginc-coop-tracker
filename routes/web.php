@@ -19,4 +19,5 @@ Route::get('current-contracts', 'CurrentContracts@index')->name('current-contrac
 
 Route::get('current-contract-status/{contractId}', 'CurrentContracts@status')
     ->name('contract-status')
+    ->middleware('signed')
 ;
