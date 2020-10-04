@@ -74,7 +74,8 @@ exports.getContract = async function(contractName, coopName) {
             eggs : response.totalAmount,
             totalRate : members.reduce((accumulator, member) => accumulator + member.rate, 0),
             timeLeft : response.secondsRemaining,
-            members : members
+            members : members,
+            pb_public: response.pb_public
         }
     });
 }

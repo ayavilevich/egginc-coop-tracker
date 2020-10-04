@@ -1,6 +1,13 @@
 <template>
     <div>
-        <h3>{{ coop.coop }}</h3>
+        <h3>
+            {{ coop.coop }}
+            <i
+                class="fas fa-user-plus"
+                v-if="coop.pb_public"
+                title="Public"
+            ></i>
+        </h3>
 
         <p class="text-center">
             Time Left:
@@ -60,6 +67,16 @@
                 <tr v-for="member in coop.members">
                     <td>
                         {{ member.name }} - {{ member.boostTokens }}
+                        <i
+                            class="fas fa-suitcase-rolling"
+                            v-if="!member.active"
+                            title="Sleeping"
+                        ></i>
+                        <i
+                            class="fas fa-bug"
+                            v-if="member.timeCheatDetected"
+                            title="Cheating"
+                        ></i>
                     </td>
                     <td>
                         <EggFormater :eggs="member.eggs" />
