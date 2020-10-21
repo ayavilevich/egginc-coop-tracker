@@ -56,7 +56,7 @@ class Coop extends Model
 
     public function getEggsNeededFormatted(): string
     {
-        return resolve(Egg::class)->format($this->getEggsNeeded());
+        return resolve(Egg::class)->format($this->getEggsNeeded(), 3);
     }
 
     public function getContractInfo(): ?\StdClass
