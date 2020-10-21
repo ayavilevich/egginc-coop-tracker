@@ -33,6 +33,9 @@ class Coop extends Model
 
     public function getEggsNeeded(): int
     {
+        if (!$this->getContractInfo()) {
+            return 0;
+        }
         return end($this->getContractInfo()->goalsList)->targetAmount;
     }
 
@@ -53,10 +56,10 @@ class Coop extends Model
 
     public function getEggsNeededFormatted(): string
     {
-        return resolve(Egg::class)->format(end($this->getContractInfo()->goalsList)->targetAmount);
+        return resolve(Egg::class)->format($this->getEggsNeeded());
     }
 
-    public function getContractInfo(): \StdClass
+    public function getContractInfo(): ?\StdClass
     {
         return collect(resolve(EggInc::class)->getCurrentContracts())
             ->where('identifier', $this->contract)
@@ -98,6 +101,9 @@ class Coop extends Model
 
     public function getContractSize(): int
     {
+        if (!$this->getContractInfo()) {
+            return 0;
+        }
         return $this->getContractInfo()->maxCoopSize;
     }
 }

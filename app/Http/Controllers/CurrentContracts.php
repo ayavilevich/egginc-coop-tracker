@@ -49,9 +49,17 @@ class CurrentContracts extends Controller
 
     private function getContractInfo($identifier)
     {
-        return collect($this->getContractsInfo())
+        $contract = collect($this->getContractsInfo())
             ->where('identifier', $identifier)
             ->first()
         ;
+
+        if (!$contract) {
+            $contract = new \StdClass;
+            $contract->name = $identifier;
+            $contract->goalsList = [['targetAmount' => 0]];
+        }
+
+        return $contract;
     }
 }

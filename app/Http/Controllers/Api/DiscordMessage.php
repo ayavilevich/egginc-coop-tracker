@@ -76,10 +76,14 @@ HELP;
             return 'Invalid contract ID or no coops setup.';
         }
 
-        $contractInfo = $this->getContractInfo($parts[1]);
+        try {
+            $contractInfo = $this->getContractInfo($parts[1]);
+        } catch (\Exception $e) {
+            $contractInfo = null;
+        }
         $firstCoop = $coops->first();
         $messages = [
-            $contractInfo->name,
+            $contractInfo ? $contractInfo->name : $parts[1],
             URL::signedRoute('contract-status', ['contractId' => $parts[1]], 60 * 60),
         ];
 
