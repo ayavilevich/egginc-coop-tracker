@@ -17,5 +17,13 @@ require('yargs')
             console.log(JSON.stringify(coopInfo))
         })
     })
+    .command('getPlayerInfo', 'Get Player Info', (yargs) => {
+        yargs
+            .positional('playerId', {type: 'string'})
+    }, (argv) => {
+        eggIncApi.getPlayerData(argv.playerId).then((player) => {
+            console.log(JSON.stringify(player))
+        })
+    })
     .help()
     .argv
