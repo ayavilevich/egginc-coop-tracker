@@ -62,7 +62,13 @@ HELP;
     private function status(array $parts): string
     {
         $coops = Coop::contract($parts[1])
-            ->orderBy('coop')
+            ->orderBy(
+                \DB::raw("if(
+                    SUBSTRING(coop, LOCATE('adv', coop)+3) = 'x',
+                    99,
+                    CAST(SUBSTRING(coop, LOCATE('adv', coop)+3) AS SIGNED)
+                )")
+            )
             ->get()
         ;
 
