@@ -22,6 +22,6 @@ Route::get('current-contract-status/{contractId}', 'CurrentContracts@status')
     ->middleware('signed')
 ;
 
-Route::get('login/discord', 'Discord@redirect');
+Route::get('login/discord', 'Discord@redirect')->name('discord-login');
 
 Route::get('login/discord/callback', 'Discord@callback');
