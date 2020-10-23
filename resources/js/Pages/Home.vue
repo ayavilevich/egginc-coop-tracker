@@ -1,6 +1,10 @@
 <template>
     <layout title="Home">
-        <div>Some home page of awesomeness</div>
+        <div class="list-group">
+            <a v-for="guild in guilds" class="list-group-item list-group-item-action flex-column" href="#">
+                <h5 class="mb-1">{{ guild.name }}</h5>
+            </a>
+        </div>
     </layout>
 </template>
 
@@ -10,6 +14,9 @@
     export default {
         components: {
             Layout,
+        },
+        props: {
+            guilds: Object
         }
     }
 </script>

@@ -7,8 +7,13 @@ use Inertia\Inertia;
 
 class Home extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Inertia::render('Home');
+        $guilds = [];
+        if ($request->user()) {
+            $guilds = $request->user()->guilds();
+        }
+
+        return Inertia::render('Home', ['guilds' => $guilds]);
     }
 }

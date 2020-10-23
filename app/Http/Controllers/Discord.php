@@ -11,7 +11,14 @@ class Discord extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('discord')->redirect();
+        return Socialite::driver('discord')
+            ->scopes([
+                'identify',
+                'email',
+                'guilds',
+            ])
+            ->redirect()
+        ;
     }
 
     public function callback()
@@ -19,7 +26,7 @@ class Discord extends Controller
         $userInfo = Socialite::driver('discord')->user();
 
         User::unguarded(function () use ($userInfo) {
-            $user = User::firstOrCreate(
+            $user = User::updateOrCreate(
                 ['discord_id' => $userInfo->getId()],
                 [
                     'username'              => $userInfo->getName(),

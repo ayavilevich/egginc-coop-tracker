@@ -25,3 +25,8 @@ Route::get('current-contract-status/{contractId}', 'CurrentContracts@status')
 Route::get('login/discord', 'Discord@redirect')->name('discord-login');
 
 Route::get('login/discord/callback', 'Discord@callback');
+
+Route::get('logout', function () {
+    Auth::logout();
+    return redirect('/');
+});
