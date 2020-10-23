@@ -17,7 +17,8 @@ class User extends Authenticatable
     public function getCurrentDiscordToken()
     {
         if ($this->discord_token_expires->lt(now())) {
-
+            // make call to https://discord.com/api/v6/oauth2/token
+            // https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-refresh-token-exchange-example
         }
         return $this->discord_token;
     }
