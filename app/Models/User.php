@@ -33,11 +33,18 @@ class User extends Authenticatable
 
         foreach ($guilds as $key => $guild) {
             $guild->isAdmin = $guild->permissions & 8;
+            // weird bug with vue or something that causes this number to change
+            $guild->id = (string) $guild->id;
 
             if (!$guild->isAdmin) {
                 unset($guilds[$key]);
             }
         }
         return $guilds;
+    }
+
+    public function servers()
+    {
+
     }
 }

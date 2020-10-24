@@ -1,7 +1,7 @@
 <template>
     <layout title="Home">
         <div class="list-group">
-            <a v-for="guild in guilds" class="list-group-item list-group-item-action flex-column" href="#">
+            <a v-for="guild in guilds" class="list-group-item list-group-item-action flex-column" :href="route('guild.index', {'guildId': guild.id})">
                 <h5 class="mb-1">{{ guild.name }}</h5>
             </a>
         </div>
@@ -16,7 +16,7 @@
             Layout,
         },
         props: {
-            guilds: Object
+            guilds: Array
         }
     }
 </script>
