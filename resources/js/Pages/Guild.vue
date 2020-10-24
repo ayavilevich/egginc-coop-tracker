@@ -5,24 +5,44 @@
         </template>
 
         <template v-if="guildModel.is_bot_member_of">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <h4>Current Contracts</h4>
-                    </div>
-                    <div class="row">
-                        <h4>Previous Contracts</h4>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <h4>Player List</h4>
+            <div>
+                <h4>Current Contracts</h4>
+                <ul>
+                    <li>Contract 1</li>
+                </ul>
+                <h4>Previous Contracts</h4>
+                <ul>
+                    <li>Contract 1</li>
+                </ul>
+            </div>
 
-                    <ul>
-                        <li v-for="member in guildModel.members">
-                            {{ member.username }}
-                        </li>
-                    </ul>
-                </div>
+            <div>
+                <h4>Player List</h4>
+
+                <ul>
+                    <li v-for="member in guildModel.members">
+                        {{ member.username }}
+                        (
+                            <span v-for="role in member.roles">
+                                {{ role.name }}
+                            </span>
+                        )
+                    </li>
+                </ul>
+            </div>
+
+            <h3>Settings</h3>
+            <div>
+                <form>
+                    <div class="form-group">
+                        <label>Admin Roles (allowed to modify coops names and users' player IDs)</label>
+                        <select multiple="multiple" class="form-control">
+                            <option v-for="role in guildModel.roles" :key="role.id" :value="role.id">
+                                {{ role.name }}
+                            </option>
+                        </select>
+                    </div>
+                </form>
             </div>
         </template>
     </layout>

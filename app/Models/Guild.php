@@ -7,7 +7,7 @@ use RestCord\DiscordClient;
 
 class Guild extends Model
 {
-    protected $with = ['members'];
+    protected $with = ['members', 'roles'];
 
     protected $appends = ['is_bot_member_of'];
 
@@ -27,6 +27,36 @@ class Guild extends Model
         ;
     }
 
+    public function sync()
+    {
+        $this->syncRoles();
+        $this->syncMembers();
+        $this->refresh();
+    }
+
+    public function syncRoles()
+    {
+        $roles = $this->getDiscordClient()->guild->getGuildRoles(['guild.id' => (int) $this->discord_id]);
+
+        $currentRoles = $this->roles;
+        $currentRolesIds = [];
+        foreach ($roles as $role) {
+            $currentRole = $currentRoles->firstWhere('discord_id', $role->id);
+            if (!$currentRole) {
+                $currentRole = new Role;
+                $currentRole->guild_id = $this->id;
+                $currentRole->discord_id = $role->id;
+            }
+            $currentRole->name = $role->name;
+            $currentRole->save();
+            $currentRolesIds[] = $currentRole->id;
+        }
+
+        $currentRoles->whereNotIn('id', $currentRolesIds)->each(function($record) {
+            $record->delete();
+        });
+    }
+
     public function syncMembers()
     {
         $members = $this->getGuildMembers();
@@ -43,19 +73,26 @@ class Guild extends Model
                     ['username' => $member->user->username]
                 );
             });
+            $user->roles()->sync($this->roles->whereIn('discord_id', $member->roles));
+            $user->refresh();
             $users[] = $user;
         }
         $this->members()->sync($users->pluck('id'));
     }
 
+    // need to setup this to run when new server is added and add webhook to monitor members
+    public function getGuildMembers(): array
+    {
+        return $this->getDiscordClient()->guild->listGuildMembers(['guild.id' => (int) $this->discord_id, 'limit' => 100]);
+    }
+
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
+
     public function members()
     {
         return $this->belongsToMany(User::class);
-    }
-
-    // need to setup this to run when new server is added and add webhook to monitor members
-    public function getGuildMembers()
-    {
-        return $this->getDiscordClient()->guild->listGuildMembers(['guild.id' => (int) $this->discord_id, 'limit' => 100]);
     }
 }

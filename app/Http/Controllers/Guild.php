@@ -10,7 +10,7 @@ class Guild extends Controller
 {
     public function index(Request $request, $guildId)
     {
-        $guilds = $request->user()->guilds();
+        $guilds = $request->user()->discordGuilds();
         $guild = collect($guilds)
             ->where('id', $guildId)
             ->first()

@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('username');
             $table->string('email');
-            $table->string('discord_id')->nullable();
+            $table->bigInteger('discord_id')->nullable();
             $table->string('discord_token')->nullable();
             $table->dateTime('discord_token_expires')->nullable();
             $table->string('discord_refresh_token')->nullable();

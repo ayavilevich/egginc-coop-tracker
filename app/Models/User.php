@@ -14,6 +14,8 @@ class User extends Authenticatable
         'discord_token_expires' => 'datetime',
     ];
 
+    protected $with = ['roles'];
+
     public function getCurrentDiscordToken()
     {
         if ($this->discord_token_expires->lt(now())) {
@@ -23,7 +25,7 @@ class User extends Authenticatable
         return $this->discord_token;
     }
 
-    public function guilds()
+    public function discordGuilds()
     {
         $discord = new DiscordClient([
             'token'     => $this->getCurrentDiscordToken(),
@@ -43,8 +45,13 @@ class User extends Authenticatable
         return $guilds;
     }
 
-    public function servers()
+    public function guilds()
     {
+        return $this->belongsToMany(Guild::class);
+    }
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 }

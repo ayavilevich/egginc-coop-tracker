@@ -11,7 +11,7 @@ class Home extends Controller
     {
         $guilds = [];
         if ($request->user()) {
-            $guilds = $request->user()->guilds();
+            $guilds = $request->user()->discordGuilds();
         }
 
         return Inertia::render('Home', ['guilds' => $guilds]);

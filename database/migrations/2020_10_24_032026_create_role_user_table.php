@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGuildsTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateGuildsTable extends Migration
      */
     public function up()
     {
-        Schema::create('guilds', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('discord_id')->unique();
-            $table->string('name');
-            $table->timestamps();
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->integer('role_id')->unsigned();
+            $table->primary(['user_id','role_id']);
         });
     }
 
@@ -28,6 +27,6 @@ class CreateGuildsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guilds');
+        Schema::dropIfExists('role_user');
     }
 }
