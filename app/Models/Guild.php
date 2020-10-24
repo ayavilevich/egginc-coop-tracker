@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use RestCord\DiscordClient;
+use Cache;
 
 class Guild extends Model
 {
@@ -19,9 +20,16 @@ class Guild extends Model
         ]);
     }
 
+    private function getBotGuilds(): array
+    {
+        return Cache::remember('discord-bot-guilds', 60 * 5, function () {
+            return $this->getDiscordClient()->user->getCurrentUserGuilds();
+        });
+    }
+
     public function getIsBotMemberOfAttribute(): bool
     {
-        return (bool) collect($this->getDiscordClient()->user->getCurrentUserGuilds())
+        return (bool) collect($this->getBotGuilds())
             ->where('id', $this->discord_id)
             ->first()
         ;
@@ -94,5 +102,12 @@ class Guild extends Model
     public function members()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public static function findByDiscordGuild($guild): Guild
+    {
+        return self::unguarded(function () use ($guild) {
+            return self::updateOrCreate(['discord_id' => $guild->id], ['name' => $guild->name]);
+        });
     }
 }

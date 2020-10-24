@@ -37,8 +37,9 @@ class User extends Authenticatable
             $guild->isAdmin = $guild->permissions & 8;
             // weird bug with vue or something that causes this number to change
             $guild->id = (string) $guild->id;
+            $guildModel = Guild::findByDiscordGuild($guild);
 
-            if (!$guild->isAdmin) {
+            if (!$guild->isAdmin && !$guildModel->getIsBotMemberOfAttribute()) {
                 unset($guilds[$key]);
             }
         }

@@ -20,9 +20,8 @@ class Guild extends Controller
             return redirect()->route('home');
         }
 
-        $guildModel = GuildModel::unguarded(function () use ($guild) {
-            return GuildModel::updateOrCreate(['discord_id' => $guild->id], ['name' => $guild->name]);
-        });
+        $guildModel = GuildModel::findByDiscordGuild($guild);
+        $guildModel->sync();
 
         return Inertia::render('Guild', [
             'guild'      => $guild,

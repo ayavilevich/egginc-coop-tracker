@@ -14,6 +14,6 @@ class Home extends Controller
             $guilds = $request->user()->discordGuilds();
         }
 
-        return Inertia::render('Home', ['guilds' => $guilds]);
+        return Inertia::render('Home', ['guilds' => array_merge($guilds)]);
     }
 }
