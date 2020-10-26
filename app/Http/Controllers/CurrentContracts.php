@@ -42,6 +42,43 @@ class CurrentContracts extends Controller
         ]);
     }
 
+    public function guildStatus($guildId, $contractId, Request $request)
+    {
+        $guilds = $request->user()->discordGuilds();
+        $guild = collect($guilds)
+            ->where('id', $guildId)
+            ->first()
+        ;
+
+        if (!$guild) {
+            return redirect()->route('home');
+        }
+
+        $coops = Coop::contract($contractId)
+            ->guild($guildId)
+            ->orderBy('coop')
+            ->get()
+        ;
+
+        if ($coops->count() == 0) {
+            abort(404);
+        }
+
+        $coopsInfo = [];
+        foreach ($coops as $coop) {
+            try {
+                $coopsInfo[] = $coop->getCoopInfo();
+            } catch (CoopNotFoundException $e) {
+                $coopsInfo[] = [];
+            }
+        }
+
+        return Inertia::render('ContractStatus', [
+            'coopsInfo'    => $coopsInfo,
+            'contractInfo' => $this->getContractInfo($contractId),
+        ]);
+    }
+
     private function getContractsInfo()
     {
         return resolve(EggInc::class)->getCurrentContracts();

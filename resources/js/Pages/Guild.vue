@@ -8,7 +8,11 @@
             <div>
                 <h4>Current Contracts</h4>
                 <ul>
-                    <li>Contract 1</li>
+                    <li v-for="contract in currentContracts">
+                        <a :href="route('contract-guild-status', {'guildId': guild.id, 'contractId': contract.identifier})">
+                            {{ contract.name }}
+                        </a>
+                    </li>
                 </ul>
                 <h4>Previous Contracts</h4>
                 <ul>
@@ -57,7 +61,8 @@
         },
         props: {
             guild: Object,
-            guildModel: Object
+            guildModel: Object,
+            currentContracts: Object,
         }
     }
 </script>

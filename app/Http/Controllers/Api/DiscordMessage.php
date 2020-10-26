@@ -15,10 +15,14 @@ class DiscordMessage extends Controller
 {
     private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'delete',];
 
+    private $guildId;
+
     public function receive(Request $request): array
     {
-        if (!in_array($request->input('channel.guild.id'), ['722987744774848556'])) {
-            return ['message' => 'Invalid Server'];
+        $this->guildId = $request->input('channel.guild.id');
+
+        if (!$this->guildId) {
+            return ['message' => 'Invalid Server.'];
         }
 
         $message = trim(str_replace($request->input('atBotUser'), '', $request->input('content')));
@@ -62,6 +66,7 @@ HELP;
     private function status(array $parts): string
     {
         $coops = Coop::contract($parts[1])
+            ->guild($this->guildId)
             ->orderBy(
                 \DB::raw("if(
                     SUBSTRING(coop, LOCATE('adv', coop)+3) = 'x',
@@ -153,6 +158,7 @@ HELP;
         }
 
         $coopCheck = Coop::contract($parts[1])
+            ->guild($this->guildId)
             ->coop($parts[2])
             ->first()
         ;
@@ -167,10 +173,12 @@ HELP;
             return 'Contract is invalid.';
         }
 
-        $coop = Coop::create([
+        $coop = new Coop([
             'contract' => $parts[1],
-            'coop' => $parts[2],
+            'coop'     => $parts[2],
         ]);
+        $coop->guild_id = $this->guildId;
+        $coop->save();
 
         if ($coop->id) {
             return 'Coop added successfully.';
@@ -195,6 +203,7 @@ HELP;
 
         $coop = Coop::contract($parts[1])
             ->coop($parts[2])
+            ->guild($this->guildId)
             ->first()
         ;
 

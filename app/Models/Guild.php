@@ -82,7 +82,6 @@ class Guild extends Model
                 );
             });
             $user->roles()->sync($this->roles->whereIn('discord_id', $member->roles));
-            $user->refresh();
             $users[] = $user;
         }
         $this->members()->sync($users->pluck('id'));

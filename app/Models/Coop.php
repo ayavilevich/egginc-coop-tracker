@@ -11,6 +11,11 @@ class Coop extends Model
 {
     protected $fillable = ['contract', 'coop'];
 
+    public function scopeGuild($query, $guildId)
+    {
+        return $query->where('guild_id', $guildId);
+    }
+
     public function scopeContract($query, $contract)
     {
         return $query->where('contract', $contract);
