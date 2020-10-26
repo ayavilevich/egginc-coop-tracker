@@ -24,6 +24,7 @@ Route::get('current-contract-status/{contractId}', 'CurrentContracts@status')
 
 Route::get('current-contract-status/{guildId}/{contractId}', 'CurrentContracts@guildStatus')
     ->name('contract-guild-status')
+    ->middleware('auth')
 ;
 
 Route::get('guild/{guildId}', 'Guild@index')
