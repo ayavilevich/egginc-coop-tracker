@@ -53,12 +53,11 @@ class DiscordMessage extends Controller
     {
         return <<<HELP
 ```
-@EggBert help - Displays list of commands
-@EggBert contracts - Display current contracts with IDs
-@EggBert status contractId - Display coop info for contract
-@EggBert add {contractID} {Coop} - Add coop to tracking
-@EggBert delete {contractID} {Coop} - Remove coop from tracking
-
+eb!help - Displays list of commands
+eb!contracts - Display current contracts with IDs
+eb!status contractId - Display coop info for contract
+eb!add {contractID} {Coop} - Add coop to tracking
+eb!delete {contractID} {Coop} - Remove coop from tracking
 ```
 HELP;
     }
