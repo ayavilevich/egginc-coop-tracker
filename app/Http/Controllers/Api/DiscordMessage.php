@@ -41,7 +41,7 @@ class DiscordMessage extends Controller
     private function hi(array $parts, Request $request): string
     {
         \Log::info('hello', ['data' => $request->all()]);
-        return 'Hello <@' . $request->input('author.id') . '>';
+        return 'Hello <@' . $request->input('author.id') . '>!';
     }
 
     private function love(): string
