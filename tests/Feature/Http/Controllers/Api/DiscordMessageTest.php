@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\Api;
 
 use App\Models\Contract;
+use App\Models\Coop;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,7 +21,7 @@ class DiscordMessageTest extends TestCase
                 'channel'   => ['guild' => ['id' => 1]],
                 'content'   => $this->atBotUser . $message,
                 'atBotUser' => $this->atBotUser,
-                'author'    => ['id' => 1],
+                'author'    => ['id' => 723977563650654259],
             ]
         );
 
@@ -57,7 +58,7 @@ HELP;
     {
         $message = $this->sendDiscordMessage('hi');
 
-        $this->assertEquals('Hello <@1>!', $message);
+        $this->assertEquals('Hello <@723977563650654259>!', $message);
     }
 
     public function testCurrentContracts()
@@ -73,6 +74,33 @@ HELP;
 {$contract->identifier}($contract->name)
 ```
 CONTRACTS;
+        $this->assertEquals($expect, $message);
+    }
+
+    public function testAdd()
+    {
+        $contract = factory(Contract::class)->create();
+
+        $message = $this->sendDiscordMessage('add ' . $contract->identifier . ' test');
+        $expect = 'Coop added successfully.';
+
+        $this->assertEquals($expect, $message);
+    }
+
+    public function testDelete()
+    {
+        $contract = factory(Contract::class)->create();
+        $coop = Coop::make([
+            'contract' => $contract->identifier,
+            'guild_id' => 1,
+            'coop'     => 'test',
+        ]);
+        $coop->guild_id = 1;
+        $coop->save();
+
+        $message = $this->sendDiscordMessage('delete ' . $contract->identifier . ' test');
+        $expect = 'Coop has been deleted.';
+
         $this->assertEquals($expect, $message);
     }
 }

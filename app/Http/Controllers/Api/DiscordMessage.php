@@ -212,7 +212,7 @@ HELP;
         }
 
         if ($coop->delete()) {
-            return 'Coop has been deleted';
+            return 'Coop has been deleted.';
         } else {
             return 'Was not able to delete the coop.';
         }
