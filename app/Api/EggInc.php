@@ -31,21 +31,19 @@ class EggInc
 
     public function getCurrentContracts(): array
     {
-        return Cache::remember('coops', 60 * 60, function () {
-            $contractCommand = new Command([
-                'command' => 'node ./js/egg-inc.js getAllActiveContracts',
-                'procCwd' => base_path(),
-            ]);
+        $contractCommand = new Command([
+            'command' => 'node ./js/egg-inc.js getAllActiveContracts',
+            'procCwd' => base_path(),
+        ]);
 
-            $contracts = [];
-            if ($contractCommand->execute()) {
-                $contracts = json_decode($contractCommand->getOutput());
-            }
+        $contracts = [];
+        if ($contractCommand->execute()) {
+            $contracts = json_decode($contractCommand->getOutput());
+        }
 
-            if (!$contracts) {
-                throw new \Exception('Could not load contracts');
-            }
-            return $contracts;
-        });
+        if (!$contracts) {
+            throw new \Exception('Could not load contracts');
+        }
+        return $contracts;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Api\EggInc;
 use App\Exceptions\CoopNotFoundException;
 use App\Http\Controllers\Controller;
+use App\Models\Contract;
 use App\Models\Coop;
 use Illuminate\Http\Request;
 use kbATeam\MarkdownTable\Table;
@@ -125,7 +126,7 @@ HELP;
 
     private function contracts(): string
     {
-        $contracts = resolve(EggInc::class)->getCurrentContracts();
+        $contracts = $this->getContractsInfo();
 
         $message[] = '```';
 
@@ -219,9 +220,12 @@ HELP;
 
     private function getContractInfo(string $identifier): ?\StdClass
     {
-        return collect(resolve(EggInc::class)->getCurrentContracts())
-            ->where('identifier', $identifier)
-            ->first()
-        ;
+        $contract = Contract::firstWhere('identifier', $identifier);
+
+        if (!$contract) {
+            abort(404, 'Contract not found.');
+        }
+
+        return $contract->raw_data;
     }
 }

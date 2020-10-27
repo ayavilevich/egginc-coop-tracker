@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Api\EggInc;
 use App\Exceptions\CoopNotFoundException;
+use App\Models\Contract;
 use App\Models\Coop;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -79,24 +80,14 @@ class CurrentContracts extends Controller
         ]);
     }
 
-    private function getContractsInfo()
-    {
-        return resolve(EggInc::class)->getCurrentContracts();
-    }
-
     private function getContractInfo($identifier)
     {
-        $contract = collect($this->getContractsInfo())
-            ->where('identifier', $identifier)
-            ->first()
-        ;
+        $contract = Contract::firstWhere('identifier', $identifier);
 
         if (!$contract) {
-            $contract = new \StdClass;
-            $contract->name = $identifier;
-            $contract->goalsList = [['targetAmount' => 0]];
+            abort(404, 'Contract not found.');
         }
 
-        return $contract;
+        return $contract->raw_data;
     }
 }

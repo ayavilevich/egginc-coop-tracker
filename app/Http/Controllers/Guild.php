@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Api\EggInc;
 use App\Models\Guild as GuildModel;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -29,10 +28,5 @@ class Guild extends Controller
             'guildModel'       => $guildModel,
             'currentContracts' => $this->getContractsInfo(),
         ]);
-    }
-
-    private function getContractsInfo()
-    {
-        return resolve(EggInc::class)->getCurrentContracts();
     }
 }

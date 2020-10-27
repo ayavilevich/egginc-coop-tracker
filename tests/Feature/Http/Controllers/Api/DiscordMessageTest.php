@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers\Api;
 
+use App\Models\Contract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -57,5 +58,21 @@ HELP;
         $message = $this->sendDiscordMessage('hi');
 
         $this->assertEquals('Hello <@1>!', $message);
+    }
+
+    public function testCurrentContracts()
+    {
+        $contract = factory(Contract::class)
+            ->create(['expiration' => now()->addDays(7)])
+        ;
+
+        $message = $this->sendDiscordMessage('contracts');
+
+        $expect = <<<CONTRACTS
+```
+{$contract->identifier}($contract->name)
+```
+CONTRACTS;
+        $this->assertEquals($expect, $message);
     }
 }

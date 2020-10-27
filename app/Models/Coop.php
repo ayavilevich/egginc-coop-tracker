@@ -66,10 +66,7 @@ class Coop extends Model
 
     public function getContractInfo(): ?\StdClass
     {
-        return collect(resolve(EggInc::class)->getCurrentContracts())
-            ->where('identifier', $this->contract)
-            ->first()
-        ;
+        return Contract::firstWhere('identifier', $identifier)->raw_data;
     }
 
     public function getEggsLeftNeeded(): int
