@@ -1,0 +1,99 @@
+{
+    "egg": 104,
+    "name": "Last Minute Decoration",
+    "debug": false,
+    "goalsList": [
+        {
+            "type": 1,
+            "rewardType": 9,
+            "rewardAmount": 2,
+            "targetAmount": 30000000000000000,
+            "rewardSubType": "tachyon_prism_orange_big",
+            "targetSoulEggs": 100000000000
+        },
+        {
+            "type": 1,
+            "rewardType": 4,
+            "rewardAmount": 1,
+            "targetAmount": 500000000000000000,
+            "rewardSubType": "",
+            "targetSoulEggs": 10000000000000
+        },
+        {
+            "type": 1,
+            "rewardType": 2,
+            "rewardAmount": 100000,
+            "targetAmount": 1000000000000000000,
+            "rewardSubType": "",
+            "targetSoulEggs": 1000000000000000
+        }
+    ],
+    "maxBoosts": 0,
+    "identifier": "halloween-2020",
+    "coopAllowed": true,
+    "description": "Family meetings were called, one common conclusion: We need more pumpkins!",
+    "maxCoopSize": 13,
+    "maxSoulEggs": 0,
+    "goalSetsList": [
+        {
+            "goalsList": [
+                {
+                    "type": 1,
+                    "rewardType": 9,
+                    "rewardAmount": 2,
+                    "targetAmount": 30000000000000000,
+                    "rewardSubType": "tachyon_prism_orange_big",
+                    "targetSoulEggs": 100000000000
+                },
+                {
+                    "type": 1,
+                    "rewardType": 4,
+                    "rewardAmount": 1,
+                    "targetAmount": 500000000000000000,
+                    "rewardSubType": "",
+                    "targetSoulEggs": 10000000000000
+                },
+                {
+                    "type": 1,
+                    "rewardType": 2,
+                    "rewardAmount": 100000,
+                    "targetAmount": 1000000000000000000,
+                    "rewardSubType": "",
+                    "targetSoulEggs": 1000000000000000
+                }
+            ]
+        },
+        {
+            "goalsList": [
+                {
+                    "type": 1,
+                    "rewardType": 9,
+                    "rewardAmount": 1,
+                    "targetAmount": 25000000000000,
+                    "rewardSubType": "jimbos_orange_big",
+                    "targetSoulEggs": 250
+                },
+                {
+                    "type": 1,
+                    "rewardType": 5,
+                    "rewardAmount": 3,
+                    "targetAmount": 250000000000000,
+                    "rewardSubType": "soul_eggs",
+                    "targetSoulEggs": 1000000
+                },
+                {
+                    "type": 1,
+                    "rewardType": 4,
+                    "rewardAmount": 1,
+                    "targetAmount": 2000000000000000,
+                    "rewardSubType": "",
+                    "targetSoulEggs": 1000000000
+                }
+            ]
+        }
+    ],
+    "lengthSeconds": 518400,
+    "expirationTime": 1605539809.00865,
+    "minutesPerToken": 90,
+    "minClientVersion": 26
+}
