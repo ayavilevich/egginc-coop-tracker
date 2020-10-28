@@ -66,7 +66,7 @@ class Coop extends Model
 
     public function getContractInfo(): ?\StdClass
     {
-        return Contract::firstWhere('identifier', $identifier)->raw_data;
+        return Contract::firstWhere('identifier', $this->contract)->raw_data;
     }
 
     public function getEggsLeftNeeded(): int

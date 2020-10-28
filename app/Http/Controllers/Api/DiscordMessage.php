@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\URL;
 
 class DiscordMessage extends Controller
 {
-    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'delete',];
+    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'delete', 's',];
 
     private $guildId;
 
@@ -103,6 +103,66 @@ HELP;
             try {
                 $data[] = [
                     'name'      => $coop->coop . ' ' . $coop->getMembers() . '',
+                    'progress'  => $coop->getCurrentEggsFormatted(),
+                    'time-left' => $coop->getEstimateCompletion(),
+                    'projected' => $coop->getProjectedEggsFormatted(),
+                ];
+            } catch (CoopNotFoundException $e) {
+                $data[] = [
+                    'name'     => $coop->coop,
+                    'progress' => 'NA',
+                ];
+            }
+        }
+
+        $messages[] = '```';
+        foreach ($table->generate($data) as $row) {
+            $messages[] = $row;
+        }
+        $messages[] = '```';
+
+        return implode("\n", $messages);
+    }
+
+    private function s(array $parts): string
+    {
+        $coops = Coop::contract($parts[1])
+            ->guild($this->guildId)
+            ->orderBy(
+                \DB::raw("if(
+                    SUBSTRING(coop, LOCATE('adv', coop)+3) = 'x',
+                    99,
+                    CAST(SUBSTRING(coop, LOCATE('adv', coop)+3) AS SIGNED)
+                )")
+            )
+            ->get()
+        ;
+
+        if ($coops->count() == 0) {
+            return 'Invalid contract ID or no coops setup.';
+        }
+
+        try {
+            $contractInfo = $this->getContractInfo($parts[1]);
+        } catch (\Exception $e) {
+            $contractInfo = null;
+        }
+        $firstCoop = $coops->first();
+        $messages = [
+            $contractInfo ? $contractInfo->name : $parts[1]
+        ];
+
+        $table = new Table();
+        $table->addColumn('name', new Column('C ' . $firstCoop->getContractSize() . '', Column::ALIGN_LEFT));
+        $table->addColumn('progress', new Column($firstCoop->getEggsNeededFormatted(), Column::ALIGN_LEFT));
+        $table->addColumn('time-left', new Column('E Time', Column::ALIGN_LEFT));
+        $table->addColumn('projected', new Column('Proj', Column::ALIGN_LEFT));
+
+        $data = [];
+        foreach ($coops as $coop) {
+            try {
+                $data[] = [
+                    'name'      => substr($coop->coop, -1) . ' ' . $coop->getMembers() . '',
                     'progress'  => $coop->getCurrentEggsFormatted(),
                     'time-left' => $coop->getEstimateCompletion(),
                     'projected' => $coop->getProjectedEggsFormatted(),
