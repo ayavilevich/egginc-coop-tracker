@@ -8,7 +8,7 @@ class Egg
         $this->magnitudes = json_decode(file_get_contents(base_path('resources/js/magnitudeFormat.json')));
     }
 
-    public function format(int $eggs, int $decimals = 0): string
+    public function format(int $eggs): string
     {
         $last = null;
         foreach ($this->magnitudes as $magnitude) {
@@ -21,6 +21,12 @@ class Egg
         if (!$last) {
             return $eggs;
         }
+
+        $decimals = 0;
+        if ($last->symbol == 'Q') {
+            $decimals = 1;
+        }
+
         if ($decimals) {
             return round(($eggs * ($decimals * 10))/ pow(10, $last->magnitude)) / ($decimals * 10) . $last->symbol;
         }

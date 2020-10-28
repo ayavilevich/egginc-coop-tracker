@@ -185,9 +185,9 @@ CONTRACTS;
 Last Minute Decoration
 {$url}
 ```
-Coop 13 | 1Q   | E Time  | Proj 
-------- | ---- | ------- | -----
-test 13 | 1.5q | 446d 6h | 10.7q
+Coop 13 | 1Q  | E Time  | Proj
+------- | --- | ------- | ----
+test 13 | 1q  | 446d 6h | 11q 
 ```
 STATUS;
 
@@ -212,9 +212,9 @@ STATUS;
         $expect = <<<STATUS
 Last Minute Decoration
 ```
-C 13 | 1Q   | E Time  | Proj 
----- | ---- | ------- | -----
-t 13 | 1.5q | 446d 6h | 10.7q
+C 13 | 1Q  | E Time  | Proj
+---- | --- | ------- | ----
+t 13 | 1q  | 446d 6h | 11q 
 ```
 STATUS;
 
