@@ -13,7 +13,7 @@ class CoopTest extends TestCase
     public function testPosition()
     {
         $coop1 = $this->makeSampleCoop();
-        $coop2 = $this->makeSampleCoop($coop1->contract()->first());
+        $coop2 = $this->makeSampleCoop($coop1->contractModel());
 
         $this->assertEquals(1, $coop1->position);
         $this->assertEquals(2, $coop2->position);

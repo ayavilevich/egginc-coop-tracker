@@ -124,8 +124,8 @@ class Coop extends Model
         return $this->getContractInfo()->maxCoopSize;
     }
 
-    public function contract()
+    public function contractModel(): Contract
     {
-        return $this->belongsTo(Contract::class, 'contract', 'identifier');
+        return $this->belongsTo(Contract::class, 'contract', 'identifier')->first();
     }
 }

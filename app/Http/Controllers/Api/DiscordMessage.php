@@ -67,13 +67,7 @@ HELP;
     {
         $coops = Coop::contract($parts[1])
             ->guild($this->guildId)
-            ->orderBy(
-                \DB::raw("if(
-                    SUBSTRING(coop, LOCATE('adv', coop)+3) = 'x',
-                    99,
-                    CAST(SUBSTRING(coop, LOCATE('adv', coop)+3) AS SIGNED)
-                )")
-            )
+            ->orderBy('position')
             ->get()
         ;
 
@@ -128,13 +122,7 @@ HELP;
     {
         $coops = Coop::contract($parts[1])
             ->guild($this->guildId)
-            ->orderBy(
-                \DB::raw("if(
-                    SUBSTRING(coop, LOCATE('adv', coop)+3) = 'x',
-                    99,
-                    CAST(SUBSTRING(coop, LOCATE('adv', coop)+3) AS SIGNED)
-                )")
-            )
+            ->orderBy('position')
             ->get()
         ;
 

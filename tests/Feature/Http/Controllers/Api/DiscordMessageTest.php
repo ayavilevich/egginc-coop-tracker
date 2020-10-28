@@ -2,9 +2,12 @@
 
 namespace Tests\Feature\Http\Controllers\Api;
 
+use App\Api\EggInc;
 use App\Models\Contract;
 use App\Models\Coop;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\URL;
+use Mockery;
 use Tests\TestCase;
 
 class DiscordMessageTest extends TestCase
@@ -63,9 +66,7 @@ HELP;
 
     public function testCurrentContracts()
     {
-        $contract = factory(Contract::class)
-            ->create(['expiration' => now()->addDays(7)])
-        ;
+        $contract = $this->makeSampleContract(['expiration' => now()->addDays(7)]);
 
         $message = $this->sendDiscordMessage('contracts');
 
@@ -79,7 +80,7 @@ CONTRACTS;
 
     public function testAdd()
     {
-        $contract = factory(Contract::class)->create();
+        $contract = $this->makeSampleContract();
 
         $message = $this->sendDiscordMessage('add ' . $contract->identifier . ' test');
         $expect = 'Coop added successfully.';
@@ -89,17 +90,67 @@ CONTRACTS;
 
     public function testDelete()
     {
-        $contract = factory(Contract::class)->create();
-        $coop = Coop::make([
-            'contract' => $contract->identifier,
-            'guild_id' => 1,
-            'coop'     => 'test',
-        ]);
-        $coop->guild_id = 1;
-        $coop->save();
+        $contract = $this->makeSampleContract();
+        $coop = $this->makeSampleCoop($contract);
 
         $message = $this->sendDiscordMessage('delete ' . $contract->identifier . ' test');
         $expect = 'Coop has been deleted.';
+
+        $this->assertEquals($expect, $message);
+    }
+
+    public function testStatus()
+    {
+        $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
+            $coopInfo = json_decode(file_get_contents(base_path('tests/files/halloween-2020-test.json')));
+
+            $mock
+                ->shouldReceive('getCoopInfo')
+                ->andReturn($coopInfo)
+            ;
+        }));
+
+        $contract = $this->makeSampleContract();
+        $coop = $this->makeSampleCoop($contract);
+
+        $url = URL::signedRoute('contract-status', ['contractId' => $contract->identifier], 60 * 60);
+        $message = $this->sendDiscordMessage('status ' . $contract->identifier);
+        $expect = <<<STATUS
+Last Minute Decoration
+{$url}
+```
+Coop 13 | 1Q   | E Time  | Proj 
+------- | ---- | ------- | -----
+test 13 | 1.5q | 446d 6h | 10.7q
+```
+STATUS;
+
+        $this->assertEquals($expect, $message);
+    }
+
+    public function testShortStatus()
+    {
+        $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
+            $coopInfo = json_decode(file_get_contents(base_path('tests/files/halloween-2020-test.json')));
+
+            $mock
+                ->shouldReceive('getCoopInfo')
+                ->andReturn($coopInfo)
+            ;
+        }));
+
+        $contract = $this->makeSampleContract();
+        $coop = $this->makeSampleCoop($contract);
+
+        $message = $this->sendDiscordMessage('s ' . $contract->identifier);
+        $expect = <<<STATUS
+Last Minute Decoration
+```
+C 13 | 1Q   | E Time  | Proj 
+---- | ---- | ------- | -----
+t 13 | 1.5q | 446d 6h | 10.7q
+```
+STATUS;
 
         $this->assertEquals($expect, $message);
     }
