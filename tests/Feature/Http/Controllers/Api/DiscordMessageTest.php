@@ -16,12 +16,14 @@ class DiscordMessageTest extends TestCase
 
     private $atBotUser = 'eb!';
 
+    private $guildId = 1;
+
     private function sendDiscordMessage(string $message): string
     {
         $response = $this->postJson(
             '/api/discord-message',
             [
-                'channel'   => ['guild' => ['id' => 1]],
+                'channel'   => ['guild' => ['id' => $this->guildId]],
                 'content'   => $this->atBotUser . $message,
                 'atBotUser' => $this->atBotUser,
                 'author'    => ['id' => 723977563650654259],
@@ -86,6 +88,34 @@ CONTRACTS;
         $expect = 'Coop added successfully.';
 
         $this->assertEquals($expect, $message);
+    }
+
+    public function testAddMultiple()
+    {
+        $contract = $this->makeSampleContract();
+
+        $message = $this->sendDiscordMessage('add ' . $contract->identifier . ' test test2');
+        $expect = 'Coops added successfully.';
+
+        $this->assertEquals($expect, $message);
+
+        $coops = Coop::contract($contract->identifier)
+            ->guild($this->guildId)
+            ->orderBy('position')
+            ->get()
+        ;
+        $this->assertEquals(2, $coops->count());
+
+        foreach ($coops as $coop) {
+            switch ($coop->position) {
+                case 1:
+                    $this->assertEquals('test', $coop->coop);
+                    break;
+                case 2:
+                    $this->assertEquals('test2', $coop->coop);
+                    break;
+            }
+        }
     }
 
     public function testDelete()

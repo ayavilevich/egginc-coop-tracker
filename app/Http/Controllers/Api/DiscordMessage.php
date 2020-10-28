@@ -201,38 +201,62 @@ HELP;
             return 'Contract ID required';
         }
 
-        if (!$parts[2]) {
-            return 'Coop name is required';
-        }
-
-        $coopCheck = Coop::contract($parts[1])
-            ->guild($this->guildId)
-            ->coop($parts[2])
-            ->first()
-        ;
-
-        if ($coopCheck) {
-            return 'Coop is already being tracked.';
-        }
-
         $contractIsValid = $this->getContractInfo($parts[1]);
 
         if (!$contractIsValid) {
             return 'Contract is invalid.';
         }
 
-        $coop = new Coop([
-            'contract' => $parts[1],
-            'coop'     => $parts[2],
-        ]);
-        $coop->guild_id = $this->guildId;
-        $coop->save();
-
-        if ($coop->id) {
-            return 'Coop added successfully.';
-        } else {
-            return 'Was not able to add coop.';
+        if (!$parts[2]) {
+            return 'Coop name is required';
         }
+
+        if (isset($parts[3])) {
+            $position = 1;
+
+            foreach ($parts as $key => $part) {
+                if (in_array($key, [0, 1])) {
+                    continue;
+                }
+
+                Coop::unguarded(function () use ($parts, $part, $position) {
+                    Coop::updateOrCreate(
+                        [
+                            'contract' => $parts[1],
+                            'coop'     => $part,
+                            'guild_id' => $this->guildId,
+                            'position' => $position,
+                        ],
+                    );
+                });
+
+                $position++;
+            }
+
+            return 'Coops added successfully.';
+        } else {
+            $coopCheck = Coop::contract($parts[1])
+                ->guild($this->guildId)
+                ->coop($parts[2])
+                ->first()
+            ;
+
+            if ($coopCheck) {
+                return 'Coop is already being tracked.';
+            }
+
+            $coop = new Coop([
+                'contract' => $parts[1],
+                'coop'     => $parts[2],
+            ]);
+            $coop->guild_id = $this->guildId;
+            $coop->save();
+            if ($coop->id) {
+                return 'Coop added successfully.';
+            } else {
+                return 'Was not able to add coop.';
+            }
+        }        
     }
 
     private function delete(array $parts, Request $request): string
