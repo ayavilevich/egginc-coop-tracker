@@ -57,7 +57,7 @@ class DiscordMessage extends Controller
 eb!help - Displays list of commands
 eb!contracts - Display current contracts with IDs
 eb!status contractId - Display coop info for contract
-eb!add {contractID} {Coop} - Add coop to tracking
+eb!add {contractID} {Coop} {?Coop} - Add coop to tracking, multiple can be added by this command. When multiple is added, the position of the coops is set.
 eb!delete {contractID} {Coop} - Remove coop from tracking
 ```
 HELP;
