@@ -9,7 +9,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coop extends Model
 {
-    protected $fillable = ['contract', 'coop'];
+    protected $fillable = ['contract', 'coop', 'position'];
+
+    protected static function booted()
+    {
+        static::creating(function ($coop) {
+            $lastCoop = self::query()
+                ->guild($coop->guild_id)
+                ->contract($coop->contract)
+                ->orderBy('position', 'desc')
+                ->first()
+            ;
+
+            $position = object_get($lastCoop, 'position', 0) + 1;
+            $coop->position = $position;
+        });
+    }
 
     public function scopeGuild($query, $guildId)
     {
@@ -107,5 +122,10 @@ class Coop extends Model
             return 0;
         }
         return $this->getContractInfo()->maxCoopSize;
+    }
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'contract', 'identifier');
     }
 }
