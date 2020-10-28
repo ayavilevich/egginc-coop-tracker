@@ -157,7 +157,7 @@ HELP;
                 ];
             } catch (CoopNotFoundException $e) {
                 $data[] = [
-                    'name'     => $coop->coop,
+                    'name'     => substr($coop->coop, -1),
                     'progress' => 'NA',
                 ];
             }
