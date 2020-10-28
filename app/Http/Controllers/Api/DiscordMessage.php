@@ -225,8 +225,10 @@ HELP;
                             'contract' => $parts[1],
                             'coop'     => $part,
                             'guild_id' => $this->guildId,
-                            'position' => $position,
                         ],
+                        [
+                            'position' => $position,
+                        ]
                     );
                 });
 

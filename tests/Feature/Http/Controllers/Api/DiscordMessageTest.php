@@ -90,6 +90,9 @@ CONTRACTS;
         $this->assertEquals($expect, $message);
     }
 
+    /**
+     * @depends testAdd
+     */
     public function testAddMultiple()
     {
         $contract = $this->makeSampleContract();
@@ -113,6 +116,39 @@ CONTRACTS;
                     break;
                 case 2:
                     $this->assertEquals('test2', $coop->coop);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * @depends testAddMultiple
+     */
+    public function testUpdatePosition()
+    {
+        $this->testAddMultiple();
+
+        $contract = Contract::find(1);
+
+        $message = $this->sendDiscordMessage('add ' . $contract->identifier . ' test2 test');
+        $expect = 'Coops added successfully.';
+
+        $this->assertEquals($expect, $message);
+
+        $coops = Coop::contract($contract->identifier)
+            ->guild($this->guildId)
+            ->orderBy('position')
+            ->get()
+        ;
+        $this->assertEquals(2, $coops->count());
+
+        foreach ($coops as $coop) {
+            switch ($coop->position) {
+                case 1:
+                    $this->assertEquals('test2', $coop->coop);
+                    break;
+                case 2:
+                    $this->assertEquals('test', $coop->coop);
                     break;
             }
         }
