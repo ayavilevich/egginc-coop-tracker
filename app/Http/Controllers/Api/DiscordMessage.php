@@ -7,10 +7,12 @@ use App\Exceptions\CoopNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Coop;
+use App\SimilarText;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use kbATeam\MarkdownTable\Table;
-use kbATeam\MarkdownTable\Column;
 use Illuminate\Support\Facades\URL;
+use kbATeam\MarkdownTable\Column;
+use kbATeam\MarkdownTable\Table;
 
 class DiscordMessage extends Controller
 {
@@ -56,20 +58,26 @@ class DiscordMessage extends Controller
 ```
 eb!help - Displays list of commands
 eb!contracts - Display current contracts with IDs
-eb!status contractId - Display coop info for contract
-eb!add {contractID} {Coop} {?Coop} - Add coop to tracking, multiple can be added by this command. When multiple is added, the position of the coops is set.
+eb!status {Contract ID} - Display coop info for contract
+eb!s {Contract ID} - Short version of status
+eb!add {Contract ID} {Coop} {?Coop} - Add coop to tracking, multiple can be added by this command. When multiple is added, the position of the coops is set.
 eb!delete {contractID} {Coop} - Remove coop from tracking
 ```
 HELP;
     }
 
-    private function status(array $parts): string
+    private function coops(string $contract): Collection
     {
-        $coops = Coop::contract($parts[1])
+        return Coop::contract($contract)
             ->guild($this->guildId)
             ->orderBy('position')
             ->get()
         ;
+    }
+
+    private function status(array $parts): string
+    {
+        $coops = $this->coops($parts[1]);
 
         if ($coops->count() == 0) {
             return 'Invalid contract ID or no coops setup.';
@@ -120,11 +128,7 @@ HELP;
 
     private function s(array $parts): string
     {
-        $coops = Coop::contract($parts[1])
-            ->guild($this->guildId)
-            ->orderBy('position')
-            ->get()
-        ;
+        $coops = $this->coops($parts[1]);
 
         if ($coops->count() == 0) {
             return 'Invalid contract ID or no coops setup.';
@@ -146,18 +150,22 @@ HELP;
         $table->addColumn('time-left', new Column('E Time', Column::ALIGN_LEFT));
         $table->addColumn('projected', new Column('Proj', Column::ALIGN_LEFT));
 
+        $similarText = new SimilarText;
+        $similarPart = $similarText->similar($coops->pluck('coop')->all());
+
         $data = [];
         foreach ($coops as $coop) {
+            $coopName = str_replace($similarPart, '', $coop->coop);
             try {
                 $data[] = [
-                    'name'      => substr($coop->coop, -1) . ' ' . $coop->getMembers() . '',
+                    'name'      => $coopName . ' ' . $coop->getMembers() . '',
                     'progress'  => $coop->getCurrentEggsFormatted(),
                     'time-left' => $coop->getEstimateCompletion(),
                     'projected' => $coop->getProjectedEggsFormatted(),
                 ];
             } catch (CoopNotFoundException $e) {
                 $data[] = [
-                    'name'     => substr($coop->coop, -1),
+                    'name'     => $coopName,
                     'progress' => 'NA',
                 ];
             }

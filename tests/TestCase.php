@@ -22,7 +22,7 @@ abstract class TestCase extends BaseTestCase
         }
         $coop = Coop::make([
             'contract' => $contract->identifier,
-            'coop'     => 'test',
+            'coop'     => $coopName,
         ]);
         $coop->guild_id = 1;
         $coop->save();

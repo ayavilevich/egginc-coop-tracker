@@ -51,8 +51,9 @@ class DiscordMessageTest extends TestCase
 ```
 eb!help - Displays list of commands
 eb!contracts - Display current contracts with IDs
-eb!status contractId - Display coop info for contract
-eb!add {contractID} {Coop} {?Coop} - Add coop to tracking, multiple can be added by this command. When multiple is added, the position of the coops is set.
+eb!status {Contract ID} - Display coop info for contract
+eb!s {Contract ID} - Short version of status
+eb!add {Contract ID} {Coop} {?Coop} - Add coop to tracking, multiple can be added by this command. When multiple is added, the position of the coops is set.
 eb!delete {contractID} {Coop} - Remove coop from tracking
 ```
 HELP;
@@ -206,7 +207,9 @@ STATUS;
         }));
 
         $contract = $this->makeSampleContract();
-        $coop = $this->makeSampleCoop($contract);
+        $this->makeSampleCoop($contract, 'honeyadv1');
+        $this->makeSampleCoop($contract, 'honeyadv2');
+        $this->makeSampleCoop($contract, 'honeyadv3');
 
         $message = $this->sendDiscordMessage('s ' . $contract->identifier);
         $expect = <<<STATUS
@@ -214,7 +217,9 @@ Last Minute Decoration
 ```
 C 13 | 1Q  | E Time  | Proj
 ---- | --- | ------- | ----
-t 13 | 1q  | 446d 6h | 11q 
+1 13 | 1q  | 446d 6h | 11q 
+2 13 | 1q  | 446d 6h | 11q 
+3 13 | 1q  | 446d 6h | 11q 
 ```
 STATUS;
 
