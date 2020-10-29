@@ -17,6 +17,33 @@ class CurrentContracts extends Controller
         return Inertia::render('CurrentContracts', ['contracts' => $contracts]);
     }
 
+    public function status($guildId, $contractId)
+    {
+        $coops = Coop::contract($contractId)
+            ->guild($guildId)
+            ->orderBy('coop')
+            ->get()
+        ;
+
+        if ($coops->count() == 0) {
+            abort(404);
+        }
+
+        $coopsInfo = [];
+        foreach ($coops as $coop) {
+            try {
+                $coopsInfo[] = $coop->getCoopInfo();
+            } catch (CoopNotFoundException $e) {
+                $coopsInfo[] = [];
+            }
+        }
+
+        return Inertia::render('ContractStatus', [
+            'coopsInfo'    => $coopsInfo,
+            'contractInfo' => $this->getContractInfo($contractId),
+        ]);
+    }
+
     public function guildStatus($guildId, $contractId, Request $request)
     {
         $guilds = $request->user()->discordGuilds();
