@@ -180,7 +180,7 @@ CONTRACTS;
         $contract = $this->makeSampleContract();
         $coop = $this->makeSampleCoop($contract);
 
-        $url = URL::signedRoute('contract-status', ['contractId' => $contract->identifier], 60 * 60);
+        $url = URL::signedRoute('contract-status', ['guildId' => $this->guildId, 'contractId' => $contract->identifier], 60 * 60);
         $message = $this->sendDiscordMessage('status ' . $contract->identifier);
         $expect = <<<STATUS
 Last Minute Decoration

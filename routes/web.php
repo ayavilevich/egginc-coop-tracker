@@ -17,7 +17,7 @@ Route::get('/', 'Home@index')->name('home');
 
 Route::get('current-contracts', 'CurrentContracts@index')->name('current-contracts');
 
-Route::get('current-contract-status/{contractId}', 'CurrentContracts@status')
+Route::get('current-contract-status-signed/{guildId}/{contractId}', 'CurrentContracts@guildStatus')
     ->name('contract-status')
     ->middleware('signed')
 ;

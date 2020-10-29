@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Coop;
 use App\SimilarText;
+use Arr;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -77,6 +78,10 @@ HELP;
 
     private function status(array $parts): string
     {
+        if (!Arr::get($parts, 1)) {
+            return 'Contract ID required.';
+        }
+
         $coops = $this->coops($parts[1]);
 
         if ($coops->count() == 0) {
@@ -91,7 +96,7 @@ HELP;
         $firstCoop = $coops->first();
         $messages = [
             $contractInfo ? $contractInfo->name : $parts[1],
-            URL::signedRoute('contract-status', ['contractId' => $parts[1]], 60 * 60),
+            URL::signedRoute('contract-status', ['guildId' => $this->guildId, 'contractId' => $parts[1]], 60 * 60),
         ];
 
         $table = new Table();
@@ -128,6 +133,10 @@ HELP;
 
     private function s(array $parts): string
     {
+        if (!Arr::get($parts, 1)) {
+            return 'Contract ID required.';
+        }
+
         $coops = $this->coops($parts[1]);
 
         if ($coops->count() == 0) {
@@ -211,11 +220,11 @@ HELP;
 
         $contractIsValid = $this->getContractInfo($parts[1]);
 
-        if (!$contractIsValid) {
-            return 'Contract is invalid.';
+        if (!Arr::get($parts, 1)) {
+            return 'Contract ID required';
         }
 
-        if (!$parts[2]) {
+        if (!Arr::get($parts, 2)) {
             return 'Coop name is required';
         }
 
@@ -275,11 +284,11 @@ HELP;
             return 'You are not allowed to do that.' . $request->input('author.id');
         }
 
-        if (!$parts[1]) {
+        if (!Arr::get($parts, 1)) {
             return 'Contract ID required';
         }
 
-        if (!$parts[2]) {
+        if (!Arr::get($parts, 2)) {
             return 'Coop name is required';
         }
 
