@@ -14,7 +14,7 @@ class Guild extends Model
 
     private function getDiscordClient(): DiscordClient
     {
-        return new DiscordClient([
+        return app()->makeWith(DiscordClient::class, [
             'token'     => config('services.discord.token'),
             'tokenType' => 'Bot',
         ]);
@@ -107,6 +107,17 @@ class Guild extends Model
     {
         return self::unguarded(function () use ($guild) {
             return self::updateOrCreate(['discord_id' => $guild->id], ['name' => $guild->name]);
+        });
+    }
+
+    public static function findByDiscordGuildId(int $guildId): Guild
+    {
+        return self::unguarded(function () use ($guildId) {
+            $guild = self::firstOrNew(['discord_id' => $guildId]);
+            $guildInfo = $guild->getDiscordClient()->guild->getGuild(['guild.id' => $guildId]);
+            $guild->name = $guildInfo->name;
+            $guild->save();
+            return $guild;
         });
     }
 }

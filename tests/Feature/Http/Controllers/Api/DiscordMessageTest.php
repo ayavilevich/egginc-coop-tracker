@@ -8,6 +8,9 @@ use App\Models\Coop;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
 use Mockery;
+use RestCord\DiscordClient;
+use RestCord\OverriddenGuzzleClient;
+use StdClass;
 use Tests\TestCase;
 
 class DiscordMessageTest extends TestCase
@@ -20,6 +23,8 @@ class DiscordMessageTest extends TestCase
 
     private function sendDiscordMessage(string $message): string
     {
+        $this->mockGuildCall();
+
         $response = $this->postJson(
             '/api/discord-message',
             [
@@ -34,6 +39,39 @@ class DiscordMessageTest extends TestCase
             ->assertStatus(200)
             ->decodeResponseJson('message')
         ;
+    }
+
+    private function mockGuildCall()
+    {
+        app()->bind(DiscordClient::class, function () {
+            return Mockery::mock(DiscordClient::class, function ($mock) {
+                $guildCall = Mockery::mock(OverriddenGuzzleClient::class, function ($mock) {
+                    $guild = new StdClass;
+                    $guild->name = 'Test';
+
+                    $mock
+                        ->shouldReceive('getGuild')
+                        ->andReturn($guild)
+                    ;
+                });
+
+                $mock->guild = $guildCall;
+
+                $userCall = Mockery::mock(OverriddenGuzzleClient::class, function ($mock) {
+                    $user = new StdClass;
+                    $user->id = 123456;
+                    $user->username = 'Test';
+                    $user->email = 'test@example.com';
+
+                    $mock
+                        ->shouldReceive('getUser')
+                        ->andReturn($user)
+                    ;
+                });
+
+                $mock->user = $userCall;
+            });
+        });
     }
 
     public function testLove()
@@ -55,6 +93,8 @@ eb!status {Contract ID} - Display coop info for contract
 eb!s {Contract ID} - Short version of status
 eb!add {Contract ID} {Coop} {?Coop} - Add coop to tracking, multiple can be added by this command. When multiple is added, the position of the coops is set.
 eb!delete {contractID} {Coop} - Remove coop from tracking
+
+eb!set-player-id {@Discord Name} {Egg Inc Player ID}
 ```
 HELP;
         $this->assertEquals($expect, $message);
@@ -224,5 +264,16 @@ C 13 | 1Q  | E Time  | Proj
 STATUS;
 
         $this->assertEquals($expect, $message);
+    }
+
+    public function testSetPlayerId()
+    {
+        $message = $this->sendDiscordMessage('set-player-id <@123456> 12345');
+        $expect = 'Player ID set successfully.';
+
+        $this->assertDatabaseHas('guilds', ['discord_id' => 1, 'name' => 'Test']);
+        $this->assertDatabaseHas('users', ['discord_id' => 123456, 'egg_inc_player_id' => '12345']);
+
+        $this->assertEquals($message, $expect);
     }
 }

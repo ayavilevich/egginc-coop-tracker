@@ -7,17 +7,38 @@ use App\Exceptions\CoopNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Coop;
+use App\Models\Guild;
+use App\Models\User;
 use App\SimilarText;
 use Arr;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use kbATeam\MarkdownTable\Column;
 use kbATeam\MarkdownTable\Table;
+use RestCord\DiscordClient;
 
 class DiscordMessage extends Controller
 {
-    private $validCommands = ['help', 'status', 'contracts', 'love', 'hi', 'add', 'delete', 's',];
+    private $validCommands = [
+        'help'          => [],
+        'status'        => [],
+        's'             => [],
+        'contracts'     => [],
+        'love'          => [],
+        'hi'            => [],
+        'add'           => [
+            'middleware' => ['isAdmin'],
+        ],
+        'delete'        => [
+            'middleware' => ['isAdmin'],
+        ],
+        'set-player-id' => [
+            'middleware' => ['isAdmin'],
+            'function'   => 'setPlayerId',
+        ],
+    ];
 
     private $guildId;
 
@@ -29,17 +50,34 @@ class DiscordMessage extends Controller
             return ['message' => 'Invalid Server.'];
         }
 
+        $this->checkGuild();
+
         $message = trim(str_replace($request->input('atBotUser'), '', $request->input('content')));
         $parts = explode(' ', $message);
         $command = $parts['0'];
 
-        if (!in_array($command, $this->validCommands)) {
+        if (!array_key_exists($command, $this->validCommands)) {
             $message = 'Invalid command: ' . $command;
         } else {
-            $message = $this->$command($parts, $request);
+            try {
+                $commandInfo = $this->validCommands[$command];
+                foreach (Arr::get($commandInfo, 'middleware', []) as $middleware) {
+                    $this->$middleware($request);
+                }
+
+                $function = Arr::has($commandInfo, 'function') ? $commandInfo['function'] : $command;
+                $message =  $this->$function($parts, $request);
+            } catch (Exception $e) {
+                $message = $e->getMessage();
+            }
         }
 
         return ['message' => $message];
+    }
+
+    private function checkGuild()
+    {
+        Guild::findByDiscordGuildId($this->guildId);
     }
 
     private function hi(array $parts, Request $request): string
@@ -63,6 +101,8 @@ eb!status {Contract ID} - Display coop info for contract
 eb!s {Contract ID} - Short version of status
 eb!add {Contract ID} {Coop} {?Coop} - Add coop to tracking, multiple can be added by this command. When multiple is added, the position of the coops is set.
 eb!delete {contractID} {Coop} - Remove coop from tracking
+
+eb!set-player-id {@Discord Name} {Egg Inc Player ID}
 ```
 HELP;
     }
@@ -203,30 +243,24 @@ HELP;
         return implode("\n", $message);
     }
 
-    private function isAdmin($userId)
+    private function isAdmin(Request $request)
     {
-        return in_array($userId, explode(',', env('DISCORD_ADMIN_USERS')));
+        if (!in_array($request->input('author.id'), explode(',', env('DISCORD_ADMIN_USERS')))) {
+            throw new Exception('You are not allowed to do that.');
+        }
     }
 
     private function add(array $parts, Request $request): string
     {
-        if (!$this->isAdmin($request->input('author.id'))) {
-            return 'You are not allowed to do that.';
-        }
-
         if (!$parts[1]) {
-            return 'Contract ID required';
-        }
-
-        $contractIsValid = $this->getContractInfo($parts[1]);
-
-        if (!Arr::get($parts, 1)) {
             return 'Contract ID required';
         }
 
         if (!Arr::get($parts, 2)) {
             return 'Coop name is required';
         }
+        
+        $contractIsValid = $this->getContractInfo($parts[1]);
 
         if (isset($parts[3])) {
             $position = 1;
@@ -280,10 +314,6 @@ HELP;
 
     private function delete(array $parts, Request $request): string
     {
-        if (!$this->isAdmin($request->input('author.id'))) {
-            return 'You are not allowed to do that.' . $request->input('author.id');
-        }
-
         if (!Arr::get($parts, 1)) {
             return 'Contract ID required';
         }
@@ -318,5 +348,29 @@ HELP;
         }
 
         return $contract->raw_data;
+    }
+
+    private function setPlayerId(array $parts): string
+    {
+        $user = User::unguarded(function () use ($parts) {
+            $discord = app()->makeWith(DiscordClient::class, [
+                'token'     => config('services.discord.token'),
+                'tokenType' => 'Bot',
+            ]);
+
+            $userId = str_replace(['<!', '>'], '', $parts[1]);
+            $user = $discord->user->getUser(['user.id' => $userId]);
+
+            User::firstOrCreate(
+                ['discord_id' => $user->id],
+                [
+                    'egg_inc_player_id' => $parts[2],
+                    'username'          => $user->username,
+                    'email'             => $user->email,
+                ]
+            );
+        });
+
+        return 'Player ID set successfully.';
     }
 }
