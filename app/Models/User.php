@@ -100,4 +100,11 @@ class User extends Authenticatable
         }
         return $last->name;
     }
+
+    public function scopeWithEggIncId($query)
+    {
+        return $query->where(function ($query) {
+            return $query->where('egg_inc_player_id', '!=', '')->orWhereNotNull('egg_inc_player_id');
+        });
+    }
 }

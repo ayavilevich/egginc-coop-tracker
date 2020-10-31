@@ -35,6 +35,10 @@ class DiscordMessageTest extends TestCase
             ]
         );
 
+        if ($response->getStatusCode() == 500) {
+            dd($response->getContent());
+        }
+
         return $response
             ->assertStatus(200)
             ->decodeResponseJson('message')
@@ -314,6 +318,32 @@ STATUS;
 Discord | Egg Inc ID
 ------- | ----------
 Test    | 12345     
+```
+PLAYERS;
+
+        $this->assertEquals($expect, $message);
+    }
+
+    public function testListPlayerWithRank()
+    {
+        $this->testSetPlayerId();
+
+        $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
+            $player = json_decode(file_get_contents(base_path('tests/files/mot3rror-player-info.json')));
+
+            $mock
+                ->shouldReceive('getPlayerInfo')
+                ->withArgs(['12345'])
+                ->andReturn($player)
+            ;
+        }));
+
+        $message = $this->sendDiscordMessage('players rank');
+        $expect = <<<PLAYERS
+```
+Discord | Rank         
+------- | -------------
+Test    | Zettafarmer 3
 ```
 PLAYERS;
 

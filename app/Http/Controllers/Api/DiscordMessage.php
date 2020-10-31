@@ -380,7 +380,7 @@ HELP;
     {
         $guild = $this->checkGuild();
         $guild->sync();
-        $users = $guild->members()->get();
+        $users = $guild->members()->withEggIncId()->get();
 
         $table = new Table();
         $table->addColumn('discord', new Column('Discord', Column::ALIGN_LEFT));
@@ -396,10 +396,14 @@ HELP;
                     ];
                 }
                 break;
-            
-            default:
-                
-                break;
+            case 'rank':
+                $table->addColumn('rank', new Column('Rank', Column::ALIGN_LEFT));
+                foreach ($users as $user) {
+                    $data[] = [
+                        'discord' => $user->username,
+                        'rank'    => $user->getPlayerEggRank(),
+                    ];
+                }
         }
 
         $messages[] = '```';
