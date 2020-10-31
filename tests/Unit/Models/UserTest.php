@@ -109,4 +109,42 @@ class UserTest extends TestCase
 
         $this->assertEquals($expects, $actual);
     }
+
+    public function samplePlayersEggRank()
+    {
+        return [
+            [
+                'mot3rror',
+                'Zettafarmer 3',
+            ],
+            [
+                '1132Ace',
+                'Petafarmer',
+            ],
+            [
+                'ladykojac',
+                'Exafarmer',
+            ],
+            [
+                'mstrixie',
+                'Zettafarmer',
+            ],
+            [
+                'oobebanoobe',
+                'Exafarmer 2',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider samplePlayersEggRank
+     */
+    public function testGetPlayerEggRank($user, $expects)
+    {
+        $user = $this->getUser($user);
+
+        $actual = $user->getPlayerEggRank();
+
+        $this->assertEquals($expects, $actual);
+    }
 }

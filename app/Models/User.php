@@ -83,6 +83,21 @@ class User extends Authenticatable
 
     public function getPlayerEggRank(): string
     {
-        
+        $roles = json_decode(file_get_contents(base_path('resources/js/roleMagnitude.json')));
+        $earningBonus = $this->getPlayerEarningBonus();
+
+        $last = null;
+        foreach ($roles as $role) {
+            // if (soulPower / Math.pow(10, MagnitudeFormat[i].magnitude) < 1) {
+            if ($earningBonus / pow(10, $role->magnitude) < 1) {
+                break;
+            }
+            $last = $role;
+        }
+
+        if (!$last) {
+            return '';
+        }
+        return $last->name;
     }
 }
