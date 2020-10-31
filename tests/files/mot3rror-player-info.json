@@ -1,7 +1,7 @@
 {
     "userId": "100779251593411306314",
     "userName": "MoT3rror",
-    "approxTime": 1603305131,
+    "approxTime": 1604109601,
     "version": 26,
     "forceOfferBackup": false,
     "forceBackup": false,
@@ -22,7 +22,7 @@
         "userAnalyticsEnabled": true,
         "userPersonalizedAdsEnabled": true,
         "lowPerformance": false,
-        "lastBackupTime": 1603305130.7120798
+        "lastBackupTime": 1604109600.461278
     },
     "tutorial": {
         "introShown": false,
@@ -40,52 +40,52 @@
         "eggTotalsOldList": [],
         "eggTotalsList": [
             1814426521002390300,
-            888640841707120500,
+            977385960244509400,
             1676791727837419500,
             904080386257949200,
             1476313362838546000,
             1243179838480918800,
-            1466596655221613000,
+            1779904240054778600,
             531299942841118600,
             653478576894030800,
             947758311262952800,
-            1345564085432723500,
+            1345564137032452900,
             71845381915023820,
             351377828226353200,
             560743766061812900,
-            94449295718682350,
+            94449295798149000,
             791908190944726000,
             920079933557142700,
-            1573922553806896600,
+            1689969722479680500,
             11903801340113052
         ],
-        "boostsUsed": 964,
-        "videoDoublerUses": 1298,
-        "droneTakedowns": 51709,
-        "droneTakedownsElite": 2278,
-        "numPrestiges": 38,
+        "boostsUsed": 1019,
+        "videoDoublerUses": 1307,
+        "droneTakedowns": 52066,
+        "droneTakedownsElite": 2292,
+        "numPrestiges": 43,
         "numPiggyBreaks": 37,
         "iapPacksPurchased": 0,
         "piggyFull": true,
         "piggyFoundFull": true,
         "timePiggyFilledRealtime": 1589500016.7898095,
-        "timePiggyFullGametime": 1167724.4523095451,
-        "lostPiggyIncrements": 1910412
+        "timePiggyFullGametime": 1221831.925604999,
+        "lostPiggyIncrements": 2198916
     },
     "game": {
         "currentFarm": 0,
         "maxEggReached": 19,
-        "goldenEggsEarned": 4864199,
-        "goldenEggsSpent": 3963459,
+        "goldenEggsEarned": 5145407,
+        "goldenEggsSpent": 4965209,
         "uncliamedGoldenEggs": 0,
-        "soulEggsD": 614949644799425700,
+        "soulEggsD": 932264323561801200,
         "unclaimedSoulEggsD": 0,
-        "eggsOfProphecy": 124,
+        "eggsOfProphecy": 127,
         "unclaimedEggsOfProphecy": 0,
-        "prestigeCashEarned": 1.1364394577633607e+58,
+        "prestigeCashEarned": 2.943827193131764e+58,
         "prestigeSoulBoostCash": 0,
-        "lifetimeCashEarned": 4.826724806410307e+77,
-        "piggyBank": 32095248,
+        "lifetimeCashEarned": 1.34045188320533e+78,
+        "piggyBank": 32245248,
         "piggyFullAlertShown": true,
         "permitLevel": 1,
         "epicResearchList": [
@@ -179,9 +179,9 @@
             }
         ],
         "hyperloopStation": true,
-        "nextDailyGiftTime": 1603324799.5258963,
-        "lastDailyGiftCollectedDay": 7599,
-        "numDailyGiftsCollected": 553,
+        "nextDailyGiftTime": 1604188799.162352,
+        "lastDailyGiftCollectedDay": 7609,
+        "numDailyGiftsCollected": 563,
         "newsList": [
             {
                 "id": "cosm_rad",
@@ -456,9 +456,9 @@
                 "read": true
             }
         ],
-        "lastNewsTime": 1603305125.2992198,
+        "lastNewsTime": 1604109583.8397167,
         "currentMultiplier": 2,
-        "currentMultiplierExpiration": 1603233936.1598449,
+        "currentMultiplierExpiration": 1604100633.3166416,
         "achievementsList": [
             {
                 "id": "farm_5000",
@@ -559,7 +559,7 @@
             11340000000,
             11340000000,
             10007312531,
-            10002570383,
+            11340000000,
             1018799325
         ],
         "eggMedalLevelList": [
@@ -589,15 +589,15 @@
         "boostsList": [
             {
                 "boostId": "jimbos_blue",
-                "count": 112
+                "count": 117
             },
             {
                 "boostId": "jimbos_blue_big",
-                "count": 99
+                "count": 104
             },
             {
                 "boostId": "jimbos_purple",
-                "count": 26
+                "count": 25
             },
             {
                 "boostId": "jimbos_purple_big",
@@ -605,59 +605,63 @@
             },
             {
                 "boostId": "jimbos_orange_big",
-                "count": 30
+                "count": 42
             },
             {
                 "boostId": "subsidy_application",
-                "count": 50
+                "count": 55
             },
             {
                 "boostId": "blank_check",
-                "count": 23
+                "count": 25
             },
             {
                 "boostId": "money_printer",
                 "count": 31
             },
             {
-                "boostId": "tachyon_prism_orange",
-                "count": 92
-            },
-            {
-                "boostId": "tachyon_prism_orange_big",
+                "boostId": "tachyon_prism_blue",
                 "count": 1
             },
             {
+                "boostId": "tachyon_prism_orange",
+                "count": 89
+            },
+            {
+                "boostId": "tachyon_prism_orange_big",
+                "count": 13
+            },
+            {
                 "boostId": "soul_beacon_blue",
-                "count": 61
+                "count": 56
             },
             {
                 "boostId": "soul_beacon_purple",
-                "count": 2
+                "count": 3
             },
             {
                 "boostId": "soul_beacon_orange",
-                "count": 8
+                "count": 94
             },
             {
                 "boostId": "boost_beacon_blue",
-                "count": 5
+                "count": 1
             },
             {
                 "boostId": "boost_beacon_purple",
-                "count": 81
+                "count": 78
             },
             {
                 "boostId": "boost_beacon_orange",
-                "count": 25
+                "count": 23
             },
             {
                 "boostId": "soul_mirror_blue",
-                "count": 90
+                "count": 95
             },
             {
                 "boostId": "soul_mirror_purple",
-                "count": 36
+                "count": 38
             },
             {
                 "boostId": "soul_mirror_orange",
@@ -665,7 +669,7 @@
             },
             {
                 "boostId": "quantum_bulb",
-                "count": 90
+                "count": 92
             }
         ],
         "totalTimeCheatsDetected": 0,
@@ -676,15 +680,15 @@
             "eggType": 18,
             "farmType": 2,
             "contractId": "",
-            "cashEarned": 1.188715830243831e+74,
-            "cashSpent": 2.749487557425301e+67,
+            "cashEarned": 8.434935197744295e+72,
+            "cashSpent": 2.7495503828334313e+67,
             "unclaimedCash": 0,
-            "lastStepTime": 1603305130.6798515,
-            "numChickens": 1796470967,
+            "lastStepTime": 1604109600.4606125,
+            "numChickens": 696376826,
             "numChickensUnsettled": 0,
             "numChickensRunning": 0,
-            "eggsLaid": 71406422161987470,
-            "eggsPaidFor": 71406422161987470,
+            "eggsLaid": 15108879768854506,
+            "eggsPaidFor": 15108879768854506,
             "silosOwned": 10,
             "habsList": [
                 18,
@@ -693,10 +697,10 @@
                 18
             ],
             "habPopulationList": [
-                449117984,
-                449117643,
-                449117685,
-                449117655
+                174094424,
+                174094172,
+                174094148,
+                174094082
             ],
             "habPopulationIndoundList": [
                 0,
@@ -705,382 +709,17 @@
                 0
             ],
             "habIncubatorPopuplationList": [
-                0.8416381907756296,
-                0.8416381907756296,
-                0.8416381907756296,
-                0.8416381907756296
+                0.5489295030020003,
+                0.5489295030020003,
+                0.5489295030020003,
+                0.5489295030020003
             ],
             "hatcheryPopulation": 500,
             "vehiclesList": [
-                11,
                 11
             ],
             "trainLengthList": [
-                10,
                 10
-            ],
-            "commonResearchList": [
-                {
-                    "id": "comfy_nests",
-                    "level": 50
-                },
-                {
-                    "id": "nutritional_sup",
-                    "level": 40
-                },
-                {
-                    "id": "better_incubators",
-                    "level": 15
-                },
-                {
-                    "id": "excitable_chickens",
-                    "level": 25
-                },
-                {
-                    "id": "hab_capacity1",
-                    "level": 8
-                },
-                {
-                    "id": "internal_hatchery1",
-                    "level": 10
-                },
-                {
-                    "id": "padded_packaging",
-                    "level": 30
-                },
-                {
-                    "id": "hatchery_expansion",
-                    "level": 10
-                },
-                {
-                    "id": "bigger_eggs",
-                    "level": 1
-                },
-                {
-                    "id": "internal_hatchery2",
-                    "level": 10
-                },
-                {
-                    "id": "leafsprings",
-                    "level": 30
-                },
-                {
-                    "id": "vehicle_reliablity",
-                    "level": 2
-                },
-                {
-                    "id": "rooster_booster",
-                    "level": 25
-                },
-                {
-                    "id": "coordinated_clucking",
-                    "level": 50
-                },
-                {
-                    "id": "hatchery_rebuild1",
-                    "level": 1
-                },
-                {
-                    "id": "usde_prime",
-                    "level": 1
-                },
-                {
-                    "id": "hen_house_ac",
-                    "level": 50
-                },
-                {
-                    "id": "superfeed",
-                    "level": 35
-                },
-                {
-                    "id": "microlux",
-                    "level": 10
-                },
-                {
-                    "id": "compact_incubators",
-                    "level": 10
-                },
-                {
-                    "id": "lightweight_boxes",
-                    "level": 40
-                },
-                {
-                    "id": "excoskeletons",
-                    "level": 2
-                },
-                {
-                    "id": "internal_hatchery3",
-                    "level": 15
-                },
-                {
-                    "id": "improved_genetics",
-                    "level": 30
-                },
-                {
-                    "id": "traffic_management",
-                    "level": 2
-                },
-                {
-                    "id": "motivational_clucking",
-                    "level": 50
-                },
-                {
-                    "id": "driver_training",
-                    "level": 30
-                },
-                {
-                    "id": "shell_fortification",
-                    "level": 60
-                },
-                {
-                    "id": "egg_loading_bots",
-                    "level": 2
-                },
-                {
-                    "id": "super_alloy",
-                    "level": 50
-                },
-                {
-                    "id": "even_bigger_eggs",
-                    "level": 5
-                },
-                {
-                    "id": "internal_hatchery4",
-                    "level": 30
-                },
-                {
-                    "id": "quantum_storage",
-                    "level": 20
-                },
-                {
-                    "id": "genetic_purification",
-                    "level": 100
-                },
-                {
-                    "id": "internal_hatchery5",
-                    "level": 250
-                },
-                {
-                    "id": "time_compress",
-                    "level": 20
-                },
-                {
-                    "id": "hover_upgrades",
-                    "level": 25
-                },
-                {
-                    "id": "graviton_coating",
-                    "level": 7
-                },
-                {
-                    "id": "grav_plating",
-                    "level": 25
-                },
-                {
-                    "id": "chrystal_shells",
-                    "level": 100
-                },
-                {
-                    "id": "autonomous_vehicles",
-                    "level": 5
-                },
-                {
-                    "id": "neural_linking",
-                    "level": 30
-                },
-                {
-                    "id": "telepathic_will",
-                    "level": 50
-                },
-                {
-                    "id": "enlightened_chickens",
-                    "level": 144
-                },
-                {
-                    "id": "dark_containment",
-                    "level": 25
-                },
-                {
-                    "id": "atomic_purification",
-                    "level": 50
-                },
-                {
-                    "id": "multi_layering",
-                    "level": 3
-                },
-                {
-                    "id": "timeline_diversion",
-                    "level": 50
-                },
-                {
-                    "id": "wormhole_dampening",
-                    "level": 25
-                },
-                {
-                    "id": "eggsistor",
-                    "level": 100
-                },
-                {
-                    "id": "micro_coupling",
-                    "level": 5
-                },
-                {
-                    "id": "neural_net_refine",
-                    "level": 25
-                },
-                {
-                    "id": "matter_reconfig",
-                    "level": 500
-                },
-                {
-                    "id": "timeline_splicing",
-                    "level": 1
-                },
-                {
-                    "id": "hyper_portalling",
-                    "level": 25
-                },
-                {
-                    "id": "relativity_optimization",
-                    "level": 10
-                }
-            ],
-            "activeBoostsList": [
-                {
-                    "boostId": "",
-                    "timeRemaining": -0.1387881754019043,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": -0.05424065571802095,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": -0.022569179535025796,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": -0.014213657366925703,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": -0.17862305640024606,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": 0,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": 0,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": 0,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": 0,
-                    "referenceValue": 0
-                },
-                {
-                    "boostId": "",
-                    "timeRemaining": 0,
-                    "referenceValue": 0
-                }
-            ],
-            "timeCheatsDetected": 0,
-            "timeCheatDebt": 0,
-            "boostTokensReceived": 0,
-            "boostTokensSpent": 0,
-            "boostTokensGiven": 0,
-            "unclaimedBoostTokens": 0,
-            "gametimeUntilNextBoostToken": 3600
-        },
-        {
-            "eggType": 7,
-            "farmType": 3,
-            "contractId": "quantum-voting-2020",
-            "cashEarned": 1.2270123165482486e+65,
-            "cashSpent": 1.1655690963737906e+65,
-            "unclaimedCash": 0,
-            "lastStepTime": 1603292437.7554002,
-            "numChickens": 11318019885,
-            "numChickensUnsettled": 0,
-            "numChickensRunning": 0,
-            "eggsLaid": 146447919140429820,
-            "eggsPaidFor": 146447919140429820,
-            "silosOwned": 10,
-            "habsList": [
-                18,
-                18,
-                18,
-                18
-            ],
-            "habPopulationList": [
-                2829504914,
-                2829505025,
-                2829504983,
-                2829504963
-            ],
-            "habPopulationIndoundList": [
-                0,
-                0,
-                0,
-                0
-            ],
-            "habIncubatorPopuplationList": [
-                0.06609724184417942,
-                0.06609724184417942,
-                0.06609724184417942,
-                0.06609724184417942
-            ],
-            "hatcheryPopulation": 500,
-            "vehiclesList": [
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11,
-                11
-            ],
-            "trainLengthList": [
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9,
-                9
             ],
             "commonResearchList": [
                 {
@@ -1285,7 +924,7 @@
                 },
                 {
                     "id": "micro_coupling",
-                    "level": 4
+                    "level": 5
                 },
                 {
                     "id": "neural_net_refine",
@@ -1293,15 +932,15 @@
                 },
                 {
                     "id": "matter_reconfig",
-                    "level": 402
+                    "level": 500
                 },
                 {
                     "id": "timeline_splicing",
-                    "level": 0
+                    "level": 1
                 },
                 {
                     "id": "hyper_portalling",
-                    "level": 17
+                    "level": 25
                 },
                 {
                     "id": "relativity_optimization",
@@ -1311,17 +950,366 @@
             "activeBoostsList": [
                 {
                     "boostId": "",
-                    "timeRemaining": -0.05365281157961255,
+                    "timeRemaining": -0.18187103257306153,
                     "referenceValue": 0
                 },
                 {
                     "boostId": "",
-                    "timeRemaining": -0.05112414360556505,
+                    "timeRemaining": -0.09090652451769421,
                     "referenceValue": 0
                 },
                 {
                     "boostId": "",
-                    "timeRemaining": -0.07435755782776943,
+                    "timeRemaining": -0.00801587104808732,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": -0.01642942428600236,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": -0.014813899994010171,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": 0,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": 0,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": 0,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": 0,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": 0,
+                    "referenceValue": 0
+                }
+            ],
+            "timeCheatsDetected": 0,
+            "timeCheatDebt": 0,
+            "boostTokensReceived": 0,
+            "boostTokensSpent": 0,
+            "boostTokensGiven": 0,
+            "unclaimedBoostTokens": 0,
+            "gametimeUntilNextBoostToken": 3600
+        },
+        {
+            "eggType": 104,
+            "farmType": 1,
+            "contractId": "haloween-2018",
+            "cashEarned": 3.2417557993829034e+55,
+            "cashSpent": 3.1190168216747776e+55,
+            "unclaimedCash": 0,
+            "lastStepTime": 1604101211.8827188,
+            "numChickens": 5383666597,
+            "numChickensUnsettled": 0,
+            "numChickensRunning": 0,
+            "eggsLaid": 367652928168193.3,
+            "eggsPaidFor": 367652928168193,
+            "silosOwned": 10,
+            "habsList": [
+                18,
+                18,
+                18,
+                18
+            ],
+            "habPopulationList": [
+                1345916826,
+                1345916708,
+                1345916502,
+                1345916561
+            ],
+            "habPopulationIndoundList": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "habIncubatorPopuplationList": [
+                0.21625931800427622,
+                0.21625931800427622,
+                0.21625931800427622,
+                0.21625931800427622
+            ],
+            "hatcheryPopulation": 500,
+            "vehiclesList": [
+                11,
+                11,
+                11,
+                11,
+                11,
+                11,
+                11,
+                11,
+                11,
+                11
+            ],
+            "trainLengthList": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ],
+            "commonResearchList": [
+                {
+                    "id": "comfy_nests",
+                    "level": 50
+                },
+                {
+                    "id": "nutritional_sup",
+                    "level": 40
+                },
+                {
+                    "id": "better_incubators",
+                    "level": 15
+                },
+                {
+                    "id": "excitable_chickens",
+                    "level": 25
+                },
+                {
+                    "id": "hab_capacity1",
+                    "level": 8
+                },
+                {
+                    "id": "internal_hatchery1",
+                    "level": 10
+                },
+                {
+                    "id": "padded_packaging",
+                    "level": 30
+                },
+                {
+                    "id": "hatchery_expansion",
+                    "level": 10
+                },
+                {
+                    "id": "bigger_eggs",
+                    "level": 1
+                },
+                {
+                    "id": "internal_hatchery2",
+                    "level": 10
+                },
+                {
+                    "id": "leafsprings",
+                    "level": 30
+                },
+                {
+                    "id": "vehicle_reliablity",
+                    "level": 2
+                },
+                {
+                    "id": "rooster_booster",
+                    "level": 25
+                },
+                {
+                    "id": "coordinated_clucking",
+                    "level": 50
+                },
+                {
+                    "id": "hatchery_rebuild1",
+                    "level": 1
+                },
+                {
+                    "id": "usde_prime",
+                    "level": 1
+                },
+                {
+                    "id": "hen_house_ac",
+                    "level": 50
+                },
+                {
+                    "id": "superfeed",
+                    "level": 35
+                },
+                {
+                    "id": "microlux",
+                    "level": 10
+                },
+                {
+                    "id": "compact_incubators",
+                    "level": 10
+                },
+                {
+                    "id": "lightweight_boxes",
+                    "level": 40
+                },
+                {
+                    "id": "excoskeletons",
+                    "level": 2
+                },
+                {
+                    "id": "internal_hatchery3",
+                    "level": 15
+                },
+                {
+                    "id": "improved_genetics",
+                    "level": 30
+                },
+                {
+                    "id": "traffic_management",
+                    "level": 2
+                },
+                {
+                    "id": "motivational_clucking",
+                    "level": 50
+                },
+                {
+                    "id": "driver_training",
+                    "level": 30
+                },
+                {
+                    "id": "shell_fortification",
+                    "level": 60
+                },
+                {
+                    "id": "egg_loading_bots",
+                    "level": 2
+                },
+                {
+                    "id": "super_alloy",
+                    "level": 50
+                },
+                {
+                    "id": "even_bigger_eggs",
+                    "level": 5
+                },
+                {
+                    "id": "internal_hatchery4",
+                    "level": 30
+                },
+                {
+                    "id": "quantum_storage",
+                    "level": 20
+                },
+                {
+                    "id": "genetic_purification",
+                    "level": 100
+                },
+                {
+                    "id": "internal_hatchery5",
+                    "level": 250
+                },
+                {
+                    "id": "time_compress",
+                    "level": 20
+                },
+                {
+                    "id": "hover_upgrades",
+                    "level": 25
+                },
+                {
+                    "id": "graviton_coating",
+                    "level": 7
+                },
+                {
+                    "id": "grav_plating",
+                    "level": 25
+                },
+                {
+                    "id": "chrystal_shells",
+                    "level": 100
+                },
+                {
+                    "id": "autonomous_vehicles",
+                    "level": 5
+                },
+                {
+                    "id": "neural_linking",
+                    "level": 29
+                },
+                {
+                    "id": "telepathic_will",
+                    "level": 50
+                },
+                {
+                    "id": "enlightened_chickens",
+                    "level": 91
+                },
+                {
+                    "id": "dark_containment",
+                    "level": 25
+                },
+                {
+                    "id": "atomic_purification",
+                    "level": 36
+                },
+                {
+                    "id": "multi_layering",
+                    "level": 1
+                },
+                {
+                    "id": "timeline_diversion",
+                    "level": 43
+                },
+                {
+                    "id": "wormhole_dampening",
+                    "level": 10
+                },
+                {
+                    "id": "eggsistor",
+                    "level": 38
+                },
+                {
+                    "id": "micro_coupling",
+                    "level": 3
+                },
+                {
+                    "id": "neural_net_refine",
+                    "level": 13
+                },
+                {
+                    "id": "matter_reconfig",
+                    "level": 0
+                },
+                {
+                    "id": "timeline_splicing",
+                    "level": 0
+                },
+                {
+                    "id": "hyper_portalling",
+                    "level": 0
+                },
+                {
+                    "id": "relativity_optimization",
+                    "level": 0
+                }
+            ],
+            "activeBoostsList": [
+                {
+                    "boostId": "",
+                    "timeRemaining": -0.033503055569497064,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": -0.0064084529841466065,
+                    "referenceValue": 0
+                },
+                {
+                    "boostId": "",
+                    "timeRemaining": 0,
                     "referenceValue": 0
                 },
                 {
@@ -1362,25 +1350,25 @@
             ],
             "timeCheatsDetected": 0,
             "timeCheatDebt": 0,
-            "boostTokensReceived": 74,
-            "boostTokensSpent": 38,
-            "boostTokensGiven": 11,
+            "boostTokensReceived": 62,
+            "boostTokensSpent": 22,
+            "boostTokensGiven": 0,
             "unclaimedBoostTokens": 0,
-            "gametimeUntilNextBoostToken": 566.0497458914998
+            "gametimeUntilNextBoostToken": 2.193725013662322
         },
         {
-            "eggType": 100,
+            "eggType": 2,
             "farmType": 1,
-            "contractId": "trick-or-treat-2020",
-            "cashEarned": 4.296784947613439e+59,
-            "cashSpent": 3.995739553390281e+59,
+            "contractId": "moon-trouble-food",
+            "cashEarned": 1.1216727597445014e+60,
+            "cashSpent": 6.928065863134092e+59,
             "unclaimedCash": 0,
-            "lastStepTime": 1602869205.7399228,
-            "numChickens": 10201260430,
+            "lastStepTime": 1603631451.2627747,
+            "numChickens": 9874563291,
             "numChickensUnsettled": 0,
             "numChickensRunning": 0,
-            "eggsLaid": 235912046690197100,
-            "eggsPaidFor": 235912046690197100,
+            "eggsLaid": 88745118537380130,
+            "eggsPaidFor": 88745118537380130,
             "silosOwned": 10,
             "habsList": [
                 18,
@@ -1389,10 +1377,10 @@
                 18
             ],
             "habPopulationList": [
-                2550315185,
-                2550315109,
-                2550315134,
-                2550315002
+                2468640782,
+                2468640843,
+                2468640840,
+                2468640826
             ],
             "habPopulationIndoundList": [
                 0,
@@ -1401,10 +1389,10 @@
                 0
             ],
             "habIncubatorPopuplationList": [
-                0.8878310479400255,
-                0.8878310479400255,
-                0.8878310479400255,
-                0.8878310479400255
+                0.5515811007724274,
+                0.5515811007724274,
+                0.5515811007724274,
+                0.5515811007724274
             ],
             "hatcheryPopulation": 500,
             "vehiclesList": [
@@ -1620,7 +1608,7 @@
                 },
                 {
                     "id": "enlightened_chickens",
-                    "level": 120
+                    "level": 119
                 },
                 {
                     "id": "dark_containment",
@@ -1628,7 +1616,7 @@
                 },
                 {
                     "id": "atomic_purification",
-                    "level": 49
+                    "level": 50
                 },
                 {
                     "id": "multi_layering",
@@ -1640,11 +1628,11 @@
                 },
                 {
                     "id": "wormhole_dampening",
-                    "level": 20
+                    "level": 21
                 },
                 {
                     "id": "eggsistor",
-                    "level": 63
+                    "level": 66
                 },
                 {
                     "id": "micro_coupling",
@@ -1656,7 +1644,7 @@
                 },
                 {
                     "id": "matter_reconfig",
-                    "level": 171
+                    "level": 197
                 },
                 {
                     "id": "timeline_splicing",
@@ -1664,7 +1652,7 @@
                 },
                 {
                     "id": "hyper_portalling",
-                    "level": 5
+                    "level": 6
                 },
                 {
                     "id": "relativity_optimization",
@@ -1674,17 +1662,17 @@
             "activeBoostsList": [
                 {
                     "boostId": "",
-                    "timeRemaining": -0.2477924352243422,
+                    "timeRemaining": -0.2529553890182877,
                     "referenceValue": 0
                 },
                 {
                     "boostId": "",
-                    "timeRemaining": -0.11025052070700331,
+                    "timeRemaining": -0.12768187522529734,
                     "referenceValue": 0
                 },
                 {
                     "boostId": "",
-                    "timeRemaining": 0,
+                    "timeRemaining": -0.21538968085970628,
                     "referenceValue": 0
                 },
                 {
@@ -1725,11 +1713,11 @@
             ],
             "timeCheatsDetected": 0,
             "timeCheatDebt": 0,
-            "boostTokensReceived": 303,
-            "boostTokensSpent": 23,
-            "boostTokensGiven": 14,
+            "boostTokensReceived": 69,
+            "boostTokensSpent": 48,
+            "boostTokensGiven": 0,
             "unclaimedBoostTokens": 0,
-            "gametimeUntilNextBoostToken": 797.4493451602381
+            "gametimeUntilNextBoostToken": 2139.755753755389
         },
         {
             "eggType": 2,
@@ -2833,6 +2821,8 @@
             "good-ol-fusion",
             "graviton-project",
             "halloween-2019",
+            "halloween-2020",
+            "haloween-2018",
             "hangover",
             "heat-wave-2019",
             "heat-wave-2020",
@@ -2852,6 +2842,7 @@
             "may-the-force-2020",
             "mday-brunch",
             "memorial-2020",
+            "moon-trouble-food",
             "moon-vacation",
             "more-pumpkins",
             "mothers-day-2019",
@@ -2911,120 +2902,7 @@
             "xmas-lights",
             "xmas-shipping"
         ],
-        "contractsList": [
-            {
-                "contract": {
-                    "identifier": "quantum-voting-2020",
-                    "name": "Quantum Ballot Box",
-                    "description": "The new Quantum Ballot boxes can securely store millions of ballots. Make sure you (or your parents) are planning to vote!",
-                    "egg": 7,
-                    "goalsList": [
-                        {
-                            "type": 1,
-                            "targetAmount": 25000000000000000,
-                            "rewardType": 6,
-                            "rewardSubType": "",
-                            "rewardAmount": 150000,
-                            "targetSoulEggs": 25000000000
-                        },
-                        {
-                            "type": 1,
-                            "targetAmount": 500000000000000000,
-                            "rewardType": 2,
-                            "rewardSubType": "",
-                            "rewardAmount": 50000,
-                            "targetSoulEggs": 5000000000000
-                        },
-                        {
-                            "type": 1,
-                            "targetAmount": 1500000000000000000,
-                            "rewardType": 9,
-                            "rewardSubType": "boost_beacon_orange",
-                            "rewardAmount": 3,
-                            "targetSoulEggs": 5000000000000000
-                        }
-                    ],
-                    "goalSetsList": [
-                        {
-                            "goalsList": [
-                                {
-                                    "type": 1,
-                                    "targetAmount": 25000000000000000,
-                                    "rewardType": 6,
-                                    "rewardSubType": "",
-                                    "rewardAmount": 150000,
-                                    "targetSoulEggs": 25000000000
-                                },
-                                {
-                                    "type": 1,
-                                    "targetAmount": 500000000000000000,
-                                    "rewardType": 2,
-                                    "rewardSubType": "",
-                                    "rewardAmount": 50000,
-                                    "targetSoulEggs": 5000000000000
-                                },
-                                {
-                                    "type": 1,
-                                    "targetAmount": 1500000000000000000,
-                                    "rewardType": 9,
-                                    "rewardSubType": "boost_beacon_orange",
-                                    "rewardAmount": 3,
-                                    "targetSoulEggs": 5000000000000000
-                                }
-                            ]
-                        },
-                        {
-                            "goalsList": [
-                                {
-                                    "type": 1,
-                                    "targetAmount": 200000000000000,
-                                    "rewardType": 6,
-                                    "rewardSubType": "",
-                                    "rewardAmount": 20000,
-                                    "targetSoulEggs": 50
-                                },
-                                {
-                                    "type": 1,
-                                    "targetAmount": 800000000000000,
-                                    "rewardType": 2,
-                                    "rewardSubType": "",
-                                    "rewardAmount": 5000,
-                                    "targetSoulEggs": 5000
-                                },
-                                {
-                                    "type": 1,
-                                    "targetAmount": 3000000000000000,
-                                    "rewardType": 9,
-                                    "rewardSubType": "tachyon_prism_orange",
-                                    "rewardAmount": 2,
-                                    "targetSoulEggs": 10000000
-                                }
-                            ]
-                        }
-                    ],
-                    "coopAllowed": true,
-                    "maxCoopSize": 10,
-                    "maxBoosts": 0,
-                    "minutesPerToken": 60,
-                    "expirationTime": 1604933750.1339529,
-                    "lengthSeconds": 604800,
-                    "maxSoulEggs": 0,
-                    "minClientVersion": 26,
-                    "debug": false
-                },
-                "coopIdentifier": "qvotingadv8",
-                "accepted": true,
-                "timeAccepted": 1603120197.820414,
-                "coopSharedEndTime": 1603726037.2329967,
-                "coopGracePeriodEndTime": 1603898837.2329977,
-                "coopContributionFinalized": false,
-                "coopLastUploadedContribution": 146446145194505540,
-                "coopUserId": "100779251593411306314",
-                "lastAmountWhenRewardGiven": 25000000000000000,
-                "numGoalsAchieved": 1,
-                "league": 0
-            }
-        ],
+        "contractsList": [],
         "archiveList": [
             {
                 "contract": {
@@ -11987,134 +11865,408 @@
                 "lastAmountWhenRewardGiven": 1500000000000000000,
                 "numGoalsAchieved": 2,
                 "league": 0
+            },
+            {
+                "contract": {
+                    "identifier": "quantum-voting-2020",
+                    "name": "Quantum Ballot Box",
+                    "description": "The new Quantum Ballot boxes can securely store millions of ballots. Make sure you (or your parents) are planning to vote!",
+                    "egg": 7,
+                    "goalsList": [
+                        {
+                            "type": 1,
+                            "targetAmount": 25000000000000000,
+                            "rewardType": 6,
+                            "rewardSubType": "",
+                            "rewardAmount": 150000,
+                            "targetSoulEggs": 25000000000
+                        },
+                        {
+                            "type": 1,
+                            "targetAmount": 500000000000000000,
+                            "rewardType": 2,
+                            "rewardSubType": "",
+                            "rewardAmount": 50000,
+                            "targetSoulEggs": 5000000000000
+                        },
+                        {
+                            "type": 1,
+                            "targetAmount": 1500000000000000000,
+                            "rewardType": 9,
+                            "rewardSubType": "boost_beacon_orange",
+                            "rewardAmount": 3,
+                            "targetSoulEggs": 5000000000000000
+                        }
+                    ],
+                    "goalSetsList": [
+                        {
+                            "goalsList": [
+                                {
+                                    "type": 1,
+                                    "targetAmount": 25000000000000000,
+                                    "rewardType": 6,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 150000,
+                                    "targetSoulEggs": 25000000000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 500000000000000000,
+                                    "rewardType": 2,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 50000,
+                                    "targetSoulEggs": 5000000000000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 1500000000000000000,
+                                    "rewardType": 9,
+                                    "rewardSubType": "boost_beacon_orange",
+                                    "rewardAmount": 3,
+                                    "targetSoulEggs": 5000000000000000
+                                }
+                            ]
+                        },
+                        {
+                            "goalsList": [
+                                {
+                                    "type": 1,
+                                    "targetAmount": 200000000000000,
+                                    "rewardType": 6,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 20000,
+                                    "targetSoulEggs": 50
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 800000000000000,
+                                    "rewardType": 2,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 5000,
+                                    "targetSoulEggs": 5000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 3000000000000000,
+                                    "rewardType": 9,
+                                    "rewardSubType": "tachyon_prism_orange",
+                                    "rewardAmount": 2,
+                                    "targetSoulEggs": 10000000
+                                }
+                            ]
+                        }
+                    ],
+                    "coopAllowed": true,
+                    "maxCoopSize": 10,
+                    "maxBoosts": 0,
+                    "minutesPerToken": 60,
+                    "expirationTime": 1604933750.1339529,
+                    "lengthSeconds": 604800,
+                    "maxSoulEggs": 0,
+                    "minClientVersion": 26,
+                    "debug": false
+                },
+                "coopIdentifier": "qvotingadv8",
+                "accepted": true,
+                "timeAccepted": 1603120197.820414,
+                "cancelled": true,
+                "coopSharedEndTime": 1603726036.810686,
+                "coopGracePeriodEndTime": 1603898836.8106866,
+                "coopContributionFinalized": true,
+                "coopLastUploadedContribution": 459754012147471000,
+                "coopUserId": "100779251593411306314",
+                "lastAmountWhenRewardGiven": 1500000000000000000,
+                "numGoalsAchieved": 3,
+                "league": 0
+            },
+            {
+                "contract": {
+                    "identifier": "moon-trouble-food",
+                    "name": "LEGGACY: Moon Food",
+                    "description": "(2019) Moon colony food stores were tainted without government food inspectors to check for contaminants. Help send some food!",
+                    "egg": 2,
+                    "goalsList": [
+                        {
+                            "type": 1,
+                            "targetAmount": 12000000000000000,
+                            "rewardType": 2,
+                            "rewardSubType": "",
+                            "rewardAmount": 40000,
+                            "targetSoulEggs": 1000000000000
+                        },
+                        {
+                            "type": 1,
+                            "targetAmount": 75000000000000000,
+                            "rewardType": 4,
+                            "rewardSubType": "",
+                            "rewardAmount": 1,
+                            "targetSoulEggs": 20000000000000
+                        }
+                    ],
+                    "goalSetsList": [
+                        {
+                            "goalsList": [
+                                {
+                                    "type": 1,
+                                    "targetAmount": 12000000000000000,
+                                    "rewardType": 2,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 40000,
+                                    "targetSoulEggs": 1000000000000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 75000000000000000,
+                                    "rewardType": 4,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 1,
+                                    "targetSoulEggs": 20000000000000
+                                }
+                            ]
+                        },
+                        {
+                            "goalsList": [
+                                {
+                                    "type": 1,
+                                    "targetAmount": 50000000000000,
+                                    "rewardType": 2,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 5000,
+                                    "targetSoulEggs": 250000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 750000000000000,
+                                    "rewardType": 4,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 1,
+                                    "targetSoulEggs": 15000000000
+                                }
+                            ]
+                        }
+                    ],
+                    "coopAllowed": true,
+                    "maxCoopSize": 3,
+                    "maxBoosts": 0,
+                    "minutesPerToken": 60,
+                    "expirationTime": 1604083435.7265818,
+                    "lengthSeconds": 259200,
+                    "maxSoulEggs": 0,
+                    "minClientVersion": 26,
+                    "debug": false
+                },
+                "coopIdentifier": "moonfoodadv5",
+                "accepted": true,
+                "timeAccepted": 1603478785.3574576,
+                "cancelled": true,
+                "coopSharedEndTime": 1603743143.8145783,
+                "coopGracePeriodEndTime": 1603915943.8145792,
+                "coopContributionFinalized": true,
+                "coopLastUploadedContribution": 88744878751252350,
+                "coopUserId": "100779251593411306314",
+                "lastAmountWhenRewardGiven": 75000000000000000,
+                "numGoalsAchieved": 2,
+                "league": 0
+            },
+            {
+                "contract": {
+                    "identifier": "halloween-2020",
+                    "name": "Last Minute Decoration",
+                    "description": "Family meetings were called, one common conclusion: We need more pumpkins!",
+                    "egg": 104,
+                    "goalsList": [
+                        {
+                            "type": 1,
+                            "targetAmount": 30000000000000000,
+                            "rewardType": 9,
+                            "rewardSubType": "tachyon_prism_orange_big",
+                            "rewardAmount": 2,
+                            "targetSoulEggs": 100000000000
+                        },
+                        {
+                            "type": 1,
+                            "targetAmount": 500000000000000000,
+                            "rewardType": 4,
+                            "rewardSubType": "",
+                            "rewardAmount": 1,
+                            "targetSoulEggs": 10000000000000
+                        },
+                        {
+                            "type": 1,
+                            "targetAmount": 1000000000000000000,
+                            "rewardType": 2,
+                            "rewardSubType": "",
+                            "rewardAmount": 100000,
+                            "targetSoulEggs": 1000000000000000
+                        }
+                    ],
+                    "goalSetsList": [
+                        {
+                            "goalsList": [
+                                {
+                                    "type": 1,
+                                    "targetAmount": 30000000000000000,
+                                    "rewardType": 9,
+                                    "rewardSubType": "tachyon_prism_orange_big",
+                                    "rewardAmount": 2,
+                                    "targetSoulEggs": 100000000000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 500000000000000000,
+                                    "rewardType": 4,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 1,
+                                    "targetSoulEggs": 10000000000000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 1000000000000000000,
+                                    "rewardType": 2,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 100000,
+                                    "targetSoulEggs": 1000000000000000
+                                }
+                            ]
+                        },
+                        {
+                            "goalsList": [
+                                {
+                                    "type": 1,
+                                    "targetAmount": 25000000000000,
+                                    "rewardType": 9,
+                                    "rewardSubType": "jimbos_orange_big",
+                                    "rewardAmount": 1,
+                                    "targetSoulEggs": 250
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 250000000000000,
+                                    "rewardType": 5,
+                                    "rewardSubType": "soul_eggs",
+                                    "rewardAmount": 3,
+                                    "targetSoulEggs": 1000000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 2000000000000000,
+                                    "rewardType": 4,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 1,
+                                    "targetSoulEggs": 1000000000
+                                }
+                            ]
+                        }
+                    ],
+                    "coopAllowed": true,
+                    "maxCoopSize": 13,
+                    "maxBoosts": 0,
+                    "minutesPerToken": 90,
+                    "expirationTime": 1605539810.3164432,
+                    "lengthSeconds": 518400,
+                    "maxSoulEggs": 0,
+                    "minClientVersion": 26,
+                    "debug": false
+                },
+                "coopIdentifier": "hdecor20adv4",
+                "accepted": true,
+                "timeAccepted": 1603725612.7247946,
+                "cancelled": true,
+                "coopSharedEndTime": 1604246125.159008,
+                "coopGracePeriodEndTime": 1604418925.1590087,
+                "coopContributionFinalized": true,
+                "coopLastUploadedContribution": 233570683603854560,
+                "coopUserId": "100779251593411306314",
+                "lastAmountWhenRewardGiven": 1000000000000000000,
+                "numGoalsAchieved": 3,
+                "league": 0
+            },
+            {
+                "contract": {
+                    "identifier": "haloween-2018",
+                    "name": "LEGGACY: Halloween Blitz",
+                    "description": "(2018) Pumpkin demand is overwhelming! A quick contract for big money!",
+                    "egg": 104,
+                    "goalsList": [
+                        {
+                            "type": 1,
+                            "targetAmount": 10000000000000,
+                            "rewardType": 6,
+                            "rewardSubType": "",
+                            "rewardAmount": 150000,
+                            "targetSoulEggs": 50000000000
+                        },
+                        {
+                            "type": 1,
+                            "targetAmount": 150000000000000,
+                            "rewardType": 2,
+                            "rewardSubType": "",
+                            "rewardAmount": 75000,
+                            "targetSoulEggs": 10000000000000
+                        }
+                    ],
+                    "goalSetsList": [
+                        {
+                            "goalsList": [
+                                {
+                                    "type": 1,
+                                    "targetAmount": 10000000000000,
+                                    "rewardType": 6,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 150000,
+                                    "targetSoulEggs": 50000000000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 150000000000000,
+                                    "rewardType": 2,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 75000,
+                                    "targetSoulEggs": 10000000000000
+                                }
+                            ]
+                        },
+                        {
+                            "goalsList": [
+                                {
+                                    "type": 1,
+                                    "targetAmount": 500000000000,
+                                    "rewardType": 6,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 25000,
+                                    "targetSoulEggs": 100000
+                                },
+                                {
+                                    "type": 1,
+                                    "targetAmount": 5000000000000,
+                                    "rewardType": 2,
+                                    "rewardSubType": "",
+                                    "rewardAmount": 25000,
+                                    "targetSoulEggs": 1000000000
+                                }
+                            ]
+                        }
+                    ],
+                    "coopAllowed": false,
+                    "maxCoopSize": 0,
+                    "maxBoosts": 0,
+                    "minutesPerToken": 8,
+                    "expirationTime": 1604676015.0909255,
+                    "lengthSeconds": 28800,
+                    "maxSoulEggs": 0,
+                    "minClientVersion": 26,
+                    "debug": false
+                },
+                "accepted": true,
+                "timeAccepted": 1604071486.5103483,
+                "cancelled": true,
+                "coopUserId": "100779251593411306314",
+                "lastAmountWhenRewardGiven": 150000000000000,
+                "numGoalsAchieved": 2,
+                "league": 0
             }
         ],
-        "currentCoopStatusesList": [
-            {
-                "contractIdentifier": "quantum-voting-2020",
-                "totalAmount": 381038097478409500,
-                "coopIdentifier": "qvotingadv8",
-                "contributorsList": [
-                    {
-                        "userId": "100779251593411306314",
-                        "userName": "MoT3rror",
-                        "contributionAmount": 146446145194505540,
-                        "contributionRate": 1045784957170.8,
-                        "soulPower": 23.097623773668744,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 25
-                    },
-                    {
-                        "userId": "114082814786140914118",
-                        "userName": "Comradewithers",
-                        "contributionAmount": 119881762310876560,
-                        "contributionRate": 1047816000000.0001,
-                        "soulPower": 19.05166297119796,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 20
-                    },
-                    {
-                        "userId": "U:ea56047b35b299ba01e1e57e2266b827",
-                        "userName": "avogadrotoast",
-                        "contributionAmount": 67928286046342950,
-                        "contributionRate": 773900305253.46,
-                        "soulPower": 20.84643104735408,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 1,
-                        "boostTokens": 21
-                    },
-                    {
-                        "userId": "103481093208375540991",
-                        "userName": "pwnagetech",
-                        "contributionAmount": 44103631576369460,
-                        "contributionRate": 709365415082.9401,
-                        "soulPower": 23.84404174299474,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 11
-                    },
-                    {
-                        "userId": "g15363219060305727922",
-                        "userName": "dreadloafer",
-                        "contributionAmount": 1183848344425923,
-                        "contributionRate": 16977596161.680002,
-                        "soulPower": 13.917705778690221,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 30
-                    },
-                    {
-                        "userId": "g08983565991680089000",
-                        "userName": "KeirAutomaton",
-                        "contributionAmount": 833310915804133,
-                        "contributionRate": 11506190105.025002,
-                        "soulPower": 11.1343249060378,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 12
-                    },
-                    {
-                        "userId": "112736380886715570706",
-                        "userName": "kevinpirola23",
-                        "contributionAmount": 284503382150785,
-                        "contributionRate": 6071589774.5810995,
-                        "soulPower": 12.713668813394024,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 24
-                    },
-                    {
-                        "userId": "108553388981271142287",
-                        "userName": "Derek275",
-                        "contributionAmount": 137539002560612,
-                        "contributionRate": 3557245331.178,
-                        "soulPower": 19.434035509687046,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 25
-                    },
-                    {
-                        "userId": "g17700492152759901892",
-                        "userName": "ChocolateNerd219",
-                        "contributionAmount": 122792726831709,
-                        "contributionRate": 3059490308.4900002,
-                        "soulPower": 17.85733679921265,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 0
-                    },
-                    {
-                        "userId": "g02984991554145256549",
-                        "userName": "kallyoughurt",
-                        "contributionAmount": 116277978541763,
-                        "contributionRate": 3513677755.896001,
-                        "soulPower": 18.766971269912506,
-                        "active": true,
-                        "timeCheatDetected": false,
-                        "platform": 2,
-                        "boostTokens": 30
-                    }
-                ],
-                "autoGenerated": false,
-                "pb_public": false,
-                "creatorId": "g15363219060305727922",
-                "secondsRemaining": 433598.47209477425,
-                "allMembersReporting": false,
-                "gracePeriodSecondsRemaining": 606398.4720947742,
-                "giftsList": []
-            }
-        ]
+        "currentCoopStatusesList": []
     },
-    "checksum": 1801342995
+    "checksum": 701530106
 }

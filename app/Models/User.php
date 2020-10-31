@@ -62,4 +62,27 @@ class User extends Authenticatable
     {
         return resolve(EggInc::class)->getPlayerInfo($this->egg_inc_player_id);
     }
+
+    public function getEachSoulEggBonus(): int
+    {
+        $info = $this->getEggPlayerInfo();
+        $epicResearch = collect($info->game->epicResearchList);
+        $prophecyBonus = $epicResearch->where('id', 'prophecy_bonus')->first()->level;
+        $soulBonus = $epicResearch->where('id', 'soul_eggs')->first()->level;
+        $eggsOfProphecy = $info->game->eggsOfProphecy;
+
+        // round((.1 + SERL*.01) * (1.05 + PERL*.01)**PE, 6)
+        return floor(((.1 + $soulBonus * .01) * (1.05 + $prophecyBonus * .01) ** $eggsOfProphecy) * 100);
+    }
+
+    public function getPlayerEarningBonus(): float
+    {
+        $info = $this->getEggPlayerInfo();
+        return floor($this->getEachSoulEggBonus() * $info->game->soulEggsD);
+    } 
+
+    public function getPlayerEggRank(): string
+    {
+        
+    }
 }
