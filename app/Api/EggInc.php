@@ -2,6 +2,7 @@
 namespace App\Api;
 
 use App\Exceptions\CoopNotFoundException;
+use App\Exceptions\UserNotFoundException;
 use Cache;
 use mikehaertl\shellcommand\Command;
 
@@ -58,7 +59,14 @@ class EggInc
             if (!$appInfoCommand->execute()) {
                 throw new Exception('Unable to get player info');
             }
-            return json_decode($appInfoCommand->getOutput());
+
+            $player = json_decode($appInfoCommand->getOutput());
+
+            if (!$player->version) {
+                throw new UserNotFoundException('User not found');
+            }
+
+            return $player;
         });
     }
 }
