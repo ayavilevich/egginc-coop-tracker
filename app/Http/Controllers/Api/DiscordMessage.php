@@ -361,15 +361,14 @@ HELP;
                 'tokenType' => 'Bot',
             ]);
 
-            $userId = str_replace(['<!', '>'], '', $parts[1]);
-            $user = $discord->user->getUser(['user.id' => $userId]);
+            $userId = str_replace(['<@!', '>'], '', $parts[1]);
+            $user = $discord->user->getUser(['user.id' => (int) $userId]);
 
-            User::firstOrCreate(
+            return User::updateOrCreate(
                 ['discord_id' => $user->id],
                 [
                     'egg_inc_player_id' => $parts[2],
                     'username'          => $user->username,
-                    'email'             => $user->email,
                 ]
             );
         });

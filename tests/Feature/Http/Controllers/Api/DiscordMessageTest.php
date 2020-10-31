@@ -291,7 +291,7 @@ STATUS;
 
     public function testSetPlayerId()
     {
-        $message = $this->sendDiscordMessage('set-player-id <@123456> 12345');
+        $message = $this->sendDiscordMessage('set-player-id <@!123456> 12345');
         $expect = 'Player ID set successfully.';
 
         $this->assertDatabaseHas('guilds', ['discord_id' => 1, 'name' => 'Test']);
