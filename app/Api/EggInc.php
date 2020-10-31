@@ -46,4 +46,19 @@ class EggInc
         }
         return $contracts;
     }
+
+    public function getPlayerInfo(string $playerId): \StdClass
+    {
+        return Cache::remember('egg-player-info-' . $playerId, 60 * 60 * 24, function () use ($playerId) {
+            $appInfoCommand = new Command([
+                'command' => 'node ./js/egg-inc.js getPlayerInfo --playerId ' . $playerId,
+                'procCwd' => base_path(),
+            ]);
+
+            if (!$appInfoCommand->execute()) {
+                throw new Exception('Unable to get player info');
+            }
+            return json_decode($appInfoCommand->getOutput());
+        });
+    }
 }

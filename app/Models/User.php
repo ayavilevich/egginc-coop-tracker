@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use RestCord\DiscordClient;
+use App\Api\EggInc;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use RestCord\DiscordClient;
+use stdClass;
 
 class User extends Authenticatable
 {
@@ -54,5 +56,10 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function getEggPlayerInfo(): stdClass
+    {
+        return resolve(EggInc::class)->getPlayerInfo($this->egg_inc_player_id);
     }
 }
