@@ -11,7 +11,7 @@ use App\Models\Guild;
 use App\Models\User;
 use App\SimilarText;
 use Arr;
-use Exception;
+use App\Exceptions\DiscordErrorException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -37,6 +37,9 @@ class DiscordMessage extends Controller
         'set-player-id' => [
             'middleware' => ['isAdmin'],
             'function'   => 'setPlayerId',
+        ],
+        'players'       => [
+            'middleware' => ['isAdmin'],
         ],
     ];
 
@@ -67,7 +70,7 @@ class DiscordMessage extends Controller
 
                 $function = Arr::has($commandInfo, 'function') ? $commandInfo['function'] : $command;
                 $message =  $this->$function($parts, $request);
-            } catch (Exception $e) {
+            } catch (DiscordErrorException $e) {
                 $message = $e->getMessage();
             }
         }
@@ -75,9 +78,9 @@ class DiscordMessage extends Controller
         return ['message' => $message];
     }
 
-    private function checkGuild()
+    private function checkGuild(): Guild
     {
-        Guild::findByDiscordGuildId($this->guildId);
+        return Guild::findByDiscordGuildId($this->guildId);
     }
 
     private function hi(array $parts, Request $request): string
@@ -130,7 +133,7 @@ HELP;
 
         try {
             $contractInfo = $this->getContractInfo($parts[1]);
-        } catch (\Exception $e) {
+        } catch (CoopNotFoundException $e) {
             $contractInfo = null;
         }
         $firstCoop = $coops->first();
@@ -185,7 +188,7 @@ HELP;
 
         try {
             $contractInfo = $this->getContractInfo($parts[1]);
-        } catch (\Exception $e) {
+        } catch (CoopNotFoundException $e) {
             $contractInfo = null;
         }
         $firstCoop = $coops->first();
@@ -246,7 +249,7 @@ HELP;
     private function isAdmin(Request $request)
     {
         if (!in_array($request->input('author.id'), explode(',', env('DISCORD_ADMIN_USERS')))) {
-            throw new Exception('You are not allowed to do that.');
+            throw new DiscordErrorException('You are not allowed to do that.');
         }
     }
 
@@ -372,5 +375,40 @@ HELP;
         });
 
         return 'Player ID set successfully.';
+    }
+
+    private function players(array $parts): string
+    {
+        $guild = $this->checkGuild();
+        $guild->sync();
+        $users = $guild->members()->get();
+
+        $table = new Table();
+        $table->addColumn('discord', new Column('Discord', Column::ALIGN_LEFT));
+
+        $data = [];
+        switch (Arr::get($parts, 1)) {
+            case 'egg_id':
+                $table->addColumn('egg_inc', new Column('Egg Inc ID', Column::ALIGN_LEFT));
+                foreach ($users as $user) {
+                    $data[] = [
+                        'discord' => $user->username,
+                        'egg_inc' => $user->egg_inc_player_id,
+                    ];
+                }
+                break;
+            
+            default:
+                
+                break;
+        }
+
+        $messages[] = '```';
+        foreach ($table->generate($data) as $row) {
+            $messages[] = $row;
+        }
+        $messages[] = '```';
+
+        return implode("\n", $messages);
     }
 }

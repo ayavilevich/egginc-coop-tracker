@@ -53,6 +53,29 @@ class DiscordMessageTest extends TestCase
                         ->shouldReceive('getGuild')
                         ->andReturn($guild)
                     ;
+
+                    $role = new StdClass;
+                    $role->id = 1;
+                    $role->name = 'Everybody';
+                    $roles = [$role];
+
+                    $mock
+                        ->shouldReceive('getGuildRoles')
+                        ->andReturn($roles);
+                    ;
+
+                    $member = new StdClass;
+                    $member->user = new StdClass;
+                    $member->user->bot = false;
+                    $member->user->id = 123456;
+                    $member->user->username = 'Test';
+                    $member->roles = [1];
+                    $members = [$member];
+
+                    $mock
+                        ->shouldReceive('listGuildMembers')
+                        ->andReturn($members)
+                    ;
                 });
 
                 $mock->guild = $guildCall;
@@ -275,5 +298,25 @@ STATUS;
         $this->assertDatabaseHas('users', ['discord_id' => 123456, 'egg_inc_player_id' => '12345']);
 
         $this->assertEquals($message, $expect);
+    }
+
+    
+    /**
+     * depends testSetPlayerId
+     */
+    public function testListPlayersWithEggId()
+    {
+        $this->testSetPlayerId();
+
+        $message = $this->sendDiscordMessage('players egg_id');
+        $expect = <<<PLAYERS
+```
+Discord | Egg Inc ID
+------- | ----------
+Test    | 12345     
+```
+PLAYERS;
+
+        $this->assertEquals($expect, $message);
     }
 }
