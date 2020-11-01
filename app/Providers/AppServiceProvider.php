@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Api\EggInc;
+use App\Formatters\EarningBonus;
 use App\Formatters\Egg;
 use App\Formatters\TimeLeft;
 use Illuminate\Support\ServiceProvider;
@@ -18,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(EggInc::class);
+        $this->app->singleton(EarningBonus::class);
         $this->app->singleton(Egg::class);
         $this->app->singleton(TimeLeft::class);
         $this->app->bind(DiscordClient::class, function ($app, $options) {

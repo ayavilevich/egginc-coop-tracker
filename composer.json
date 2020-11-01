@@ -17,6 +17,7 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
+        "litipk/php-bignumbers": "^0.8.6",
         "mikehaertl/php-shellcommand": "^1.6",
         "restcord/restcord": "^0.4.0",
         "rollbar/rollbar-laravel": "^6.0",

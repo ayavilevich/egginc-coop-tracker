@@ -116,22 +116,27 @@ class UserTest extends TestCase
             [
                 'mot3rror',
                 'Zettafarmer 3',
+                '25S',
             ],
             [
                 '1132Ace',
                 'Petafarmer',
+                '117q',
             ],
             [
                 'ladykojac',
                 'Exafarmer',
+                '115Q',
             ],
             [
                 'mstrixie',
                 'Zettafarmer',
+                '299s',
             ],
             [
                 'oobebanoobe',
                 'Exafarmer 2',
+                '9s',
             ],
         ];
     }
@@ -139,12 +144,14 @@ class UserTest extends TestCase
     /**
      * @dataProvider samplePlayersEggRank
      */
-    public function testGetPlayerEggRank($user, $expects)
+    public function testGetPlayerEggRank($user, $expects, $formatted)
     {
         $user = $this->getUser($user);
 
         $actual = $user->getPlayerEggRank();
 
         $this->assertEquals($expects, $actual);
+
+        $this->assertEquals($formatted, $user->getPlayerEarningBonusFormatted());
     }
 }

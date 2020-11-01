@@ -1,18 +1,23 @@
 <?php
 namespace App\Formatters;
 
+use Litipk\BigNumbers\Decimal;
+
 class Egg
 {
+    public $magnitudes;
+
     public function __construct()
     {
         $this->magnitudes = json_decode(file_get_contents(base_path('resources/js/magnitudeFormat.json')));
     }
 
-    public function format(int $eggs): string
+    public function format($eggs): string
     {
         $last = null;
+        $eggsInBig = Decimal::create($eggs); 
         foreach ($this->magnitudes as $magnitude) {
-            if ($eggs / pow(10, $magnitude->magnitude) < 1) {
+            if ($eggsInBig->div(Decimal::create(pow(10, $magnitude->magnitude)))->isLessThan(Decimal::create(1))) {
                 break;
             }
             $last = $magnitude;
@@ -27,9 +32,6 @@ class Egg
             $decimals = 1;
         }
 
-        if ($decimals) {
-            return round(($eggs * ($decimals * 10))/ pow(10, $last->magnitude)) / ($decimals * 10) . $last->symbol;
-        }
-        return round($eggs / pow(10, $last->magnitude)) . $last->symbol;
+        return $eggsInBig->div(Decimal::create(pow(10, $last->magnitude)))->floor($decimals) . $last->symbol;
     }
 }

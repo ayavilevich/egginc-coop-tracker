@@ -253,9 +253,9 @@ CONTRACTS;
 Last Minute Decoration
 {$url}
 ```
-Coop 13 | 1Q  | E Time  | Proj
-------- | --- | ------- | ----
-test 13 | 1q  | 446d 6h | 11q 
+Coop 13 | 1.0Q | E Time  | Proj
+------- | ---- | ------- | ----
+test 13 | 1q   | 446d 6h | 10q 
 ```
 STATUS;
 
@@ -282,11 +282,11 @@ STATUS;
         $expect = <<<STATUS
 Last Minute Decoration
 ```
-C 13 | 1Q  | E Time  | Proj
----- | --- | ------- | ----
-1 13 | 1q  | 446d 6h | 11q 
-2 13 | 1q  | 446d 6h | 11q 
-3 13 | 1q  | 446d 6h | 11q 
+C 13 | 1.0Q | E Time  | Proj
+---- | ---- | ------- | ----
+1 13 | 1q   | 446d 6h | 10q 
+2 13 | 1q   | 446d 6h | 10q 
+3 13 | 1q   | 446d 6h | 10q 
 ```
 STATUS;
 
@@ -354,6 +354,32 @@ PLAYERS;
 Discord | Rank         
 ------- | -------------
 Test    | Zettafarmer 3
+```
+PLAYERS;
+
+        $this->assertEquals($expect, $message);
+    }
+
+    public function testListPlayerEarningBonus()
+    {
+        $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
+            $player = json_decode(file_get_contents(base_path('tests/files/mot3rror-player-info.json')));
+
+            $mock
+                ->shouldReceive('getPlayerInfo')
+                ->withArgs(['12345'])
+                ->andReturn($player)
+            ;
+        }));
+
+        $this->testSetPlayerId();
+
+        $message = $this->sendDiscordMessage('players earning_bonus');
+        $expect = <<<PLAYERS
+```
+Discord | Earning Bonus
+------- | -------------
+Test    | 25S          
 ```
 PLAYERS;
 

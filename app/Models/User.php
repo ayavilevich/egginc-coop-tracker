@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Api\EggInc;
+use App\Formatters\EarningBonus;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use RestCord\DiscordClient;
@@ -71,7 +72,6 @@ class User extends Authenticatable
         $soulBonus = $epicResearch->where('id', 'soul_eggs')->first()->level;
         $eggsOfProphecy = $info->game->eggsOfProphecy;
 
-        // round((.1 + SERL*.01) * (1.05 + PERL*.01)**PE, 6)
         return floor(((.1 + $soulBonus * .01) * (1.05 + $prophecyBonus * .01) ** $eggsOfProphecy) * 100);
     }
 
@@ -80,6 +80,11 @@ class User extends Authenticatable
         $info = $this->getEggPlayerInfo();
         return floor($this->getEachSoulEggBonus() * $info->game->soulEggsD);
     } 
+
+    public function getPlayerEarningBonusFormatted(): string
+    {
+        return resolve(EarningBonus::class)->format($this->getPlayerEarningBonus());
+    }
 
     public function getPlayerEggRank(): string
     {

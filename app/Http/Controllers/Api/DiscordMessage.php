@@ -393,13 +393,17 @@ HELP;
             case 'rank':
                 $table->addColumn('rank', new Column('Rank', Column::ALIGN_LEFT));
                 break;
+            case 'earning_bonus': 
+                $table->addColumn('earning_bonus', new Column('Earning Bonus', Column::ALIGN_LEFT));
+                break;
         }
 
         foreach ($users as $user) {
             $data[] = [
-                'discord' => $user->username,
-                'egg_inc' => $user->egg_inc_player_id,
-                'rank'    => $user->getPlayerEggRank(),
+                'discord'       => $user->username,
+                'egg_inc'       => $user->egg_inc_player_id,
+                'rank'          => $user->getPlayerEggRank(),
+                'earning_bonus' => $user->getPlayerEarningBonusFormatted(),
             ];
         }
 

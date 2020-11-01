@@ -11,7 +11,7 @@ class EggTest extends TestCase
     {
         return [
             [
-                '1Q',
+                '1.0Q',
                 '1,000,000,000,000,000,000',
             ],
             [
