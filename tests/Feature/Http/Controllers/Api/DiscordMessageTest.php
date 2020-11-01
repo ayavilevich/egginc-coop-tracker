@@ -385,4 +385,30 @@ PLAYERS;
 
         $this->assertEquals($expect, $message);
     }
+
+    public function testListPlayersBonusAndRank()
+    {
+        $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
+            $player = json_decode(file_get_contents(base_path('tests/files/mot3rror-player-info.json')));
+
+            $mock
+                ->shouldReceive('getPlayerInfo')
+                ->withArgs(['12345'])
+                ->andReturn($player)
+            ;
+        }));
+
+        $this->testSetPlayerId();
+
+        $message = $this->sendDiscordMessage('players earning_bonus rank');
+        $expect = <<<PLAYERS
+```
+Discord | Earning Bonus | Rank         
+------- | ------------- | -------------
+Test    | 25S           | Zettafarmer 3
+```
+PLAYERS;
+
+        $this->assertEquals($expect, $message);
+    }
 }

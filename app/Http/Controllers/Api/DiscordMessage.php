@@ -386,23 +386,25 @@ HELP;
             ->get()
             ->sortBy(function ($user) {
                 return $user->getPlayerEarningBonus();
-            })
+            }, SORT_REGULAR, true)
         ;
 
         $table = new Table();
         $table->addColumn('discord', new Column('Discord', Column::ALIGN_LEFT));
 
         $data = [];
-        switch (Arr::get($parts, 1)) {
-            case 'egg_id':
-                $table->addColumn('egg_inc', new Column('Egg Inc ID', Column::ALIGN_LEFT));
-                break;
-            case 'rank':
-                $table->addColumn('rank', new Column('Rank', Column::ALIGN_LEFT));
-                break;
-            case 'earning_bonus': 
-                $table->addColumn('earning_bonus', new Column('Earning Bonus', Column::ALIGN_LEFT));
-                break;
+        foreach ($parts as $part) {
+            switch ($part) {
+                case 'egg_id':
+                    $table->addColumn('egg_inc', new Column('Egg Inc ID', Column::ALIGN_LEFT));
+                    break;
+                case 'rank':
+                    $table->addColumn('rank', new Column('Rank', Column::ALIGN_LEFT));
+                    break;
+                case 'earning_bonus': 
+                    $table->addColumn('earning_bonus', new Column('Earning Bonus', Column::ALIGN_LEFT));
+                    break;
+            }
         }
 
         foreach ($users as $user) {
