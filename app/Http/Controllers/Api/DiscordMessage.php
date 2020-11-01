@@ -385,13 +385,12 @@ HELP;
             ->sortBy(function ($user) {
                 return $user->getPlayerEarningBonus();
             }, SORT_REGULAR, true)
-            ->chunk(15)
+            ->chunk(10)
         ;
 
         $table = new Table();
         $table->addColumn('discord', new Column('Discord', Column::ALIGN_LEFT));
 
-        $data = [];
         foreach ($parts as $part) {
             switch ($part) {
                 case 'egg_id':
@@ -401,22 +400,24 @@ HELP;
                     $table->addColumn('rank', new Column('Rank', Column::ALIGN_LEFT));
                     break;
                 case 'earning_bonus': 
-                    $table->addColumn('earning_bonus', new Column('Earning Bonus', Column::ALIGN_LEFT));
+                    $table->addColumn('earning_bonus', new Column('EB', Column::ALIGN_LEFT));
                     break;
             }
         }
 
         $groupOfMessages = [];
         foreach ($chuckOfUsers as $users) {
+            $data = [];
             foreach ($users as $user) {
                 $data[] = [
                     'discord'       => $user->username,
                     'egg_inc'       => $user->egg_inc_player_id,
-                    'rank'          => $user->getPlayerEggRank(),
+                    'rank'          => str_replace('farmer', '', $user->getPlayerEggRank()),
                     'earning_bonus' => $user->getPlayerEarningBonusFormatted(),
                 ];
             }
 
+            $messages = [];
             $messages[] = '```';
             foreach ($table->generate($data) as $row) {
                 $messages[] = $row;
