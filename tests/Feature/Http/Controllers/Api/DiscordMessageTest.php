@@ -21,7 +21,7 @@ class DiscordMessageTest extends TestCase
 
     private $guildId = 1;
 
-    private function sendDiscordMessage(string $message): string
+    private function sendDiscordMessage(string $message)
     {
         $this->mockGuildCall();
 
@@ -331,7 +331,7 @@ Test    | 12345
 ```
 PLAYERS;
 
-        $this->assertEquals($expect, $message);
+        $this->assertEquals([$expect], $message);
     }
 
     public function testListPlayerWithRank()
@@ -357,7 +357,7 @@ Test    | Zettafarmer 3
 ```
 PLAYERS;
 
-        $this->assertEquals($expect, $message);
+        $this->assertEquals([$expect], $message);
     }
 
     public function testListPlayerEarningBonus()
@@ -383,7 +383,7 @@ Test    | 25.263S
 ```
 PLAYERS;
 
-        $this->assertEquals($expect, $message);
+        $this->assertEquals([$expect], $message);
     }
 
     public function testListPlayersBonusAndRank()
@@ -409,6 +409,6 @@ Test    | 25.263S       | Zettafarmer 3
 ```
 PLAYERS;
 
-        $this->assertEquals($expect, $message);
+        $this->assertEquals([$expect], $message);
     }
 }

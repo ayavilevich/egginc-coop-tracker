@@ -374,17 +374,18 @@ HELP;
         return 'Player ID set successfully.';
     }
 
-    private function players(array $parts): string
+    private function players(array $parts): array
     {
         $guild = $this->checkGuild();
         $guild->sync();
-        $users = $guild
+        $chuckOfUsers = $guild
             ->members()
             ->withEggIncId()
             ->get()
             ->sortBy(function ($user) {
                 return $user->getPlayerEarningBonus();
             }, SORT_REGULAR, true)
+            ->chunk(15)
         ;
 
         $table = new Table();
@@ -405,21 +406,25 @@ HELP;
             }
         }
 
-        foreach ($users as $user) {
-            $data[] = [
-                'discord'       => $user->username,
-                'egg_inc'       => $user->egg_inc_player_id,
-                'rank'          => $user->getPlayerEggRank(),
-                'earning_bonus' => $user->getPlayerEarningBonusFormatted(),
-            ];
-        }
+        $groupOfMessages = [];
+        foreach ($chuckOfUsers as $users) {
+            foreach ($users as $user) {
+                $data[] = [
+                    'discord'       => $user->username,
+                    'egg_inc'       => $user->egg_inc_player_id,
+                    'rank'          => $user->getPlayerEggRank(),
+                    'earning_bonus' => $user->getPlayerEarningBonusFormatted(),
+                ];
+            }
 
-        $messages[] = '```';
-        foreach ($table->generate($data) as $row) {
-            $messages[] = $row;
-        }
-        $messages[] = '```';
+            $messages[] = '```';
+            foreach ($table->generate($data) as $row) {
+                $messages[] = $row;
+            }
+            $messages[] = '```';
 
-        return implode("\n", $messages);
+            $groupOfMessages[] = implode("\n", $messages);
+        }
+        return $groupOfMessages;
     }
 }

@@ -3,6 +3,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const axios = require('axios');
+const _ = require('lodash');
+
 require('dotenv').config();
 
 client.on('ready', () => {
@@ -30,7 +32,13 @@ client.on('message', message => {
     axios.post(process.env.DISCORD_API_URL + '/api/discord-message', messageDetails)
         .then(function (response) {
             if (response.data.message) {
-                message.channel.send(response.data.message);
+                if (_.isArray(response.data.message)) {
+                    _.forEach(response.data.message, function (messageToSend) {
+                        message.channel.send(messageToSend)
+                    })
+                } else {
+                    message.channel.send(response.data.message);
+                }
             } else {
                 message.channel.send('I have nothing to say.');
             }
