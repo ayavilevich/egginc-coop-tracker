@@ -380,7 +380,14 @@ HELP;
     {
         $guild = $this->checkGuild();
         $guild->sync();
-        $users = $guild->members()->withEggIncId()->get();
+        $users = $guild
+            ->members()
+            ->withEggIncId()
+            ->get()
+            ->sortBy(function ($user) {
+                return $user->getPlayerEarningBonus();
+            })
+        ;
 
         $table = new Table();
         $table->addColumn('discord', new Column('Discord', Column::ALIGN_LEFT));
