@@ -20,6 +20,6 @@ class EarningBonus extends Egg
             return $bonus;
         }
 
-        return $bonus->div(Decimal::create(pow(10, $last->magnitude)))->floor() . $last->symbol;
+        return $bonus->div(Decimal::create(pow(10, $last->magnitude)))->floor(3) . $last->symbol;
     }
 }

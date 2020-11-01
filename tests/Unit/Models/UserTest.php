@@ -116,27 +116,27 @@ class UserTest extends TestCase
             [
                 'mot3rror',
                 'Zettafarmer 3',
-                '25S',
+                '25.263S',
             ],
             [
                 '1132Ace',
                 'Petafarmer',
-                '117q',
+                '117.343q',
             ],
             [
                 'ladykojac',
                 'Exafarmer',
-                '115Q',
+                '115.574Q',
             ],
             [
                 'mstrixie',
                 'Zettafarmer',
-                '299s',
+                '299.867s',
             ],
             [
                 'oobebanoobe',
                 'Exafarmer 2',
-                '9s',
+                '9.650s',
             ],
         ];
     }

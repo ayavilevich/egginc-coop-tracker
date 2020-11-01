@@ -38,9 +38,7 @@ class DiscordMessage extends Controller
             'middleware' => ['isAdmin'],
             'function'   => 'setPlayerId',
         ],
-        'players'       => [
-            'middleware' => ['isAdmin'],
-        ],
+        'players'       => [],
     ];
 
     private $guildId;

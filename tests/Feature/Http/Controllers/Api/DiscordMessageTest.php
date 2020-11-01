@@ -379,7 +379,7 @@ PLAYERS;
 ```
 Discord | Earning Bonus
 ------- | -------------
-Test    | 25S          
+Test    | 25.263S      
 ```
 PLAYERS;
 
@@ -405,7 +405,7 @@ PLAYERS;
 ```
 Discord | Earning Bonus | Rank         
 ------- | ------------- | -------------
-Test    | 25S           | Zettafarmer 3
+Test    | 25.263S       | Zettafarmer 3
 ```
 PLAYERS;
 
