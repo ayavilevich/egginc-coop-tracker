@@ -310,6 +310,16 @@ STATUS;
      */
     public function testListPlayersWithEggId()
     {
+        $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
+            $player = json_decode(file_get_contents(base_path('tests/files/mot3rror-player-info.json')));
+
+            $mock
+                ->shouldReceive('getPlayerInfo')
+                ->withArgs(['12345'])
+                ->andReturn($player)
+            ;
+        }));
+
         $this->testSetPlayerId();
 
         $message = $this->sendDiscordMessage('players egg_id');
@@ -326,8 +336,6 @@ PLAYERS;
 
     public function testListPlayerWithRank()
     {
-        $this->testSetPlayerId();
-
         $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
             $player = json_decode(file_get_contents(base_path('tests/files/mot3rror-player-info.json')));
 
@@ -337,6 +345,8 @@ PLAYERS;
                 ->andReturn($player)
             ;
         }));
+
+        $this->testSetPlayerId();
 
         $message = $this->sendDiscordMessage('players rank');
         $expect = <<<PLAYERS

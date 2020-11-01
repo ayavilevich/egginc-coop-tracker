@@ -389,21 +389,18 @@ HELP;
         switch (Arr::get($parts, 1)) {
             case 'egg_id':
                 $table->addColumn('egg_inc', new Column('Egg Inc ID', Column::ALIGN_LEFT));
-                foreach ($users as $user) {
-                    $data[] = [
-                        'discord' => $user->username,
-                        'egg_inc' => $user->egg_inc_player_id,
-                    ];
-                }
                 break;
             case 'rank':
                 $table->addColumn('rank', new Column('Rank', Column::ALIGN_LEFT));
-                foreach ($users as $user) {
-                    $data[] = [
-                        'discord' => $user->username,
-                        'rank'    => $user->getPlayerEggRank(),
-                    ];
-                }
+                break;
+        }
+
+        foreach ($users as $user) {
+            $data[] = [
+                'discord' => $user->username,
+                'egg_inc' => $user->egg_inc_player_id,
+                'rank'    => $user->getPlayerEggRank(),
+            ];
         }
 
         $messages[] = '```';
