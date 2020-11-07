@@ -23,7 +23,9 @@
                 <v-data-table
                     :headers="headers"
                     :items="guildModel.members"
-                    :items-per-page="10"
+                    :disable-filtering="true"
+                    :disable-pagination="true"
+                    :hide-default-footer="true"
                 >
                     <template v-slot:item.roles="{ item }">
                         <ul>
@@ -32,9 +34,12 @@
                             </li>
                         </ul>
                     </template>
-                    <template v-slot:item.earning_bonus="{ item }">
-                        {{ item.player_earning_bonus_formatted }}
-                        ({{ item.player_egg_rank }})
+                    <template v-slot:item.player_earning_bonus="{ item }">
+                        <template v-if="item.player_egg_rank">
+                            {{ item.player_earning_bonus_formatted }}
+                            ({{ item.player_egg_rank }})
+                        </template>
+                        
                     </template>
                     <template v-slot:item.soul_eggs="{ item }">
                         <EggFormater :eggs="item.soul_eggs" />
@@ -68,12 +73,15 @@
         data() {
             return {
                 headers: [
-                      {text: 'Username', value: 'username'},
-                      {text: 'Roles', value: 'roles'},
-                      {text: 'Earning Bonus (Rank)', value: 'earning_bonus'},
-                      {text: 'Soul Eggs', value: 'soul_eggs'},
-                      {text: 'Golden Eggs', value: 'eggs_of_prophecy'},
-                      {text: 'Drones', value: 'drones'},
+                    {text: 'Username', value: 'username'},
+                    {text: 'Roles', value: 'roles'},
+                    {
+                        text: 'Earning Bonus (Rank)',
+                        value: 'player_earning_bonus',
+                    },
+                    {text: 'Soul Eggs', value: 'soul_eggs'},
+                    {text: 'Golden Eggs', value: 'eggs_of_prophecy'},
+                    {text: 'Drones', value: 'drones'},
                 ]
             }
         },

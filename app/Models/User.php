@@ -17,7 +17,7 @@ class User extends Authenticatable
         'discord_token_expires' => 'datetime',
     ];
 
-    protected $appends = ['player_earning_bonus_formatted', 'player_egg_rank', 'drones', 'soul_eggs', 'eggs_of_prophecy',];
+    protected $appends = ['player_earning_bonus_formatted', 'player_egg_rank', 'drones', 'soul_eggs', 'eggs_of_prophecy', 'player_earning_bonus'];
 
     protected $with = ['roles'];
 
@@ -97,7 +97,12 @@ class User extends Authenticatable
     public function getPlayerEarningBonus(): float
     {
         return floor($this->getEachSoulEggBonus() * $this->getSoulEggsAttribute());
-    } 
+    }
+
+    public function getPlayerEarningBonusAttribute(): float
+    {
+        return $this->getPlayerEarningBonus();
+    }
 
     public function getSoulEggsAttribute(): float
     {
