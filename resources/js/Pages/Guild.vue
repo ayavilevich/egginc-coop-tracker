@@ -15,46 +15,31 @@
                     </li>
                 </ul>
                 <h4>Previous Contracts</h4>
-                <ul>
-                    <li>Contract 1</li>
-                </ul>
             </div>
 
             <div>
                 <h4>Player List</h4>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Roles</th>
-                            <th>Earning Bonus (Rank)</th>
-                            <th>Soul Eggs (Golden Eggs)</th>
-                            <th>Drones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="member in guildModel.members">
-                            <td>{{ member.username }}</th>
-                            <td>
-                                <ul>
-                                    <li v-for="role in member.roles">
-                                        {{ role.name }}
-                                    </li>
-                                </ul>
-                            </td>
-                            <td>
-                                {{ member.player_earning_bonus_formatted }}
-                                ({{ member.player_egg_rank }})
-                            </td>
-                            <td>
-                                <EggFormater :eggs="member.soul_eggs" />
-                                ({{ member.eggs_of_prophecy }})
-                            </td>
-                            <td>{{ member.drones }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <v-data-table
+                    :headers="headers"
+                    :items="guildModel.members"
+                    :items-per-page="10"
+                >
+                    <template v-slot:item.roles="{ item }">
+                        <ul>
+                            <li v-for="role in item.roles">
+                                {{ role.name }}
+                            </li>
+                        </ul>
+                    </template>
+                    <template v-slot:item.earning_bonus="{ item }">
+                        {{ item.player_earning_bonus_formatted }}
+                        ({{ item.player_egg_rank }})
+                    </template>
+                    <template v-slot:item.soul_eggs="{ item }">
+                        <EggFormater :eggs="item.soul_eggs" />
+                    </template>
+                </v-data-table>
             </div>
 
             <h3>Settings</h3>
@@ -79,6 +64,18 @@
             guild: Object,
             guildModel: Object,
             currentContracts: Array,
-        }
+        },
+        data() {
+            return {
+                headers: [
+                      {text: 'Username', value: 'username'},
+                      {text: 'Roles', value: 'roles'},
+                      {text: 'Earning Bonus (Rank)', value: 'earning_bonus'},
+                      {text: 'Soul Eggs', value: 'soul_eggs'},
+                      {text: 'Golden Eggs', value: 'eggs_of_prophecy'},
+                      {text: 'Drones', value: 'drones'},
+                ]
+            }
+        },
     }
 </script>

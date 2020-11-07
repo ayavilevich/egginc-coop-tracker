@@ -32,6 +32,7 @@
         "dotenv": "^8.2.0",
         "google-protobuf": "^3.12.4",
         "vue-simple-progress": "^1.1.1",
+        "vuetify": "^2.3.16",
         "yargs": "^15.4.1"
     }
 }

@@ -99,7 +99,7 @@ class User extends Authenticatable
         return floor($this->getEachSoulEggBonus() * $this->getSoulEggsAttribute());
     } 
 
-    public function getSoulEggsAttribute(): int
+    public function getSoulEggsAttribute(): float
     {
         $info = $this->getEggPlayerInfo();
 
