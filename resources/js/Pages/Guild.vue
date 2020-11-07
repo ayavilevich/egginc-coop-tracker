@@ -23,29 +23,44 @@
             <div>
                 <h4>Player List</h4>
 
-                <ul>
-                    <li v-for="member in guildModel.members">
-                        {{ member.username }}
-                        (
-                            <span v-for="role in member.roles">
-                                {{ role.name }}
-                            </span>
-                        )
-                    </li>
-                </ul>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Roles</th>
+                            <th>Earning Bonus (Rank)</th>
+                            <th>Soul Eggs (Golden Eggs)</th>
+                            <th>Drones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="member in guildModel.members">
+                            <td>{{ member.username }}</th>
+                            <td>
+                                <ul>
+                                    <li v-for="role in member.roles">
+                                        {{ role.name }}
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                {{ member.player_earning_bonus_formatted }}
+                                ({{ member.player_egg_rank }})
+                            </td>
+                            <td>
+                                <EggFormater :eggs="member.soul_eggs" />
+                                ({{ member.eggs_of_prophecy }})
+                            </td>
+                            <td>{{ member.drones }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <h3>Settings</h3>
             <div>
                 <form>
-                    <div class="form-group">
-                        <label>Admin Roles (allowed to modify coops names and users' player IDs)</label>
-                        <select multiple="multiple" class="form-control">
-                            <option v-for="role in guildModel.roles" :key="role.id" :value="role.id">
-                                {{ role.name }}
-                            </option>
-                        </select>
-                    </div>
+                    
                 </form>
             </div>
         </template>
@@ -54,15 +69,16 @@
 
 <script>
     import Layout from './Layout'
+    import EggFormater from '../Components/EggFormater'
 
     export default {
         components: {
-            Layout,
+            Layout, EggFormater,
         },
         props: {
             guild: Object,
             guildModel: Object,
-            currentContracts: Object,
+            currentContracts: Array,
         }
     }
 </script>

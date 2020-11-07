@@ -17,6 +17,8 @@ class User extends Authenticatable
         'discord_token_expires' => 'datetime',
     ];
 
+    protected $appends = ['player_earning_bonus_formatted', 'player_egg_rank', 'drones', 'soul_eggs', 'eggs_of_prophecy',];
+
     protected $with = ['roles'];
 
     public function getCurrentDiscordToken()
@@ -59,31 +61,63 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function getEggPlayerInfo(): stdClass
+    public function getEggPlayerInfo(): ?stdClass
     {
+        if (!$this->egg_inc_player_id) {
+            return null;
+        }
         return resolve(EggInc::class)->getPlayerInfo($this->egg_inc_player_id);
+    }
+
+    public function getEggsOfProphecyAttribute(): int
+    {
+        $info = $this->getEggPlayerInfo();
+        if (!$info) {
+            return 0;
+        }
+
+        return $info->game->eggsOfProphecy;
     }
 
     public function getEachSoulEggBonus(): int
     {
         $info = $this->getEggPlayerInfo();
+        if (!$info) {
+            return 0;
+        }
+
         $epicResearch = collect($info->game->epicResearchList);
         $prophecyBonus = $epicResearch->where('id', 'prophecy_bonus')->first()->level;
         $soulBonus = $epicResearch->where('id', 'soul_eggs')->first()->level;
-        $eggsOfProphecy = $info->game->eggsOfProphecy;
+        $eggsOfProphecy = $this->getEggsOfProphecyAttribute();
 
         return floor(((.1 + $soulBonus * .01) * (1.05 + $prophecyBonus * .01) ** $eggsOfProphecy) * 100);
     }
 
     public function getPlayerEarningBonus(): float
     {
-        $info = $this->getEggPlayerInfo();
-        return floor($this->getEachSoulEggBonus() * $info->game->soulEggsD);
+        return floor($this->getEachSoulEggBonus() * $this->getSoulEggsAttribute());
     } 
+
+    public function getSoulEggsAttribute(): int
+    {
+        $info = $this->getEggPlayerInfo();
+
+        if (!$info) {
+            return 0;
+        }
+
+        return $info->game->soulEggsD;
+    }
 
     public function getPlayerEarningBonusFormatted(): string
     {
         return resolve(EarningBonus::class)->format($this->getPlayerEarningBonus());
+    }
+
+    public function getPlayerEarningBonusFormattedAttribute(): string
+    {
+        return $this->getPlayerEarningBonusFormatted();
     }
 
     public function getPlayerEggRank(): string
@@ -104,6 +138,21 @@ class User extends Authenticatable
             return '';
         }
         return $last->name;
+    }
+
+    public function getPlayerEggRankAttribute(): string
+    {
+        return $this->getPlayerEggRank();
+    }
+
+    public function getDronesAttribute(): int
+    {
+        $info = $this->getEggPlayerInfo();
+
+        if (!$info) {
+            return 0;
+        }
+        return $info->stats->droneTakedowns;
     }
 
     public function scopeWithEggIncId($query)
