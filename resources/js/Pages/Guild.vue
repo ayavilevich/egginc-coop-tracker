@@ -22,17 +22,13 @@
 
                 <v-data-table
                     :headers="headers"
-                    :items="guildModel.members"
+                    :items="members"
                     :disable-filtering="true"
                     :disable-pagination="true"
                     :hide-default-footer="true"
                 >
                     <template v-slot:item.roles="{ item }">
-                        <ul>
-                            <li v-for="role in item.roles">
-                                {{ role.name }}
-                            </li>
-                        </ul>
+                        {{ getUserRoles(item.roles) }}
                     </template>
                     <template v-slot:item.player_earning_bonus="{ item }">
                         <template v-if="item.player_egg_rank">
@@ -60,6 +56,7 @@
 <script>
     import Layout from './Layout'
     import EggFormater from '../Components/EggFormater'
+    import _ from 'lodash'
 
     export default {
         components: {
@@ -84,6 +81,22 @@
                     {text: 'Drones', value: 'drones'},
                 ]
             }
+        },
+        computed: {
+            members() {
+                return _.filter(this.guildModel.members, (member) => {
+                    return _.filter(member.roles, 'show_members_on_roster').length >= 1;
+                })
+            }
+        },
+        methods: {
+            getUserRoles(roles) {
+                return _
+                    .chain(roles)
+                    .filter((role) => role.show_role)
+                    .map((role) => role.name)
+                    .join(',')
+            },
         },
     }
 </script>
