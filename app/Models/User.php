@@ -166,4 +166,13 @@ class User extends Authenticatable
             return $query->where('egg_inc_player_id', '!=', '')->orWhereNotNull('egg_inc_player_id');
         });
     }
+
+    public function scopeInShowRoles($query)
+    {
+        return $query
+            ->whereHas('roles', function($query) {
+                $query->where('show_members_on_roster', 1);
+            })
+        ;
+    }
 }

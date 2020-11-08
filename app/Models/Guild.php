@@ -67,6 +67,7 @@ class Guild extends Model
 
     public function syncMembers()
     {
+        $this->load('roles');
         $members = $this->getGuildMembers();
         $users = collect();
 

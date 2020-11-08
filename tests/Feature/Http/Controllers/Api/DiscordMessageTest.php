@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers\Api;
 use App\Api\EggInc;
 use App\Models\Contract;
 use App\Models\Coop;
+use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
 use Mockery;
@@ -24,6 +25,10 @@ class DiscordMessageTest extends TestCase
     private function sendDiscordMessage(string $message)
     {
         $this->mockGuildCall();
+
+        Role::creating(function($role) {
+            $role->show_members_on_roster = true;
+        });
 
         $response = $this->postJson(
             '/api/discord-message',
@@ -303,7 +308,6 @@ STATUS;
 
         $this->assertEquals($message, $expect);
     }
-
     
     /**
      * depends testSetPlayerId

@@ -381,6 +381,7 @@ HELP;
         $chuckOfUsers = $guild
             ->members()
             ->withEggIncId()
+            ->inShowRoles()
             ->get()
             ->sortBy(function ($user) {
                 return $user->getPlayerEarningBonus();
