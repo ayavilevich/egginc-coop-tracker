@@ -21,7 +21,7 @@ class CurrentContracts extends Controller
     {
         $coops = Coop::contract($contractId)
             ->guild($guildId)
-            ->orderBy('coop')
+            ->orderBy('position')
             ->get()
         ;
 
@@ -58,7 +58,7 @@ class CurrentContracts extends Controller
 
         $coops = Coop::contract($contractId)
             ->guild($guildId)
-            ->orderBy('coop')
+            ->orderBy('position')
             ->get()
         ;
 
