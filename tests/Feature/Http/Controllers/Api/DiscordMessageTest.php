@@ -33,7 +33,10 @@ class DiscordMessageTest extends TestCase
         $response = $this->postJson(
             '/api/discord-message',
             [
-                'channel'   => ['guild' => ['id' => $this->guildId]],
+                'channel'   => [
+                    'id'    => 1,
+                    'guild' => ['id' => $this->guildId],
+                ],
                 'content'   => $this->atBotUser . $message,
                 'atBotUser' => $this->atBotUser,
                 'author'    => ['id' => 723977563650654259],
@@ -266,6 +269,26 @@ test 13 | 1q   | 446d 6h | 10q
 STATUS;
 
         $this->assertEquals($expect, $message);
+    }
+
+    public function testRemind()
+    {
+        \Queue::fake();
+
+        $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
+            $coopInfo = json_decode(file_get_contents(base_path('tests/files/halloween-2020-test.json')));
+
+            $mock
+                ->shouldReceive('getCoopInfo')
+                ->andReturn($coopInfo)
+            ;
+        }));
+
+        $contract = $this->makeSampleContract();
+        $coop = $this->makeSampleCoop($contract);
+        $message = $this->sendDiscordMessage('remind ' . $contract->identifier . ' 1 30');
+        $this->assertEquals('Reminders set.', $message);
+        \Queue::assertPushed(\App\Jobs\RemindCoopStatus::class, 2);
     }
 
     public function testShortStatus()

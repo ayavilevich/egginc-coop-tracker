@@ -1,15 +1,27 @@
 <?php
 namespace App\DiscordMessages;
 
+use App\Jobs\RemindCoopStatus;
+use Arr;
+
 class Remind extends Base
 {
     public function message(): string
     {
-        $channel = $request->input('channel.id');
+        $parts = $this->parts;
         $contract = Arr::get($parts, 1);
-        $hours = Arr::get($parts, 2);
-        $minutes = Arr::get($parts, 3);
+        $hours = (int) Arr::get($parts, 2);
+        $minutes = (int) Arr::get($parts, 3);
 
-        return '`' . json_encode($request->input('channel')) . '`';
+        for ($i = $minutes; $i <= ($hours * 60); $i += $minutes) {
+            RemindCoopStatus::dispatch(
+                $this->authorId,
+                $this->guildId,
+                $this->channelId,
+                $contract
+            )->delay(now()->addMinutes($i));
+        }
+
+        return 'Reminders set.';
     }
 }

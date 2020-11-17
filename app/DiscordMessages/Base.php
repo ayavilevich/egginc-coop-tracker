@@ -11,17 +11,20 @@ class Base
 
     public $guildId;
 
+    public $channelId;
+
     public $guild = null;
 
     protected $middlewares = [];
 
     public $parts;
 
-    public function __construct(int $authorId, int $guildId, $parts = [])
+    public function __construct(int $authorId, int $guildId, int $channelId, $parts = [])
     {
         $this->authorId = $authorId;
         $this->guildId = $guildId;
         $this->parts = $parts;
+        $this->channelId = $channelId;
 
         if ($this->guildId) {
             $this->guild = $this->setGuild();

@@ -9,6 +9,7 @@ use App\DiscordMessages\Help;
 use App\DiscordMessages\Hi;
 use App\DiscordMessages\Love;
 use App\DiscordMessages\Players;
+use App\DiscordMessages\Remind;
 use App\DiscordMessages\SetPlayerId;
 use App\DiscordMessages\ShortStatus;
 use App\DiscordMessages\Status;
@@ -30,6 +31,7 @@ class DiscordMessage extends Controller
         'delete'        => ['class' => Delete::class],
         'set-player-id' => ['class' => SetPlayerId::class],
         'players'       => ['class' => Players::class],
+        'remind'        => ['class' => Remind::class],
     ];
 
     private $guildId;
@@ -51,6 +53,7 @@ class DiscordMessage extends Controller
             $object = new $class(
                 $request->input('author.id'),
                 $request->input('channel.guild.id'),
+                $request->input('channel.id'),
                 $parts
             );
             return ['message' => $object->message()];

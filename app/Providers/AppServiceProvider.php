@@ -25,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DiscordClient::class, function ($app, $options) {
             return new DiscordClient($options);
         });
+        $this->app->bind('DiscordClientBot', function ($app) {
+            return $app->makeWith(DiscordClient::class, [
+                'token'     => config('services.discord.token'),
+                'tokenType' => 'Bot',
+            ]);
+        });
     }
 
     /**

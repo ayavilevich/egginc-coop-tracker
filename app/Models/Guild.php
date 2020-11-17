@@ -14,10 +14,7 @@ class Guild extends Model
 
     private function getDiscordClient(): DiscordClient
     {
-        return app()->makeWith(DiscordClient::class, [
-            'token'     => config('services.discord.token'),
-            'tokenType' => 'Bot',
-        ]);
+        return app()->make('DiscordClientBot');
     }
 
     private function getBotGuilds(): array
