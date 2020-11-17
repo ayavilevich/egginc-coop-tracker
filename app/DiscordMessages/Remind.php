@@ -6,6 +6,8 @@ use Arr;
 
 class Remind extends Base
 {
+    protected $middlewares = ['requiresGuild', 'isAdmin'];
+
     public function message(): string
     {
         $parts = $this->parts;
