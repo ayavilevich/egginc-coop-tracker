@@ -1,5 +1,5 @@
 php artisan down
-composer install
+composer install --no-dev
 php artisan migrate --force
 npm install
 
