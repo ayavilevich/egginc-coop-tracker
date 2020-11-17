@@ -12,7 +12,7 @@ abstract class TestCase extends BaseTestCase
 
     public function makeSampleContract(array $data = []): Contract
     {
-        return factory(Contract::class)->create($data);
+        return Contract::factory()->create($data);
     }
 
     public function makeSampleCoop(?Contract $contract = null, string $coopName = 'test'): Coop

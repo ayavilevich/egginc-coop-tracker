@@ -12,7 +12,7 @@ class ContractTest extends TestCase
 
     public function testGetActiveContracts()
     {
-        $contract = factory(Contract::class)
+        $contract = Contract::factory()
             ->create(['expiration' => now()->addDays(7)])
         ;
 
@@ -30,7 +30,7 @@ class ContractTest extends TestCase
 
     public function testGetContractsRawFormat()
     {
-        factory(Contract::class)
+        Contract::factory()
             ->create(['expiration' => now()->addDays(7)])
         ;
 

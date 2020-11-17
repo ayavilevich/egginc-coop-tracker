@@ -47,6 +47,7 @@ class DiscordMessageTest extends TestCase
         return $response
             ->assertStatus(200)
             ->decodeResponseJson('message')
+            ->json(['message'])
         ;
     }
 
