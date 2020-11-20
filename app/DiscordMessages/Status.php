@@ -1,6 +1,7 @@
 <?php
 namespace App\DiscordMessages;
 
+use App\Exceptions\CoopNotFoundException;
 use App\Exceptions\DiscordErrorException;
 use App\Models\Coop;
 use App\SimilarText;
