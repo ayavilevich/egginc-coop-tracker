@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Api\EggInc;
 use App\Formatters\EarningBonus;
+use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use RestCord\DiscordClient;
@@ -24,8 +25,22 @@ class User extends Authenticatable
     public function getCurrentDiscordToken()
     {
         if ($this->discord_token_expires->lt(now())) {
-            // make call to https://discord.com/api/v6/oauth2/token
-            // https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-refresh-token-exchange-example
+            $client = new Client;
+            $response = $client->request('POST', 'https://discord.com/api/v6/oauth2/token', [
+                'form_params' => [
+                    'client_id'     => config('services.discord.client_id'),
+                    'client_secret' => config('services.discord.client_secret'),
+                    'grant_type'    => 'refresh_token',
+                    'refresh_token' => $this->discord_refresh_token,
+                    'redirect_url'  => config('services.discord.redirect'),
+                    'scope'         => 'identify email guilds',
+                ],
+            ]);
+            $data = json_decode($response->getBody());
+            $this->discord_token = $data->access_token;
+            $this->discord_token_expires = now()->addSeconds($data->expires_in);
+            $this->discord_refresh_token = $data->refresh_token;
+            $this->save();
         }
         return $this->discord_token;
     }
