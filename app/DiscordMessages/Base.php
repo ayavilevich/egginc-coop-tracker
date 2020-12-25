@@ -42,7 +42,15 @@ class Base
     
     private function isAdmin()
     {
-        if (!in_array($this->authorId, explode(',', env('DISCORD_ADMIN_USERS')))) {
+        $this->guild->sync();
+        $admin = false;
+        foreach ($this->guild->roles as $role) {
+            if ($role->is_admin && $role->members->contains('discord_id', $this->authorId))  {
+                $admin = true;
+                break;
+            }
+        }
+        if (!$admin) {
             throw new DiscordErrorException('You are not allowed to do that.');
         }
     }

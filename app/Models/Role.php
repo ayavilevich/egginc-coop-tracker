@@ -11,4 +11,9 @@ class Role extends Model
         'show_role'              => 'boolean',
         'is_admin'               => 'boolean',
     ];
+
+    public function members()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

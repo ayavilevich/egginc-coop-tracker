@@ -22,12 +22,13 @@ class DiscordMessageTest extends TestCase
 
     private $guildId = 1;
 
-    private function sendDiscordMessage(string $message)
+    private function sendDiscordMessage(string $message, int $authorId = 123456)
     {
         $this->mockGuildCall();
 
         Role::creating(function($role) {
             $role->show_members_on_roster = true;
+            $role->is_admin = $role->discord_id == 1;
         });
 
         $response = $this->postJson(
@@ -39,7 +40,7 @@ class DiscordMessageTest extends TestCase
                 ],
                 'content'   => $this->atBotUser . $message,
                 'atBotUser' => $this->atBotUser,
-                'author'    => ['id' => 723977563650654259],
+                'author'    => ['id' => $authorId],
             ]
         );
 
@@ -69,8 +70,13 @@ class DiscordMessageTest extends TestCase
 
                     $role = new StdClass;
                     $role->id = 1;
-                    $role->name = 'Everybody';
-                    $roles = [$role];
+                    $role->name = 'Admin';
+
+                    $role2 = new StdClass;
+                    $role2->id = 2;
+                    $role2->name = 'Everybody';
+
+                    $roles = [$role, $role2];
 
                     $mock
                         ->shouldReceive('getGuildRoles')
@@ -82,8 +88,16 @@ class DiscordMessageTest extends TestCase
                     $member->user->bot = false;
                     $member->user->id = 123456;
                     $member->user->username = 'Test';
-                    $member->roles = [1];
-                    $members = [$member];
+                    $member->roles = [1, 2];
+
+                    $member2 = new StdClass;
+                    $member2->user = new StdClass;
+                    $member2->user->bot = false;
+                    $member2->user->id = 654321;
+                    $member2->user->username = 'Test 2';
+                    $member2->roles = [2];
+
+                    $members = [$member, $member2];
 
                     $mock
                         ->shouldReceive('listGuildMembers')
@@ -140,7 +154,7 @@ HELP;
     {
         $message = $this->sendDiscordMessage('hi');
 
-        $this->assertEquals('Hello <@723977563650654259>!', $message);
+        $this->assertEquals('Hello <@123456>!', $message);
     }
 
     public function testCurrentContracts()
@@ -165,6 +179,16 @@ CONTRACTS;
         $expect = 'Coop added successfully.';
 
         $this->assertEquals($expect, $message);
+    }
+
+    public function testAdminFail()
+    {
+        $contract = $this->makeSampleContract();
+
+        $message = $this->sendDiscordMessage('add ' . $contract->identifier . ' test', 654321);
+        $expect = 'You are not allowed to do that.';
+
+        $this->assertEquals($expect, $message);   
     }
 
     /**
@@ -326,11 +350,10 @@ STATUS;
     {
         $message = $this->sendDiscordMessage('set-player-id <@!123456> 12345');
         $expect = 'Player ID set successfully.';
+        $this->assertEquals($message, $expect);
 
         $this->assertDatabaseHas('guilds', ['discord_id' => 1, 'name' => 'Test']);
         $this->assertDatabaseHas('users', ['discord_id' => 123456, 'egg_inc_player_id' => '12345']);
-
-        $this->assertEquals($message, $expect);
     }
     
     /**
