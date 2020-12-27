@@ -50,7 +50,7 @@ class EggInc
 
     public function getPlayerInfo(string $playerId): \StdClass
     {
-        return Cache::remember('egg-player-info-' . $playerId, 60 * 60 * 24, function () use ($playerId) {
+        return Cache::remember('egg-player-info-' . $playerId, 60 * 60 * 1, function () use ($playerId) {
             $appInfoCommand = new Command([
                 'command' => 'node ./js/egg-inc.js getPlayerInfo --playerId ' . $playerId,
                 'procCwd' => base_path(),
@@ -65,6 +65,8 @@ class EggInc
             if (!$player->version) {
                 throw new UserNotFoundException('User not found');
             }
+
+            $player->received_at = time();
 
             return $player;
         });

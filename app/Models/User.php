@@ -84,6 +84,11 @@ class User extends Authenticatable
         return resolve(EggInc::class)->getPlayerInfo($this->egg_inc_player_id);
     }
 
+    public function getCurrentContracts(): array
+    {
+        return $this->getEggPlayerInfo()->contracts->contractsList;
+    }
+
     public function getEggsOfProphecyAttribute(): int
     {
         $info = $this->getEggPlayerInfo();

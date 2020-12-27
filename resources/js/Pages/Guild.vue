@@ -42,13 +42,6 @@
                     </template>
                 </v-data-table>
             </div>
-
-            <h3>Settings</h3>
-            <div>
-                <form>
-                    
-                </form>
-            </div>
         </template>
     </layout>
 </template>
