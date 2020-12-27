@@ -462,4 +462,31 @@ PLAYERS;
 
         $this->assertEquals([$expect], $message);
     }
+
+    public function testRank()
+    {
+        $this->instance(EggInc::class, Mockery::mock(EggInc::class, function ($mock) {
+            $player = json_decode(file_get_contents(base_path('tests/files/mot3rror-player-info.json')));
+
+            $mock
+                ->shouldReceive('getPlayerInfo')
+                ->withArgs(['12345'])
+                ->andReturn($player)
+            ;
+        }));
+
+        $this->testSetPlayerId();
+
+        $message = $this->sendDiscordMessage('rank');
+        $expect = <<<RANK
+```
+MoT3rror
+Soul Eggs: 932q
+Golden Eggs: 127
+Farmer Role: Zettafarmer 3
+Group Role: 
+```
+RANK;
+        $this->assertEquals($expect, $message);
+    }
 }

@@ -9,6 +9,7 @@ use App\DiscordMessages\Help;
 use App\DiscordMessages\Hi;
 use App\DiscordMessages\Love;
 use App\DiscordMessages\Players;
+use App\DiscordMessages\Rank;
 use App\DiscordMessages\Remind;
 use App\DiscordMessages\SetPlayerId;
 use App\DiscordMessages\ShortStatus;
@@ -31,6 +32,7 @@ class DiscordMessage extends Controller
         'delete'        => ['class' => Delete::class],
         'set-player-id' => ['class' => SetPlayerId::class],
         'players'       => ['class' => Players::class],
+        'rank'          => ['class' => Rank::class],
         'remind'        => ['class' => Remind::class],
     ];
 

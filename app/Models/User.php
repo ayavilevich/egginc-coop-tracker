@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Api\EggInc;
 use App\Formatters\EarningBonus;
+use App\Formatters\Egg;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -135,6 +136,11 @@ class User extends Authenticatable
         return $info->game->soulEggsD;
     }
 
+    public function getSoulEggsFormattedAttribute(): string
+    {
+        return resolve(Egg::class)->format($this->getSoulEggsAttribute());
+    }
+
     public function getPlayerEarningBonusFormatted(): string
     {
         return resolve(EarningBonus::class)->format($this->getPlayerEarningBonus());
@@ -193,6 +199,13 @@ class User extends Authenticatable
             ->whereHas('roles', function($query) {
                 $query->where('show_members_on_roster', 1);
             })
+        ;
+    }
+
+    public function scopeDiscordId($query, $discordId)
+    {
+        return $query
+            ->where('discord_id', $discordId)
         ;
     }
 }
