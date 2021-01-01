@@ -19,7 +19,7 @@ class Base
 
     public $parts;
 
-    public function __construct(int $authorId, int $guildId, int $channelId, $parts = [])
+    public function __construct(int $authorId, ?int $guildId = null, ?int $channelId = null, $parts = [])
     {
         $this->authorId = $authorId;
         $this->guildId = $guildId;
