@@ -494,4 +494,12 @@ Total Golden Eggs Needed for Next Rank: 142
 RANK;
         $this->assertEquals($expect, $message);
     }
+
+    public function testRankNoUser()
+    {
+        $message = $this->sendDiscordMessage('rank');
+        $expect = 'Egg Inc Player ID not set. Use `eb!set-player-id {id}` to set.';
+
+        $this->assertEquals($expect, $message);
+    }
 }

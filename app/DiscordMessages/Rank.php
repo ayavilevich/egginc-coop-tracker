@@ -9,14 +9,16 @@ class Rank extends Base
 
     public function message(): string
     {
-        $user = User::discordId($this->authorId)
-            ->first()
-        ;
-
-        if (!$user) {
-            // @todo finish this
-            return 'No user found.';
-        }
+        $user = User::unguarded(function () {
+            return User::firstOrCreate(
+                [
+                    'discord_id' => $this->authorId,
+                ],
+                [
+                    'username' => $this->authorName,
+                ]
+            );
+        });
 
         if (!$user->egg_inc_player_id) {
             return 'Egg Inc Player ID not set. Use `eb!set-player-id {id}` to set.';
