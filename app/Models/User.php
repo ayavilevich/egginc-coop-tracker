@@ -151,7 +151,7 @@ class User extends Authenticatable
         return $this->getPlayerEarningBonusFormatted();
     }
 
-    public function getPlayerEggRankInfo(): StdClass
+    public function getPlayerEggRankInfo(): ?StdClass
     {
         $roles = json_decode(file_get_contents(base_path('resources/js/roleMagnitude.json')));
         $earningBonus = $this->getPlayerEarningBonus();
@@ -197,6 +197,10 @@ class User extends Authenticatable
             return 0;
         }
 
+        if (!$this->getPlayerEggRankInfo()) {
+            return -1;
+        }
+
         $nextLevelMagnitude = $this->getPlayerEggRankInfo()->magnitude + 1;
         $nextLevelEarningBonus = pow(10, $nextLevelMagnitude);
         $epicResearch = collect($info->game->epicResearchList);
@@ -224,6 +228,10 @@ class User extends Authenticatable
 
     public function getSoulEggsNeededForNextRankAttribute(): float
     {
+        if (!$this->getPlayerEggRankInfo()) {
+            return -1;
+        }
+
         $nextLevelMagnitude = $this->getPlayerEggRankInfo()->magnitude + 1;
         return ceil(pow(10, $nextLevelMagnitude) / $this->getEachSoulEggBonus());
     }
