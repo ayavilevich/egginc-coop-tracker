@@ -12,7 +12,7 @@ class Egg
         $this->magnitudes = json_decode(file_get_contents(base_path('resources/js/magnitudeFormat.json')));
     }
 
-    public function format($eggs): string
+    public function format($eggs, int $decimals = 0): string
     {
         $last = null;
         $eggsInBig = Decimal::create($eggs); 
@@ -27,8 +27,7 @@ class Egg
             return $eggs;
         }
 
-        $decimals = 0;
-        if ($last->symbol == 'Q') {
+        if ($last->symbol == 'Q' && $decimals == 0) {
             $decimals = 1;
         }
 

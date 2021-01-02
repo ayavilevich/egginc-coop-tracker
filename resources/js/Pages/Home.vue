@@ -42,6 +42,16 @@
                             Earning Bonus:
                             {{ user.player_earning_bonus_formatted }}
                         </p>
+
+                        <p>
+                            Golden Eggs Needed for Next Rank:
+                            {{ user.p_e_needed_for_next_rank }}
+                        </p>
+
+                        <p>
+                            Soul Eggs Needed for Next Rank:
+                            <EggFormater :eggs="user.soul_eggs_needed_for_next_rank" />
+                        </p>
                     </div>
                 </div>
             </div>

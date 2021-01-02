@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use RestCord\DiscordClient;
-use stdClass;
+use StdClass;
 
 class User extends Authenticatable
 {
@@ -19,7 +19,7 @@ class User extends Authenticatable
         'discord_token_expires' => 'datetime',
     ];
 
-    protected $appends = ['player_earning_bonus_formatted', 'player_egg_rank', 'drones', 'soul_eggs', 'eggs_of_prophecy', 'player_earning_bonus'];
+    protected $appends = ['player_earning_bonus_formatted', 'player_egg_rank', 'drones', 'soul_eggs', 'eggs_of_prophecy', 'player_earning_bonus', 'soul_eggs_needed_for_next_rank', 'p_e_needed_for_next_rank'];
 
     protected $with = ['roles'];
 
@@ -77,7 +77,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function getEggPlayerInfo(): ?stdClass
+    public function getEggPlayerInfo(): ?StdClass
     {
         if (!$this->egg_inc_player_id) {
             return null;
@@ -151,20 +151,24 @@ class User extends Authenticatable
         return $this->getPlayerEarningBonusFormatted();
     }
 
-    public function getPlayerEggRank(): string
+    public function getPlayerEggRankInfo(): StdClass
     {
         $roles = json_decode(file_get_contents(base_path('resources/js/roleMagnitude.json')));
         $earningBonus = $this->getPlayerEarningBonus();
 
         $last = null;
         foreach ($roles as $role) {
-            // if (soulPower / Math.pow(10, MagnitudeFormat[i].magnitude) < 1) {
             if ($earningBonus / pow(10, $role->magnitude) < 1) {
                 break;
             }
             $last = $role;
         }
+        return $last;
+    }
 
+    public function getPlayerEggRank(): string
+    {
+        $last = $this->getPlayerEggRankInfo();
         if (!$last) {
             return '';
         }
@@ -184,6 +188,44 @@ class User extends Authenticatable
             return 0;
         }
         return $info->stats->droneTakedowns;
+    }
+
+    public function getPENeededForNextRankAttribute(): int
+    {
+        $info = $this->getEggPlayerInfo();
+        if (!$info) {
+            return 0;
+        }
+
+        $nextLevelMagnitude = $this->getPlayerEggRankInfo()->magnitude + 1;
+        $nextLevelEarningBonus = pow(10, $nextLevelMagnitude);
+        $epicResearch = collect($info->game->epicResearchList);
+        $prophecyBonus = $epicResearch->where('id', 'prophecy_bonus')->first()->level;
+        $soulBonus = $epicResearch->where('id', 'soul_eggs')->first()->level;
+        $eggsOfProphecy = $this->getEggsOfProphecyAttribute();
+        $soulEggs = $this->getSoulEggsAttribute();
+
+        while ($eggsOfProphecy <= $this->getEggsOfProphecyAttribute() + 25) {
+            $newEarningBonus = floor(((.1 + $soulBonus * .01) * (1.05 + $prophecyBonus * .01) ** $eggsOfProphecy) * 100) * $soulEggs;
+            if ($newEarningBonus > $nextLevelEarningBonus) {
+                return $eggsOfProphecy;
+            }
+            $eggsOfProphecy++;
+            
+        }
+
+        return -1;
+    }
+
+    public function getSoulEggsNeededForNextRankFormattedAttribute(): string
+    {
+        return resolve(Egg::class)->format($this->getSoulEggsNeededForNextRankAttribute(), 3);
+    }
+
+    public function getSoulEggsNeededForNextRankAttribute(): float
+    {
+        $nextLevelMagnitude = $this->getPlayerEggRankInfo()->magnitude + 1;
+        return ceil(pow(10, $nextLevelMagnitude) / $this->getEachSoulEggBonus());
     }
 
     public function scopeWithEggIncId($query)

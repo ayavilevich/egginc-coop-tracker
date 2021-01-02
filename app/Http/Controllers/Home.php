@@ -11,16 +11,17 @@ class Home extends Controller
     {
         $guilds = new \StdClass;
         $playerInfo = new \StdClass;
-        if ($request->user()) {
-            $guilds = $request->user()->discordGuilds();
+        $user = $request->user();
+        if ($user) {
+            $guilds = $user->discordGuilds();
 
-            $playerInfo = $request->user()->getEggPlayerInfo();
+            $playerInfo = $user->getEggPlayerInfo();
         }
 
         return Inertia::render('Home', [
             'guilds'     => $guilds,
             'playerInfo' => $playerInfo,
-            'user'       => $request->user(),
+            'user'       => $user,
         ]);
     }
 }

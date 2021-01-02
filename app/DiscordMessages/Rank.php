@@ -26,6 +26,8 @@ class Rank extends Base
         $soulEggs = $user->getSoulEggsFormattedAttribute();
         $goldenEggs = $user->getEggsOfProphecyAttribute();
         $farmerRole = $user->getPlayerEggRankAttribute();
+        $soulEggsNeeded = $user->getSoulEggsNeededForNextRankFormattedAttribute();
+        $goldenEggsNeeded = $user->getPENeededForNextRankAttribute();
         $roles = $user
             ->roles
             ->where('show_role')
@@ -40,6 +42,8 @@ Soul Eggs: $soulEggs
 Golden Eggs: $goldenEggs
 Farmer Role: $farmerRole
 Group Role: $roles
+Soul Eggs Needed for Next Rank: $soulEggsNeeded
+Golden Eggs Needed for Next Rank: $goldenEggsNeeded
 ```
 RANK;
     }

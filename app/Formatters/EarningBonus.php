@@ -5,7 +5,7 @@ use Litipk\BigNumbers\Decimal;
 
 class EarningBonus extends Egg
 {
-    public function format($bonus): string
+    public function format($bonus, int $decimals = 0): string
     {
         $last = null;
         $bonus = Decimal::create($bonus); 
