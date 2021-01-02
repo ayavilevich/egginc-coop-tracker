@@ -6,7 +6,7 @@ use RestCord\DiscordClient;
 
 class SetPlayerId extends Base
 {
-    protected $middlewares = ['requiresGuild', 'isAdmin'];
+    protected $middlewares = [];
 
     public function message(): string
     {
@@ -17,13 +17,12 @@ class SetPlayerId extends Base
                 'tokenType' => 'Bot',
             ]);
 
-            $userId = str_replace(['<@!', '>'], '', $parts[1]);
-            $user = $discord->user->getUser(['user.id' => (int) $userId]);
+            $user = $discord->user->getUser(['user.id' => (int) $this->authorId]);
 
             return User::updateOrCreate(
-                ['discord_id' => $user->id],
+                ['discord_id' => $this->authorId],
                 [
-                    'egg_inc_player_id' => $parts[2],
+                    'egg_inc_player_id' => $parts[1],
                     'username'          => $user->username,
                 ]
             );
