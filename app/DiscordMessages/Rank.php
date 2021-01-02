@@ -42,8 +42,8 @@ Soul Eggs: $soulEggs
 Golden Eggs: $goldenEggs
 Farmer Role: $farmerRole
 Group Role: $roles
-Soul Eggs Needed for Next Rank: $soulEggsNeeded
-Golden Eggs Needed for Next Rank: $goldenEggsNeeded
+Total Soul Eggs Needed for Next Rank: $soulEggsNeeded
+Total Golden Eggs Needed for Next Rank: $goldenEggsNeeded
 ```
 RANK;
     }

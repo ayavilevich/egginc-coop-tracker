@@ -485,8 +485,8 @@ Soul Eggs: 932q
 Golden Eggs: 127
 Farmer Role: Zettafarmer 3
 Group Role: 
-Soul Eggs Needed for Next Rank: 3.690Q
-Golden Eggs Needed for Next Rank: 142
+Total Soul Eggs Needed for Next Rank: 3.690Q
+Total Golden Eggs Needed for Next Rank: 142
 ```
 RANK;
         $this->assertEquals($expect, $message);
