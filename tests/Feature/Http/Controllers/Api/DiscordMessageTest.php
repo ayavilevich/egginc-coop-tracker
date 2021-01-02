@@ -481,7 +481,7 @@ PLAYERS;
         $expect = <<<RANK
 ```
 MoT3rror
-Soul Eggs: 932q
+Soul Eggs: 932.264q
 Golden Eggs: 127
 Farmer Role: Zettafarmer 3
 Group Role: 

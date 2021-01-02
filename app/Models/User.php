@@ -138,7 +138,7 @@ class User extends Authenticatable
 
     public function getSoulEggsFormattedAttribute(): string
     {
-        return resolve(Egg::class)->format($this->getSoulEggsAttribute());
+        return resolve(Egg::class)->format($this->getSoulEggsAttribute(), 3);
     }
 
     public function getPlayerEarningBonusFormatted(): string
