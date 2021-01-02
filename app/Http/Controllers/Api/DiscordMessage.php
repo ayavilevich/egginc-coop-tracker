@@ -54,6 +54,7 @@ class DiscordMessage extends Controller
             $class = $commandInfo['class'];
             $object = new $class(
                 $request->input('author.id'),
+                $request->input('author.username', ''),
                 $request->input('channel.guild.id'),
                 $request->input('channel.id'),
                 $parts

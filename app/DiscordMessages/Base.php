@@ -9,6 +9,8 @@ class Base
 {
     public $authorId;
 
+    public $authorName;
+
     public $guildId;
 
     public $channelId;
@@ -19,9 +21,10 @@ class Base
 
     public $parts;
 
-    public function __construct(int $authorId, ?int $guildId = null, ?int $channelId = null, $parts = [])
+    public function __construct(int $authorId, string $authorName, ?int $guildId = null, ?int $channelId = null, $parts = [])
     {
         $this->authorId = $authorId;
+        $this->authorName = $authorName;
         $this->guildId = $guildId;
         $this->parts = $parts;
         $this->channelId = $channelId;

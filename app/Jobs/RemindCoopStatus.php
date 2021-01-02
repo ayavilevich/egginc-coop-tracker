@@ -44,6 +44,7 @@ class RemindCoopStatus implements ShouldQueue
     {
         $message = new Status(
             $this->author,
+            'Author',
             $this->guild,
             $this->channel,
             ['status', $this->contract]

@@ -40,7 +40,10 @@ class DiscordMessageTest extends TestCase
                 ],
                 'content'   => $this->atBotUser . $message,
                 'atBotUser' => $this->atBotUser,
-                'author'    => ['id' => $authorId],
+                'author'    => [
+                    'id'       => $authorId,
+                    'username' => 'Test',
+                ],
             ]
         );
 
