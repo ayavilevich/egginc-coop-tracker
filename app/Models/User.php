@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Api\EggInc;
 use App\Formatters\EarningBonus;
 use App\Formatters\Egg;
+use App\Exceptions\UserNotFoundException;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -82,7 +83,11 @@ class User extends Authenticatable
         if (!$this->egg_inc_player_id) {
             return null;
         }
-        return resolve(EggInc::class)->getPlayerInfo($this->egg_inc_player_id);
+        try {
+            return resolve(EggInc::class)->getPlayerInfo($this->egg_inc_player_id);
+        } catch (UserNotFoundException $e) {
+            return null;
+        }
     }
 
     public function getCurrentContracts(): array
